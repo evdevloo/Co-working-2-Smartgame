@@ -1,0 +1,28 @@
+/* ROOT */
+
+/* ATOMS */
+
+#board {
+    display: grid;
+}
+
+#tileBrown {
+    grid-row-start: 0;
+    grid-row-start: 1;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
+#tilePurple {
+    grid-row-start: 0;
+    grid-row-start: 1;
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
+
+#tileYellow {
+    grid-row-start: 0;
+    grid-row-start: 1;
+    grid-column-start: 5;
+    grid-column-end: 6;
+}
