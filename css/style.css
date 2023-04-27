@@ -6,23 +6,23 @@
     display: grid;
 }
 
-#tileBrown {
+#tileE {
     grid-row-start: 0;
     grid-row-start: 1;
-    grid-column-start: 3;
-    grid-column-end: 4;
+    grid-column-start: 5;
+    grid-column-end: 6;
 }
 
-#tilePurple {
+#tileG {
     grid-row-start: 0;
     grid-row-start: 1;
     grid-column-start: 4;
     grid-column-end: 5;
 }
 
-#tileYellow {
+#tileJ {
     grid-row-start: 0;
     grid-row-start: 1;
-    grid-column-start: 5;
-    grid-column-end: 6;
+    grid-column-start: 3;
+    grid-column-end: 4;
 }
