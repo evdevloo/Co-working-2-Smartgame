@@ -37,9 +37,20 @@ p {
     max-width: 40em;
 }
 
+/* HEADER */
+
+header {
+    background-color: var(--primary);
+    color: var(--bg);
+}
+
+/* MAIN */
+
+/* BOARD */
+
 #board {
     display: block;
-    background-color: #a78562;
+    background-color: #ab8f6f;
     position: relative;
     border: 2rem solid #e7d3Bc;
     border-radius: 1rem;
@@ -60,7 +71,7 @@ p {
     height: calc(100% - 1rem);
 }
 
-#board #grid div {
+#grid div {
     background-color: #c1a078;
     border-radius: .2rem;
     width: calc(100% - 1rem);
@@ -68,9 +79,11 @@ p {
     transform: translate(.5rem, .5rem);
 }
 
-#board #tiles img {
-    max-width: 100%;
-    max-height: 100%;
+.tile img {
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+    -ms-user-drag: none;
+    -o-user-drag: none;
 }
 
 .x-1 {
@@ -94,7 +107,7 @@ p {
 }
 
 .y-1 {
-    grid-row-start: 1 / 4;
+    grid-row-start: 1;
 }
 
 .y-2 {
@@ -109,20 +122,42 @@ p {
     grid-row-start: 4;
 }
 
-.rotation-0 {
+.rotation-0,
+.rotation-2 {
+    grid-column-end: span 2;
+}
+
+.rotation-0 img,
+.rotation-2 img {
+    width: 100%;
+    max-height: 100%;
+}
+
+.rotation-0 img {
     transform: rotate(0deg);
 }
 
-.rotation-1 {
-    transform: rotate(90deg);
-}
-
-.rotation-2 {
+.rotation-2 img {
     transform: rotate(180deg);
 }
 
+.rotation-1,
 .rotation-3 {
-    transform: rotate(-90deg);
+    grid-row-end: span 2;
+}
+
+.rotation-1 img,
+.rotation-3 img {
+    width: 100%;
+    max-height: 100%;
+}
+
+.rotation-1 img {
+    transform: rotate(90deg) translateX(72%) scale(1.92);
+}
+
+.rotation-3 img {
+    transform: rotate(-90deg) translateX(-72%) scale(1.92);
 }
 
 /* FOOTER */
