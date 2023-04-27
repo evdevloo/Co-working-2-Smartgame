@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
-  <title>Horse Academy</title>
+    <title>Horse Academy</title>
 
-  <!-- CSS -->
-  <link href="./css/normalize.css" rel="stylesheet">
-  <link href="./css/style.css" rel="stylesheet">
+    <!-- CSS -->
+    <link href="./css/normalize.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
 
-  <!-- JS -->
-  <script src="./js/script.js" defer></script>
+    <!-- FONT : Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="./js/script.js" defer></script>
 </head>
 
 <body>
@@ -19,14 +25,50 @@
     <main>
         <section>
             <div id="board">
-                <div class="tile tile-j rotation-3 x-3 y-1">
-                    <img src="./img/tiles/g.png" alt="">
+                <div id="grid">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+
+                <div id="tiles">
+                    <div class="tile tile-j rotation-3 x-3 y-1">
+                        <img src="./img/tiles/j.png" alt="brown tile">
+                    </div>
+                    <div class="tile tile-g rotation-3 x-4 y-2">
+                        <img src="./img/tiles/g.png" alt="purple tile">
+                    </div>
+                    <div class="tile tile-e rotation-1 x-5 y-1">
+                        <img src="./img/tiles/e.png" alt="yellow tile">
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-    <footer>
-
-    </footer>
+    <!-- <footer>
+        <div>
+            <h1>Licence</h1>
+            <p>Copyright (C) [Evert Devloo, Izzet Poyraz, Kyle Hoeckman, Tommy Baudonck], 2023, All rights reserved</p>
+            <p>Smartgames (R), 2018, https://www.smartgames.eu/uk/terms-use</p>
+        </div>
+    </footer> -->
 </body>
+
 </html>

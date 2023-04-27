@@ -1,30 +1,143 @@
 /* ROOT */
 
+:root {
+    --white: #fff;
+    --black: #000;
+    --bg: var(--white);
+    --primary: var(--black);
+    --accent: #0f8;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: var(--black);
+        --primary: var(--white);
+    }
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--primary);
+}
+
 /* ATOMS */
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vw;
+}
+
+p {
+    max-width: 40em;
+}
+
 #board {
-    display: grid;
+    display: block;
+    background-color: #a78562;
+    position: relative;
+    border: 2rem solid #e7d3Bc;
+    border-radius: 1rem;
     width: 50rem;
     height: 40rem;
+    margin: 4rem auto;
 }
 
-#tileE {
-    grid-row-start: 0;
-    grid-row-start: 1;
-    grid-column-start: 5;
-    grid-column-end: 6;
+#board>div {
+    display: grid;
+    grid-template-rows: repeat(4, 25%);
+    grid-template-columns: repeat(5, 20%);
+    border-radius: .2rem;
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    width: calc(100% - 1rem);
+    height: calc(100% - 1rem);
 }
 
-#tileG {
-    grid-row-start: 0;
-    grid-row-start: 1;
-    grid-column-start: 4;
-    grid-column-end: 5;
+#board #grid div {
+    background-color: #c1a078;
+    border-radius: .2rem;
+    width: calc(100% - 1rem);
+    height: calc(100% - 1rem);
+    transform: translate(.5rem, .5rem);
 }
 
-#tileJ {
-    grid-row-start: 0;
-    grid-row-start: 1;
+#board #tiles img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.x-1 {
+    grid-column-start: 1;
+}
+
+.x-2 {
+    grid-column-start: 2;
+}
+
+.x-3 {
     grid-column-start: 3;
-    grid-column-end: 4;
+}
+
+.x-4 {
+    grid-column-start: 4;
+}
+
+.x-5 {
+    grid-column-start: 5;
+}
+
+.y-1 {
+    grid-row-start: 1 / 4;
+}
+
+.y-2 {
+    grid-row-start: 2;
+}
+
+.y-3 {
+    grid-row-start: 3;
+}
+
+.y-4 {
+    grid-row-start: 4;
+}
+
+.rotation-0 {
+    transform: rotate(0deg);
+}
+
+.rotation-1 {
+    transform: rotate(90deg);
+}
+
+.rotation-2 {
+    transform: rotate(180deg);
+}
+
+.rotation-3 {
+    transform: rotate(-90deg);
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: auto;
+}
+
+footer>div {
+    background-color: var(--black);
+    color: var(--white);
+    margin-top: 2rem;
+    padding: 2rem clamp(2rem, 8vw, 8rem);
+}
+
+footer h1 {
+    width: 100%;
 }
