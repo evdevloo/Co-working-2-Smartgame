@@ -6,6 +6,12 @@
     --bg: var(--white);
     --primary: var(--black);
     --accent: #0f8;
+
+    --starter: #afcb34;
+    --junior: #fab932;
+    --expert: #e1101d;
+    --master: #8b378a;
+    --wizard: #0669b0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,7 +27,8 @@
 
 html {
     background-color: var(--bg);
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, sans-serif;
+    font-variant-caps: all-small-caps;
     color: var(--primary);
 }
 
@@ -30,7 +37,7 @@ html {
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vw;
+    min-height: 100vh;
 }
 
 p {
@@ -46,6 +53,36 @@ header {
 
 /* MAIN */
 
+main {
+    margin: 0 auto;
+    max-width: 60em;
+    text-align: center;
+}
+
+main h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    position: relative;
+    margin-bottom: 0;
+}
+
+main h1::before,
+main h1::after {
+    content: '';
+    display: block;
+    position: absolute;
+}
+
+main h2 {
+    font-size: 1.5rem;
+    color: var(--master);
+    margin-top: 0;
+}
+
+main .challenge img {
+    width: 30rem;
+}
+
 /* BOARD */
 
 #board {
@@ -54,9 +91,9 @@ header {
     position: relative;
     border: 2rem solid #e7d3Bc;
     border-radius: 1rem;
-    width: 50rem;
-    height: 40rem;
-    margin: 4rem auto;
+    width: 40rem;
+    height: 32rem;
+    margin: 2rem 0;
 }
 
 #board>div {
@@ -77,6 +114,39 @@ header {
     width: calc(100% - 1rem);
     height: calc(100% - 1rem);
     transform: translate(.5rem, .5rem);
+}
+
+#grid span {
+    pointer-events: none;
+    display: block;
+    font-size: 2rem;
+    line-height: 0.9;
+    text-align: center;
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+}
+
+#grid .top {
+    top: -3rem;
+    width: 100%;
+}
+
+#grid .right {
+    line-height: 2.6;
+    right: -3rem;
+    height: 100%;
+}
+
+#grid .bottom {
+    bottom: -3rem;
+    width: 100%;
+}
+
+#grid .left {
+    line-height: 2.6;
+    left: -3rem;
+    height: 100%;
 }
 
 .tile img {
@@ -153,11 +223,11 @@ header {
 }
 
 .rotation-1 img {
-    transform: rotate(90deg) translateX(72%) scale(1.92);
+    transform: rotate(90deg) translateX(71.5%) scale(1.95);
 }
 
 .rotation-3 img {
-    transform: rotate(-90deg) translateX(-72%) scale(1.92);
+    transform: rotate(-90deg) translateX(-71.5%) scale(1.95);
 }
 
 /* FOOTER */

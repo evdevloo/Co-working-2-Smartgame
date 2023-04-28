@@ -6,10 +6,6 @@
     let tiles = document.getElementById('tiles');
 
     tiles.addEventListener('mouseover', e => {
-        e.stopPropagation();
-    });
-
-    grid.addEventListener('mouseover', e => {
-        console.log(e.target);
+        //console.log(e.target);
     });
 })();
