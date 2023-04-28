@@ -156,25 +156,27 @@ main .challenge img {
     height: 2rem;
 }
 
-#grid .top {
+#grid #gate-t {
     line-height: 0.65;
     top: -3rem;
     width: 100%;
 }
 
-#grid .right {
+#grid #gate-u {
     line-height: 2.5;
     right: -3.05rem;
     height: 100%;
 }
 
-#grid .bottom {
+#grid #gate-x,
+#grid #gate-w {
     line-height: 0.65;
     bottom: -3rem;
     width: 100%;
 }
 
-#grid .left {
+#grid #gate-z,
+#grid #gate-y {
     line-height: 2.5;
     left: -3rem;
     height: 100%;
