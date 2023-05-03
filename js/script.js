@@ -1,14 +1,14 @@
-'use strict';
+//'use strict';
 
-(function() {
+//function() {
     const grid = document.getElementById('grid');
     const tiles = document.getElementById('tiles');
 
     // all levels
     const challenges = {
         1: {tiles: 'f', gate: 'x', solution: ''},
-        2: {tiles: 'ae', gate: 't', solution: '[[,,{"n":"e","r":3},],[,,,{"n":"a","r":0}],[,,,],[,,,],[,,,]]'},
-        63: {tiles: 'bdefghij', gate: 'w', solution: '[[,,,],[,,,],[,,,{"n":"b","r":0}],[,,{"n":"b","r":0},],[,,,]]'}
+        2: {tiles: 'ae', gate: 't', solution: '9844f81e1408f6ec'},
+        63: {tiles: 'bdefghij', gate: 'w', solution: ''}
     };
 
     class HorseAcademy {
@@ -68,10 +68,9 @@
                     // use css classes to position the tile on the grid
                     div.classList.add(
                         'tile',
-                        'tile-' + tile.name,
-                        'rotation-' + tile.rotation,
                         'x-' + row,
-                        'y-' + col
+                        'y-' + col,
+                        'rotation-' + tile.rotation
                     );
 
                     tiles.appendChild(div);
@@ -80,14 +79,11 @@
         }
 
         solved() {
-            return JSON.stringify(this.board)
-                .replaceAll('null', '')
-                .replaceAll('name', 'n')
-                .replaceAll('rotation', 'r') === this.solution;
+            return (CryptoJS.SHA1(this.board) + '').slice(0, 16) === this.solution;
         }
     }
 
     const game = new HorseAcademy(4, 5);
     game.newChallenge(challenges[2]);
     console.log(game.solved()); // true
-})();
+//})();
