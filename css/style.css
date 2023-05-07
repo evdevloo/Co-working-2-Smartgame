@@ -109,6 +109,11 @@ main .challenge img {
 /* BOARD */
 
 #board {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
     display: block;
     background-color: #e7d3Bc;
     border: .1em solid #d6b693;
@@ -135,18 +140,16 @@ main .challenge img {
     grid-template-columns: repeat(5, 20%);
     border-radius: .1em;
     position: absolute;
-    top: .5rem;
-    left: .5rem;
-    width: calc(100% - 1rem);
-    height: calc(100% - 1rem);
+    width: 100%;
+    height: 100%;
 }
 
 #grid div {
     background-color: #c1a078;
-    border-radius: .3em;
-    width: calc(100% - 1rem);
-    height: calc(100% - 1rem);
-    transform: translate(.5rem, .5rem);
+    border-radius: .1em;
+    width: calc(100% - .4em);
+    height: calc(100% - .4em);
+    transform: translate(.2em, .2em);
 }
 
 #grid span {
@@ -287,11 +290,10 @@ footer h1 {
     main h1 {
         font-size: 3rem;
     }
-    
+
     main h2 {
         font-size: 1.5rem;
     }
 }
 
-@media only screen and (min-width: 60em) {
-}
+@media only screen and (min-width: 60em) {}
