@@ -27,10 +27,10 @@
         cols = 5;
 
         #challenges = [
-            {id: 1, difficulty: 'Starter', tiles: 'f', gate: 'x', solution: '32b0f3913ab4814e'},
-            {id: 2, difficulty: 'Starter', tiles: 'ae', gate: 't', solution: 'c993d6cc99bbd7ac'},
-            {id: 17, difficulty: 'Junior', tiles: 'dej', gate: 't', solution: ''},
-            {id: 18, difficulty: 'Junior', tiles: 'abcefj', gate: 'x', solution: ''},
+            {id: 1, difficulty: 'Starter', tiles: 'f', gate: 'x', solution: 'b47bcf64684dbed8'},
+            {id: 2, difficulty: 'Starter', tiles: 'ae', gate: 't', solution: '8b25dd891d549090'},
+            {id: 17, difficulty: 'Junior', tiles: 'dej', gate: 't', solution: '8e7e375e43cb1965'},
+            {id: 18, difficulty: 'Junior', tiles: 'abcefj', gate: 'x', solution: '7ad39d6cbf19a677'},
             {id: 33, difficulty: 'Expert', tiles: 'adegij', gate: 't', solution: ''},
             {id: 34, difficulty: 'Expert', tiles: 'bcdefgij', gate: 'u', solution: ''},
             {id: 49, difficulty: 'Master', tiles: 'abcefghj', gate: 't', solution: ''},
@@ -80,8 +80,12 @@
                 .map(cell => null));
             
             // test code
-            this.board[1][3] = {name: 'a', rotation: 2};
-            this.board[0][2] = {name: 'e', rotation: 3};
+            this.board[1][3] = {name: 'a', rotation: 0};
+            this.board[1][1] = {name: 'b', rotation: 1};
+            this.board[2][1] = {name: 'c', rotation: 1};
+            this.board[3][3] = {name: 'e', rotation: 2};
+            this.board[3][2] = {name: 'f', rotation: 0};
+            this.board[0][2] = {name: 'j', rotation: 3};
             // test code end
 
             this.renderBoard();
@@ -108,8 +112,8 @@
                     // use css classes to position the tile on the grid
                     div.classList.add(
                         'tile',
-                        'x-' + row,
-                        'y-' + col,
+                        'x-' + col,
+                        'y-' + row,
                         'rotation-' + tile.rotation
                     );
 
