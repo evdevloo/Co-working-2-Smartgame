@@ -80,7 +80,7 @@
                 .map(cell => null));
             
             // test code
-            this.board[1][3] = {name: 'a', rotation: 0};
+            this.board[1][3] = {name: 'a', rotation: 2};
             this.board[0][2] = {name: 'e', rotation: 3};
             // test code end
 
@@ -135,7 +135,7 @@
                     }
                 }
             }
-            return (CryptoJS.SHA1(board) + '').slice(0, 16);
+            return (CryptoJS.SHA1(JSON.stringify(board)) + '').slice(0, 16);
         }
     }
 
