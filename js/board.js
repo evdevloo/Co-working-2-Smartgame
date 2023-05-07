@@ -79,14 +79,13 @@
                 .map(col => [...Array(this.rows)].fill()
                 .map(cell => null));
             
-            // test code
+            // Insert pieces manually
             this.board[1][3] = {name: 'a', rotation: 0};
             this.board[1][1] = {name: 'b', rotation: 1};
             this.board[2][1] = {name: 'c', rotation: 1};
             this.board[3][3] = {name: 'e', rotation: 2};
             this.board[3][2] = {name: 'f', rotation: 0};
             this.board[0][2] = {name: 'j', rotation: 3};
-            // test code end
 
             this.renderBoard();
         }

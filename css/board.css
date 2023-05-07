@@ -334,17 +334,105 @@ button.challenge-nav span {
     display: block;
     background-color: #fff;
     position: absolute;
-    width: 3em;
-    height: .3em;
+    width: 3.1em;
+    height: .25em;
 }
 
 #fence .fence.vertical {
-    width: .3em;
-    height: 3em;
+    width: .25em;
+    height: 3.1em;
 }
 
-#fence .fence:nth-of-type(1) {
-    top: -.6em;
+#fence .fence:nth-child(23) {
+    top: -.5em;
+    left: .2em;
+}
+
+#fence .fence:nth-child(24) {
+    top: -.5em;
+    left: 3.3em;
+}
+
+#fence .fence:nth-child(25) {
+    top: -.5em;
+    right: 3.3em;
+}
+
+#fence .fence:nth-child(26) {
+    top: -.5em;
+    right: .2em;
+}
+
+#fence .fence:nth-child(27) {
+    bottom: -.5em;
+    right: 3.3em;
+}
+
+#fence .fence:nth-child(28) {
+    bottom: -.5em;
+    left: 6.4em;
+}
+
+#fence .fence:nth-child(29) {
+    bottom: -.5em;
+    left: .2em;
+}
+
+#fence .fence.vertical:nth-child(30) {
+    top: .2em;
+    right: -.5em;
+}
+
+#fence .fence.vertical:nth-child(31) {
+    bottom: 3.3em;
+    right: -.5em;
+}
+
+#fence .fence.vertical:nth-child(32) {
+    bottom: .2em;
+    right: -.5em;
+}
+
+#fence .fence.vertical:nth-child(33) {
+    top: 3.3em;
+    left: -.5em;
+}
+
+#fence .fence.vertical:nth-child(34) {
+    bottom: 3.3em;
+    left: -.5em;
+}
+
+#fence .fence-corner {
+    display: block;
+    background-color: #fff;
+    position: absolute;
+    width: 1em;
+    height: .25em;
+}
+
+#fence .fence-corner:nth-child(35) {
+    top: -.25em;
+    left: -.5em;
+    transform: rotate(-45deg);
+}
+
+#fence .fence-corner:nth-child(36) {
+    top: -.25em;
+    right: -.5em;
+    transform: rotate(45deg);
+}
+
+#fence .fence-corner:nth-child(37) {
+    bottom: -.25em;
+    right: -.5em;
+    transform: rotate(-45deg);
+}
+
+#fence .fence-corner:nth-child(38) {
+    bottom: -.25em;
+    left: -.5em;
+    transform: rotate(45deg);
 }
 
 /* BREAKPOINTS */
