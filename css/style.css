@@ -273,26 +273,29 @@ main .challenge img {
 
 
 #slider{
-
     position: absolute;
     width: 12em;
     height: 100%;
     top: 0;
     right: 0;
+    display: flex;
     background: rgba(0,0,0, 0.5);
-    overflow: hidden;
-
-}
-
-#slider ul {
-    list-style: none;
+    z-index: 1;
 }
 
 #slider #items{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    list-style: none;
+    cursor: grab;
+    padding: 0;
+    margin:0;
+    overflow-y: auto;
+    flex: 1 1 auto;
 }
+
+#slider #items::-webkit-scrollbar {
+    display: none;
+}
+
 #slider #items li{
     margin: 1em;
 
