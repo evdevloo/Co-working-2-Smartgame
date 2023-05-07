@@ -1,8 +1,8 @@
 /* ROOT */
 
 :root {
-    --white: 255, 255, 255;
-    --black: 0, 0, 0;
+    --white: #fff;
+    --black: #000;
     --bg: var(--white);
     --primary: var(--black);
     --accent: #0f8;
