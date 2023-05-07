@@ -1,0 +1,158 @@
+#board {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    display: block;
+    background-color: #e7d3Bc;
+    border: .1em solid #d6b693;
+    border-radius: 1em;
+    font-size: clamp(0.8rem, 4.6vw, 2.5rem);
+    margin: .8em 0;
+    padding: .8em;
+    width: min-content;
+    height: min-content;
+}
+
+#board>div {
+    display: block;
+    background-color: #ab8f6f;
+    border-radius: .1em;
+    position: relative;
+    width: 16em;
+    height: 12.8em;
+}
+
+#board>div>div {
+    display: grid;
+    grid-template-rows: repeat(4, 25%);
+    grid-template-columns: repeat(5, 20%);
+    border-radius: .1em;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#grid div {
+    background-color: #c1a078;
+    border-radius: .1em;
+    width: calc(100% - .4em);
+    height: calc(100% - .4em);
+    transform: translate(.2em, .2em);
+}
+
+#grid span {
+    pointer-events: none;
+    display: block;
+    font-size: 1em;
+    text-align: center;
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+}
+
+#gate-t {
+    line-height: 0.65;
+    top: -3rem;
+    width: 100%;
+}
+
+#gate-u {
+    line-height: 2.5;
+    right: -3.05rem;
+    height: 100%;
+}
+
+#gate-x,
+#gate-w {
+    line-height: 0.65;
+    bottom: -3rem;
+    width: 100%;
+}
+
+#gate-z,
+#gate-y {
+    line-height: 2.5;
+    left: -3rem;
+    height: 100%;
+}
+
+#board .tile img {
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+    -ms-user-drag: none;
+    -o-user-drag: none;
+    width: 100%;
+    max-height: 100%;
+}
+
+#board .x-0 {
+    grid-column-start: 1;
+}
+
+#board .x-1 {
+    grid-column-start: 2;
+}
+
+#board .x-2 {
+    grid-column-start: 3;
+}
+
+#board .x-3 {
+    grid-column-start: 4;
+}
+
+#board .x-4 {
+    grid-column-start: 5;
+}
+
+#board .y-0 {
+    grid-row-start: 1;
+}
+
+#board .y-1 {
+    grid-row-start: 2;
+}
+
+#board .y-2 {
+    grid-row-start: 3;
+}
+
+#board .y-3 {
+    grid-row-start: 4;
+}
+
+#board .rotation-0,
+#board .rotation-2 {
+    grid-column-end: span 2;
+}
+
+#board .rotation-0 img {
+    transform: rotate(0deg);
+}
+
+#board .rotation-2 img {
+    transform: rotate(180deg);
+}
+
+#board .rotation-1,
+#board .rotation-3 {
+    grid-row-end: span 2;
+}
+
+#board .rotation-1 img,
+#board .rotation-3 img {
+    width: 200%;
+    max-height: 50%;
+}
+
+#board .rotation-1 img {
+    transform-origin: 25% 50%;
+    transform: rotate(90deg);
+}
+
+#board .rotation-3 img {
+    transform-origin: 50% 100%;
+    transform: rotate(-90deg);
+}
