@@ -14,15 +14,19 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/board.css">
 
-    <!-- FONT : Inter -->
+    <!-- FONT : Inter (Main) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
 
+    <!-- FONT : Material Symbols Outlined (Google Icons) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <!-- JS -->
     <script src="js/crypto.js"></script>
-    <script src="js/script.js" defer></script>
+    <script src="js/board.js" defer></script>
 </head>
 
 <body>
@@ -32,13 +36,19 @@
     <main>
         <section>
             <div class="challenge-heading">
-                <h1>Challenge 0</h1>
+                <div class="challenge-title">
+                    <h1>Challenge 1</h1>
+                    <button id="previousChallenge" class="challenge-nav">
+                        <span class="material-symbols-outlined">navigate_before</span>
+                    </button>
+                    <button id="nextChallenge" class="challenge-nav">
+                        <span class="material-symbols-outlined">navigate_next</span>
+                    </button>
+                </div>
                 <h2 class="starter">Starter</h2>
-                <button id="nextChallenge"><</button>
-                <button id="previousChallenge">></button>
             </div>
 
-            <div class="challenge">
+            <div class="challenge-description">
                 <img src="img/challenges/2.png" alt="challenge diagram">
             </div>
 
