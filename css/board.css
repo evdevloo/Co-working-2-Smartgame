@@ -1,3 +1,51 @@
+/* CHALLANGE */
+
+.challenge-heading {
+    margin: 2rem 0;
+}
+
+.challenge-heading h1 {
+    line-height: 1.3;
+    margin: 0;
+    min-width: 6.5em;
+}
+
+.challenge-heading h2 {
+    line-height: 0.65;
+}
+
+.challenge-title {
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.challenge-description img {
+    width: clamp(15rem, 70vw, 30rem);
+}
+
+button.challenge-nav {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+button.challenge-nav span {
+    display: block;
+    font-size: 3rem;
+}
+
+#previousChallenge {
+    order: -1;
+}
+
+
+#previousChallenge:hover {
+    transition: transformX(1em);
+}
+
+/* BOARD */
+
 #board {
     user-select: none;
     -webkit-user-select: none;
@@ -9,7 +57,7 @@
     border: .1em solid #d6b693;
     border-radius: 1em;
     font-size: clamp(0.8rem, 4.6vw, 2.5rem);
-    margin: .8em 0;
+    margin: 2rem auto;
     padding: .8em;
     width: min-content;
     height: min-content;
@@ -48,33 +96,35 @@
     font-size: 1em;
     text-align: center;
     position: absolute;
-    width: 2rem;
-    height: 2rem;
+    width: .8em;
+    height: .8em;
 }
 
-#gate-t {
+/* 2 ID's required for specificity */
+
+#grid #gate-t {
     line-height: 0.65;
-    top: -3rem;
+    top: -1em;
     width: 100%;
 }
 
-#gate-u {
+#grid #gate-u {
     line-height: 2.5;
-    right: -3.05rem;
+    right: -1em;
     height: 100%;
 }
 
-#gate-x,
-#gate-w {
+#grid #gate-x,
+#grid #gate-w {
     line-height: 0.65;
-    bottom: -3rem;
+    bottom: -1em;
     width: 100%;
 }
 
-#gate-z,
-#gate-y {
+#grid #gate-z,
+#grid #gate-y {
     line-height: 2.5;
-    left: -3rem;
+    left: -1em;
     height: 100%;
 }
 
@@ -155,4 +205,12 @@
 #board .rotation-3 img {
     transform-origin: 50% 100%;
     transform: rotate(-90deg);
+}
+
+/* BREAKPOINTS */
+
+@media only screen and (min-width: 25em) {
+    .challenge-heading h1 {
+        line-height: 1;
+    }
 }

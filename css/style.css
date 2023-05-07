@@ -39,7 +39,7 @@ html {
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 95vh; /* Should be 100 but sometimes overflows on y */
 }
 
 p {
@@ -84,7 +84,7 @@ main {
 }
 
 main h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 900;
     position: relative;
     margin-bottom: 0;
@@ -100,10 +100,6 @@ main h1::after {
 main h2 {
     font-size: 1rem;
     margin-top: 0;
-}
-
-main .challenge img {
-    width: clamp(15rem, 70vw, 30rem);
 }
 
 /* FOOTER */
@@ -125,14 +121,12 @@ footer h1 {
 
 /* BREAKPOINTS */
 
-@media only screen and (min-width: 30em) {
+@media only screen and (min-width: 25em) {
     main h1 {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     main h2 {
         font-size: 1.5rem;
     }
 }
-
-@media only screen and (min-width: 60em) {}
