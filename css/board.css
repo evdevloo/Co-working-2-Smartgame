@@ -23,7 +23,7 @@
 .challenge-description img {
     aspect-ratio: 4 / 1;
     object-fit: contain;
-    max-width: clamp(15rem, 70vw, 30rem); 
+    max-width: clamp(15rem, 70vw, 30rem);
     height: 9rem;
 }
 
@@ -67,7 +67,6 @@ button.challenge-nav span {
 }
 
 #board>div {
-    display: block;
     background-color: #ab8f6f;
     border-radius: .1em;
     position: relative;
@@ -91,44 +90,6 @@ button.challenge-nav span {
     width: calc(100% - .4em);
     height: calc(100% - .4em);
     transform: translate(.2em, .2em);
-}
-
-#grid span {
-    pointer-events: none;
-    display: block;
-    font-size: 1em;
-    text-align: center;
-    position: absolute;
-    width: .8em;
-    height: .8em;
-}
-
-/* 2 ID's required for specificity */
-
-#grid #gate-t {
-    line-height: 0.65;
-    top: -1em;
-    width: 100%;
-}
-
-#grid #gate-u {
-    line-height: 2.5;
-    right: -1em;
-    height: 100%;
-}
-
-#grid #gate-x,
-#grid #gate-w {
-    line-height: 0.65;
-    bottom: -1em;
-    width: 100%;
-}
-
-#grid #gate-z,
-#grid #gate-y {
-    line-height: 2.5;
-    left: -1em;
-    height: 100%;
 }
 
 #board .tile img {
@@ -210,15 +171,13 @@ button.challenge-nav span {
     transform: rotate(-90deg);
 }
 
-#board #fence {
-    display: block;
+#fence>div {
+    position: absolute;
 }
 
 #fence .fence-post {
-    display: block;
     background-color: #fff;
     border-radius: 50%;
-    position: absolute;
     width: .5em;
     height: .5em;
 }
@@ -331,9 +290,7 @@ button.challenge-nav span {
 }
 
 #fence .fence {
-    display: block;
     background-color: #fff;
-    position: absolute;
     width: 3.1em;
     height: .25em;
 }
@@ -404,9 +361,7 @@ button.challenge-nav span {
 }
 
 #fence .fence-corner {
-    display: block;
     background-color: #fff;
-    position: absolute;
     width: 1em;
     height: .25em;
 }
@@ -433,6 +388,88 @@ button.challenge-nav span {
     bottom: -.25em;
     left: -.5em;
     transform: rotate(45deg);
+}
+
+#fence .gate {
+    font-size: 1em;
+    font-weight: 900;
+    line-height: 0.65;
+    width: .8em;
+    height: .8em;
+    z-index: 2;
+}
+
+#fence .gate:nth-child(39) {
+    top: -.8em;
+    left: 7.55em;
+}
+
+#fence .gate:nth-child(40) {
+    top: 4.35em;
+    right: -.8em;
+}
+
+#fence .gate:nth-child(41) {
+    bottom: -.8em;
+    right: 1.25em;
+}
+
+#fence .gate:nth-child(42) {
+    bottom: -.8em;
+    left: 4.35em;
+}
+
+#fence .gate:nth-child(43) {
+    bottom: 1.25em;
+    left: -.8em;
+}
+
+#fence .gate:nth-child(44) {
+    top: 1.25em;
+    left: -.8em;
+}
+
+#fence .finish {
+    position: absolute;
+    width: 4.2em;
+    z-index: 1;
+}
+
+#fence .finish.none {
+    display: none;
+}
+
+#fence .finish.t {
+    top: -1em;
+    left: 5.9em;
+}
+
+#fence .finish.u {
+    top: 4.1em;
+    right: -2.5em;
+    transform: rotate(90deg);
+}
+
+#fence .finish.w {
+    bottom: -1em;
+    right: -.4em;
+}
+
+#fence .finish.x {
+    bottom: -1em;
+    left: 2.7em;
+}
+
+#fence .finish.y {
+    bottom: 1em;
+    left: -2.5em;
+    transform: rotate(90deg);
+}
+
+#fence .finish.z {
+    top: 1em;
+    left: -2.5em;
+    transform: rotate(90deg);
 }
 
 /* BREAKPOINTS */

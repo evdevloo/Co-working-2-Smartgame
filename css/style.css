@@ -46,6 +46,14 @@ p {
     max-width: 40em;
 }
 
+button {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+}
+
 /* HELPER CLASSES */
 
 .starter {

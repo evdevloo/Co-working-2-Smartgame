@@ -22,7 +22,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
 
     <!-- FONT : Material Symbols Outlined (Google Icons) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <!-- JS -->
     <script src="js/crypto.js"></script>
@@ -38,8 +39,8 @@
             <div class="challenge-heading">
                 <div class="challenge-title">
                     <h1>Challenge</h1>
-                    <button id="previousChallenge" class="challenge-nav">
-                        <span class="material-symbols-outlined" style="opacity: .5;">navigate_before</span>
+                    <button id="previousChallenge" class="challenge-nav" disabled>
+                        <span class="material-symbols-outlined">navigate_before</span>
                     </button>
                     <button id="nextChallenge" class="challenge-nav">
                         <span class="material-symbols-outlined">navigate_next</span>
@@ -93,29 +94,36 @@
                         <div class="fence-corner"></div>
                         <div class="fence-corner"></div>
                         <div class="fence-corner"></div>
+                        <div class="gate">T</div>
+                        <div class="gate">U</div>
+                        <div class="gate">W</div>
+                        <div class="gate">X</div>
+                        <div class="gate">Y</div>
+                        <div class="gate">Z</div>
+                        <img class="finish none" src="img/finish.png" alt="finish"></img>
                     </div>
 
                     <div id="grid">
-                        <div><span id="gate-z">Z</span></div>
-                        <div></div>
-                        <div><span id="gate-t">T</span></div>
                         <div></div>
                         <div></div>
                         <div></div>
                         <div></div>
                         <div></div>
                         <div></div>
-                        <div><span id="gate-u">U</span></div>
                         <div></div>
                         <div></div>
                         <div></div>
                         <div></div>
                         <div></div>
-                        <div><span id="gate-y">Y</span></div>
-                        <div><span id="gate-x">X</span></div>
                         <div></div>
                         <div></div>
-                        <div><span id="gate-w">W</span></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
 
                     <div id="tiles"></div>
