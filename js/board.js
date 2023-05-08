@@ -87,9 +87,9 @@
             tiles.innerHTML = '';
 
             // convert all tiles to html elements and put them on the board
-            for (let col = 0; col < this.#cols; col++) {
-                for (let row = 0; row < this.#rows; row++) {
-                    const tile = this.board[col][row];
+            for (let x = 0; x < this.#cols; x++) {
+                for (let y = 0; y < this.#rows; y++) {
+                    const tile = this.board[x][y];
 
                     if (!tile) continue;
 
@@ -103,14 +103,24 @@
                     // use css classes to position the tile on the grid
                     div.classList.add(
                         'tile',
-                        'x-' + col,
-                        'y-' + row,
+                        'x-' + x,
+                        'y-' + y,
                         'rotation-' + tile.rotation
                     );
 
                     tiles.appendChild(div);
                 }
             }
+        }
+
+        addPiece(name, x, y, rotation) {
+            this.board[x][y] = {name, rotation};
+            this.renderBoard();
+        }
+
+        removePiece(x, y) {
+            this.board[x][y] = null;
+            this.renderBoard();
         }
 
         solved() {
@@ -121,12 +131,12 @@
             // Account for symmetric pieces
             let board = this.board.map(row => row.slice());
 
-            for (let col = 0; col < this.#cols; col++) {
-                for (let row = 0; row < this.#rows; row++) {
-                    let tile = board[col][row];
+            for (let x = 0; x < this.#cols; x++) {
+                for (let y = 0; y < this.#rows; y++) {
+                    let tile = board[x][y];
 
                     if (tile && "abci".includes(tile.name)) {
-                        board[col][row].rotation = tile.rotation === 2 ? 0 : tile.rotation === 3 ? 1 : tile.rotation;
+                        board[x][y].rotation = tile.rotation === 2 ? 0 : tile.rotation === 3 ? 1 : tile.rotation;
                     }
                 }
             }
