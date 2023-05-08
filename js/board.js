@@ -133,7 +133,7 @@
             return (CryptoJS.SHA1(JSON.stringify(board)) + '').slice(0, 16);
         }
     }
-    
+
     const game = new HorseAcademy();
 
     // Challenge Navigation
