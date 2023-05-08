@@ -1,8 +1,6 @@
 'use strict';
 (function(){
 
-    let dragged;
-
     const tiles = document.querySelectorAll(`#items div`);
     const targets = document.querySelectorAll(`.target`);
 
