@@ -5,78 +5,81 @@
 //function() {
     const grid = document.getElementById('grid');
     const tiles = document.getElementById('tiles');
-
-    // Challenge Navigation
-    document.getElementById('previousChallenge').addEventListener('click', function() {
-        if (game.selectedChallenge > 1) game.newChallenge(--game.selectedChallenge);
-        if (game.selectedChallenge <= 1) this.style.filter = 'opacity(50%)';
-
-        this.nextElementSibling.style.filter = 'opacity(1)';
-    });
-
-    document.getElementById('nextChallenge').addEventListener('click', function() {
-        if (game.selectedChallenge < 80) game.newChallenge(++game.selectedChallenge);
-        if (game.selectedChallenge >= 80) this.style.filter = 'opacity(50%)';
-
-        this.previousElementSibling.style.filter = 'opacity(1)';
-    });
     
     // Game Class
     class HorseAcademy {
-        rows = 4;
-        cols = 5;
+        #rows = 4;
+        #cols = 5;
 
-        #challenges = {
-            1: {difficulty: 'Starter', tiles: 'f', gate: 'x', solution: '32b0f3913ab4814e'},
-            2: {difficulty: 'Starter', tiles: 'ae', gate: 't', solution: '9844f81e1408f6ec'},
-            63: {difficulty: 'Master', tiles: 'bdefghij', gate: 'w', solution: ''},
-            80: {difficulty: 'Wizard', tiles: 'abcdefhij', gate: 't', solution: ''}
-        }
-        selectedChallenge = 1;
+        #challenges = [
+            {id: 1, difficulty: 'Starter', tiles: 'f', gate: 'x', solution: 'b47bcf64684dbed8'},
+            {id: 2, difficulty: 'Starter', tiles: 'ae', gate: 't', solution: '8b25dd891d549090'},
+            {id: 17, difficulty: 'Junior', tiles: 'dej', gate: 't', solution: '8e7e375e43cb1965'},
+            {id: 18, difficulty: 'Junior', tiles: 'abcefj', gate: 'y', solution: '7ad39d6cbf19a677'},
+            {id: 33, difficulty: 'Expert', tiles: 'adegij', gate: 't', solution: ''},
+            {id: 34, difficulty: 'Expert', tiles: 'bcdefgij', gate: 'u', solution: ''},
+            {id: 49, difficulty: 'Master', tiles: 'abcefghj', gate: 't', solution: ''},
+            {id: 50, difficulty: 'Master', tiles: 'abdeghij', gate: 'x', solution: ''},
+            {id: 63, difficulty: 'Master', tiles: 'bdefghij', gate: 'w', solution: ''},
+            {id: 65, difficulty: 'Wizard', tiles: 'bdefgi', gate: 'none', solution: ''},
+            {id: 66, difficulty: 'Wizard', tiles: 'acdefg', gate: 'none', solution: ''},
+            {id: 80, difficulty: 'Wizard', tiles: 'abcdefhij', gate: 'none', solution: ''}
+        ]
+        challenges = this.#challenges.length;
+
+        #progress = {
+            18: {board: '[[null,null,{"name":"j","rotation":3},null],[null,{"name":"b","rotation":1},null,{"name":"a","rotation":0}],[null,{"name":"c","rotation":1},null,null],[null,null,{"name":"f","rotation":0},{"name":"e","rotation":2}],[null,null,null,null]]', completed: false}
+        };
 
         constructor() {
-            this.newChallenge(this.selectedChallenge);
+            this.newChallenge();
         }
         
-        newChallenge(challengeNumber) {
-            const challenge = this.#challenges[challengeNumber];
+        newChallenge(challengeIndex) {
+            this.selectedChallenge = challengeIndex || 0;
+            this.challenge = this.#challenges[this.selectedChallenge];
 
             // update title
-            document.querySelector('.challenge-heading h1').innerText = 'Challenge ' + this.selectedChallenge;
+            document.querySelector('.challenge-heading h1').innerText = 'Challenge ' + (this.selectedChallenge + 1);
 
-            if (challenge) {
-                // update subtitle
-                const subtitle = document.querySelector('.challenge-heading h2');
-                subtitle.innerText = challenge.difficulty;
-                subtitle.className = challenge.difficulty.toLowerCase();
+            // update subtitle
+            const subtitle = document.querySelector('.challenge-heading h2');
+            subtitle.innerText = this.challenge.difficulty;
+            subtitle.className = this.challenge.difficulty.toLowerCase();
 
-                // update challenge description
-                const img = document.querySelector('.challenge-description img');
-                img.src = `img/challenges/solution${this.selectedChallenge}.png`;
-                img.alt = 'challenge diagram ' + this.selectedChallenge;
+            // update challenge description
+            const description = document.querySelector('.challenge-description img');
+            description.src = `img/challenges/challenge${this.challenge.id}.png`;
+            description.alt = 'challenge diagram ' + (this.selectedChallenge + 1);
 
-                // reset all gates
-                document.querySelectorAll('#grid span').forEach(el => el.style.backgroundColor = '');
+            // update finish position
+            document.querySelector('#fence .finish').className = 'finish ' + this.challenge.gate;
 
-                // set gate to red
-                document.querySelector('#grid #gate-' + challenge.gate).style.backgroundColor = 'red';
-
-                this.solution = challenge.solution;
-            }
-            this.resetBoard();
+            this.loadProgress();
         }
 
-        resetBoard() {
+        resetProgress() {
             // create 2d array
-            this.board = [...Array(this.cols)].fill()
-                .map(col => [...Array(this.rows)].fill()
+            this.board = [...Array(this.#cols)].fill()
+                .map(col => [...Array(this.#rows)].fill()
                 .map(cell => null));
-            
-            // test code
-            this.board[3][0] = {name: 'f', rotation: 0};
-            // test code end
+
+            this.saveProgress();
+        }
+
+        loadProgress() {
+            this.board = JSON.parse(this.#progress[this.challenge.id]?.board ?? '{}');
+
+            if (Object.keys(this.board).length === 0) this.resetProgress();
 
             this.renderBoard();
+        }
+
+        saveProgress() {
+            this.#progress[this.challenge.id] = {
+                board: JSON.stringify(this.board),
+                completed: this.#progress[this.challenge.id]?.completed || this.solved()
+            };
         }
 
         renderBoard() {
@@ -84,8 +87,8 @@
             tiles.innerHTML = '';
 
             // convert all tiles to html elements and put them on the board
-            for (let col = 0; col < this.cols; col++) {
-                for (let row = 0; row < this.rows; row++) {
+            for (let col = 0; col < this.#cols; col++) {
+                for (let row = 0; row < this.#rows; row++) {
                     const tile = this.board[col][row];
 
                     if (!tile) continue;
@@ -100,8 +103,8 @@
                     // use css classes to position the tile on the grid
                     div.classList.add(
                         'tile',
-                        'x-' + row,
-                        'y-' + col,
+                        'x-' + col,
+                        'y-' + row,
                         'rotation-' + tile.rotation
                     );
 
@@ -111,14 +114,40 @@
         }
 
         solved() {
-            return this.getBoardHash() === this.solution;
+            return this.getBoardHash() === this.challenge.solution;
         }
 
         getBoardHash() {
-            return (CryptoJS.SHA1(JSON.stringify(this.board)) + '').slice(0, 16);
+            // Account for symmetric pieces
+            let board = this.board.map(row => row.slice());
+
+            for (let col = 0; col < this.#cols; col++) {
+                for (let row = 0; row < this.#rows; row++) {
+                    let tile = board[col][row];
+
+                    if (tile && "abci".includes(tile.name)) {
+                        board[col][row].rotation = tile.rotation === 2 ? 0 : tile.rotation === 3 ? 1 : tile.rotation;
+                    }
+                }
+            }
+            return (CryptoJS.SHA1(JSON.stringify(board)) + '').slice(0, 16);
         }
     }
 
-    // Program
     const game = new HorseAcademy();
+
+    // Challenge Navigation
+    document.getElementById('previousChallenge').addEventListener('click', function() {
+        if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
+        if (game.selectedChallenge <= 0) this.setAttribute('disabled', '');
+
+        this.nextElementSibling.removeAttribute('disabled');
+    });
+
+    document.getElementById('nextChallenge').addEventListener('click', function() {
+        if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
+        if (game.selectedChallenge >= game.challenges - 1) this.setAttribute('disabled', '');
+
+        this.previousElementSibling.removeAttribute('disabled');
+    });
 //})();
