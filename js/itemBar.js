@@ -3,61 +3,56 @@
 
     let dragged;
 
-    const tiles = document.getElementsByClassName('draggable');
-    const target = document.getElementById("droptarget");
+    const tiles = document.querySelectorAll(`#items div`);
+    const targets = document.querySelectorAll(`.target`);
 
-    for (let i = 0; i < tiles.length; i++) {
-        const tile = tiles[i];
+    tiles.forEach(tile =>{
+        tile.addEventListener('dragstart', dragStart);
+    });
 
-        // plaats een eventListener op de knop
-        tile.addEventListener("drag", () => {
-            console.log("dragging");
-        });
-
-        tile.addEventListener("dragstart", (event) => {
-            // store a ref. on the dragged elem
-            dragged = event.target;
-            // make it half transparent
-            event.target.classList.add("dragging");
-        });
-
-        tile.addEventListener("dragend", (event) => {
-            // reset the transparency
-            event.target.classList.remove("dragging");
-        });
+    function dragStart(e) {
+        e.dataTransfer.setData('text/plain', e.target.id);
+        setTimeout(() => {
+            e.target.classList.add('hide');
+        }, 0);
     }
 
+    targets.forEach(target => {
+        target.addEventListener('dragenter', dragEnter)
+        target.addEventListener('dragover', dragOver);
+        target.addEventListener('dragleave', dragLeave);
+        target.addEventListener('drop', drop);
+    })
 
-    target.addEventListener(
-        "dragover",
-        (event) => {
-            // prevent default to allow drop
-            event.preventDefault();
-        },
-        false
-    );
-
-    target.addEventListener("dragenter", (event) => {
-        // highlight potential drop target when the draggable element enters it
-        if (event.target.classList.contains("dropzone")) {
-            event.target.classList.add("dragover");
-        }
-    });
-
-    target.addEventListener("dragleave", (event) => {
-        // reset background of potential drop target when the draggable element leaves it
-        if (event.target.classList.contains("dropzone")) {
-            event.target.classList.remove("dragover");
-        }
-    });
-
-    target.addEventListener("drop", (event) => {
-        // prevent default action (open as link for some elements)
+    function dragEnter(event){
         event.preventDefault();
-        // move dragged element to the selected drop target
-        if (event.target.classList.contains("dropzone")) {
-            event.target.classList.remove("dragover");
-            event.target.appendChild(dragged);
+        event.target.classList.add('drag-over');
+
+    }
+
+    function dragOver(event) {
+        event.preventDefault();
+        event.target.classList.add('drag-over');
+    }
+
+    function dragLeave(event) {
+        event.target.classList.remove('drag-over');
+    }
+
+    function drop(event) {
+        if (!event.target.classList.contains("tile")){
+            event.target.classList.remove('drag-over');
+
+            // get the draggable element
+            const id = event.dataTransfer.getData('text/plain');
+            const draggable = document.getElementById(id);
+
+            // add it to the drop target
+            event.target.appendChild(draggable);
+
+            // display the draggable element
+            draggable.classList.remove('hide');
         }
-    });
+    }
+
 })();
