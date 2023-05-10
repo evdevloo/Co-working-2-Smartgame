@@ -1,0 +1,144 @@
+/* ROOT */
+
+:root {
+    --white: #fff;
+    --black: #000;
+    --bg: var(--white);
+    --primary: var(--black);
+    --accent: #0f8;
+
+    --starter: #afcb34;
+    --junior: #fab932;
+    --expert: #e1101d;
+    --master: #8b378a;
+    --wizard: #0669b0;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #232133;
+        --primary: var(--white);
+    }
+
+    .g-icon {
+        color: var(--white);
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--bg);
+    font-family: Inter, sans-serif;
+    font-variant-caps: all-small-caps;
+    color: var(--primary);
+}
+
+/* ATOMS */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 95vh; /* Should be 100 but sometimes overflows on y */
+}
+
+p {
+    max-width: 40em;
+}
+
+button {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+}
+
+/* HELPER CLASSES */
+
+.starter {
+    color: var(--starter);
+}
+
+.junior {
+    color: var(--junior);
+}
+
+.expert {
+    color: var(--expert);
+}
+
+.master {
+    color: var(--master);
+}
+
+.wizard {
+    color: var(--wizard);
+}
+
+/* HEADER */
+
+header {
+    background-color: var(--primary);
+    color: var(--bg);
+}
+
+/* MAIN */
+
+main {
+    margin: 0 auto;
+    max-width: 60em;
+    text-align: center;
+}
+
+main h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    position: relative;
+    margin-bottom: 0;
+}
+
+main h1::before,
+main h1::after {
+    content: '';
+    display: block;
+    position: absolute;
+}
+
+main h2 {
+    font-size: 1rem;
+    margin-top: 0;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: auto;
+}
+
+footer>div {
+    background-color: var(--black);
+    color: var(--white);
+    margin-top: 2rem;
+    padding: 2rem clamp(2rem, 8vw, 8rem);
+}
+
+footer h1 {
+    width: 100%;
+}
+
+/* BREAKPOINTS */
+
+@media only screen and (min-width: 25em) {
+    main h1 {
+        font-size: 2.5rem;
+    }
+
+    main h2 {
+        font-size: 1.5rem;
+    }
+}
