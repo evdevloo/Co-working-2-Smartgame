@@ -14,14 +14,18 @@
     --wizard: #0669b0;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
     :root {
         --bg: #232133;
         --primary: var(--white);
     }
 
     .g-icon {
-        color: var(--white);
+        color: rgb(0, 0, 0);
+    }
+
+    button[disabled] .g-icon {
+        color: rgba(0, 0, 0, 0.3);
     }
 }
 
