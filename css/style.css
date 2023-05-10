@@ -16,8 +16,12 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg: var(--black);
+        --bg: #232133;
         --primary: var(--white);
+    }
+
+    .g-icon {
+        color: var(--white);
     }
 }
 

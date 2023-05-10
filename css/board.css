@@ -23,6 +23,9 @@
 .challenge-description img {
     aspect-ratio: 4 / 1;
     object-fit: contain;
+    background-color: var(--white);
+    border-radius: .3rem;
+    box-shadow: 0 0 .5rem .5rem var(--white);
     max-width: clamp(15rem, 70vw, 30rem);
     height: 9rem;
 }
@@ -60,6 +63,7 @@ button.challenge-nav span {
     border: .1em solid #d6b693;
     border-radius: 1.2em;
     font-size: clamp(0.8rem, 4.6vw, 2.5rem);
+    color: var(--black);
     margin: 2rem auto;
     padding: .8em;
     width: min-content;
