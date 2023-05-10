@@ -1,18 +1,62 @@
 'use strict';
 (function(){
 
-    const tiles = document.querySelectorAll(`#items div`);
-    const targets = document.querySelectorAll(`.target`);
+    class Tile {
 
-    tiles.forEach(tile =>{
-        tile.addEventListener('dragstart', dragStart);
+        oldParent;
+        constructor(element) {
+            this.id = element.id;
+            this.parent = element.parentElement;
+            element.addEventListener('dragstart', dragStart);
+        }
+
+        moved(){
+            this.oldParent = this.parent;
+            this.oldParent.style.zIndex = "";
+            this.parent = document.getElementById(this.id).parentElement;
+
+            sort();
+        }
+
+        get tileOldParent(){
+            return this.oldParent;
+        }
+
+        get tileParent() {
+            return this.parent
+        }
+    }
+
+    let sliderTiles = document.querySelectorAll(`.tile`);
+    let tiles = [];
+    sliderTiles .forEach(element =>{
+        tiles.push(new Tile(element));
     });
 
-    function dragStart(e) {
-        e.dataTransfer.setData('text/plain', e.target.id);
+    function sort() {
+            /* Act on the event */
+            let tile = document.querySelector(`#items`);
+            let tileSort = [...document.querySelectorAll(`#items div`)];
+
+            tileSort.sort(function(a, b){
+                return (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0;
+            });
+            for(var i = 0, l = tileSort.length; i < l; i++) {
+                tile.appendChild(tileSort[i]);
+            }
+    }
+
+    //const tiles = document.querySelectorAll(`#items div`);
+    const targets = document.querySelectorAll(`.target`);
+
+
+    console.log(tiles);
+
+    function dragStart(event) {
+        event.dataTransfer.setData('text/plain', event.target.id);
         setTimeout(() => {
-            e.target.classList.add('hide');
-            e.target.parentElement.style.zIndex = "";
+            event.target.classList.add('hide');
+
         }, 0);
     }
 
@@ -36,22 +80,36 @@
 
     function dragLeave(event) {
         event.target.classList.remove('drag-over');
+        //event.target.parentElement.style.zIndex = "";
     }
 
     function drop(event) {
-        if (!event.target.classList.contains("tile")){
+
+        if (event.target.classList.contains("target") ){
             event.target.classList.remove('drag-over');
 
             // get the draggable element
             const id = event.dataTransfer.getData('text/plain');
             const draggable = document.getElementById(id);
+            const tile = tiles.find(tile => tile.id === id);
 
-            // add it to the drop target
             event.target.appendChild(draggable);
             event.target.style.zIndex = "1";
-
-            // display the draggable element
             draggable.classList.remove('hide');
+            tile.moved();
+        } else if (event.target.classList.contains("tile") && event.target.parentElement.id === "items"){
+            event.target.classList.remove('drag-over');
+
+            // get the draggable element
+            const id = event.dataTransfer.getData('text/plain');
+            const draggable = document.getElementById(id);
+            const tile = tiles.find(tile => tile.id === id);
+
+            event.target.parentElement.appendChild(draggable);
+            event.target.style.zIndex = "1";
+            draggable.classList.remove('hide');
+            tile.moved();
+            sort();
         }
     }
 

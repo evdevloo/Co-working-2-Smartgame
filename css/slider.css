@@ -44,6 +44,10 @@
 
 }
 
+.dragging {
+    opacity: 0.5;
+}
+
 #tile1 {
     background-image: url("../img/tiles/a.png");
 
