@@ -25,20 +25,23 @@
     display: none;
 }
 
-#slider #items div{
+#items .tile {
+
     margin: 2em 1em;
+}
+
+.tile{
     background-size: contain;
     background-repeat: no-repeat;
     width: 85%;
     height: 0;
-    padding-top: 43%; /* (img-height / img-width * container-width) */
-    /* (853 / 1280 * 100) */
-
+    padding-top: 43%;
 }
 
-#slider img{
-    max-width:100%;
-    max-height:100%;
+#board .target .tile {
+    width: calc((100% - 0.4em)*2);
+    height: calc(100% - 0.4em);
+
 }
 
 #tile1 {

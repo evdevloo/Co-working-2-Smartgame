@@ -12,6 +12,7 @@
         e.dataTransfer.setData('text/plain', e.target.id);
         setTimeout(() => {
             e.target.classList.add('hide');
+            e.target.parentElement.style.zIndex = "";
         }, 0);
     }
 
@@ -47,6 +48,7 @@
 
             // add it to the drop target
             event.target.appendChild(draggable);
+            event.target.style.zIndex = "1";
 
             // display the draggable element
             draggable.classList.remove('hide');
