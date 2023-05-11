@@ -1,53 +1,10 @@
-'use strict';
-(function(){
-
-    class Tile {
-
-        oldParent;
-        constructor(element) {
-            this.id = element.id;
-            this.parent = element.parentElement;
-            element.addEventListener('dragstart', dragStart);
-        }
-
-        moved(){
-            this.oldParent = this.parent;
-            this.oldParent.style.zIndex = '';
-            this.parent = document.getElementById(this.id).parentElement;
-
-            sort();
-        }
-
-        get tileOldParent(){
-            return this.oldParent;
-        }
-
-        get tileParent() {
-            return this.parent
-        }
-    }
+import { game } from './board.js';
 
     let sliderTiles = document.querySelectorAll(`.card`);
-    let tiles = [];
+
     sliderTiles .forEach(element =>{
-        tiles.push(new Tile(element));
+        element.addEventListener('dragstart', dragStart);
     });
-
-    function sort() {
-            /* Act on the event */
-            let tile = document.querySelector(`#items`);
-            let tileSort = [...document.querySelectorAll(`#items div`)];
-
-            tileSort.sort(function(a, b){
-                return (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0;
-            });
-            for(var i = 0, l = tileSort.length; i < l; i++) {
-                tile.appendChild(tileSort[i]);
-            }
-    }
-
-    //const tiles = document.querySelectorAll(`#items div`);
-    const targets = document.querySelectorAll(`#grid > div, #items`);
 
     function dragStart(event) {
         event.dataTransfer.setData('text/plain', event.target.id);
@@ -57,12 +14,32 @@
         }, 0);
     }
 
-    targets.forEach(target => {
-        target.addEventListener('dragenter', dragEnter)
-        target.addEventListener('dragover', dragOver);
-        target.addEventListener('dragleave', dragLeave);
-        target.addEventListener('drop', drop);
-    })
+    const rows = 4;
+    const cols = 5;
+    let targets= [];
+    getTargets();
+
+    function getTargets(){
+        let tempTarg = [...document.querySelectorAll(`#grid > div, #items`)];
+        let h= 0
+        for (var i = 0; i < rows; i++) {
+            targets[i]=[];
+            for (var j = 0; j < cols; j++) {
+                targets[i][j] = tempTarg[h++];
+            }
+        }
+
+        targets.forEach(row => {
+            row.forEach(col => {
+                col.addEventListener('dragenter', dragEnter)
+                col.addEventListener('dragover', dragOver);
+                col.addEventListener('dragleave', dragLeave);
+                col.addEventListener('drop', drop);
+            })
+        })
+    }
+
+
 
     function dragEnter(event){
         event.preventDefault();
@@ -87,30 +64,47 @@
             // get the draggable element
             const id = event.dataTransfer.getData('text/plain');
             const draggable = document.getElementById(id);
-            const tile = tiles.find(tile => tile.id === id);
 
-            if (event.target.id === 'items'){
+            if (event.target.parentElement.id === 'grid'){
+
+                for (let i = 0; i < rows; i++) {
+                    for (let j = 0; j < cols; j++) {
+                        if (event.target === targets[i][j]){
+                            game.addPiece(draggable.id,j,i,0);
+                        }
+                    }
+                }
+                getTargets();
 
             }
 
             event.target.appendChild(draggable);
-            event.target.style.zIndex = '1';
+            //event.target.style.zIndex = '1';
+
             draggable.classList.remove('hide');
-            tile.moved();
+            sort();
         } else if (event.target.classList.contains('card') && event.target.parentElement.id === 'items'){
             event.target.classList.remove('drag-over');
 
             // get the draggable element
             const id = event.dataTransfer.getData('text/plain');
             const draggable = document.getElementById(id);
-            const tile = tiles.find(tile => tile.id === id);
 
             event.target.parentElement.appendChild(draggable);
-            event.target.style.zIndex = '1';
+            //event.target.style.zIndex = '1';
             draggable.classList.remove('hide');
-            tile.moved();
             sort();
         }
     }
+    function sort() {
+        /* Act on the event */
+        let tile = document.querySelector(`#items`);
+        let tileSort = [...document.querySelectorAll(`#items div`)];
 
-})();
+        tileSort.sort(function(a, b){
+            return (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0;
+    });
+        for(var i = 0, l = tileSort.length; i < l; i++) {
+            tile.appendChild(tileSort[i]);
+        }
+    }
