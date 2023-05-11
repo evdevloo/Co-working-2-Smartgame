@@ -12,7 +12,7 @@
 
         moved(){
             this.oldParent = this.parent;
-            this.oldParent.style.zIndex = "";
+            this.oldParent.style.zIndex = '';
             this.parent = document.getElementById(this.id).parentElement;
 
             sort();
@@ -27,7 +27,7 @@
         }
     }
 
-    let sliderTiles = document.querySelectorAll(`.tile`);
+    let sliderTiles = document.querySelectorAll(`.card`);
     let tiles = [];
     sliderTiles .forEach(element =>{
         tiles.push(new Tile(element));
@@ -47,7 +47,7 @@
     }
 
     //const tiles = document.querySelectorAll(`#items div`);
-    const targets = document.querySelectorAll(`.target`);
+    const targets = document.querySelectorAll(`#grid > div, #items`);
 
     function dragStart(event) {
         event.dataTransfer.setData('text/plain', event.target.id);
@@ -77,12 +77,11 @@
 
     function dragLeave(event) {
         event.target.classList.remove('drag-over');
-        //event.target.parentElement.style.zIndex = "";
     }
 
     function drop(event) {
 
-        if (event.target.classList.contains("target") ){
+        if (event.target.parentElement.id === 'grid' || event.target.id === 'items'){
             event.target.classList.remove('drag-over');
 
             // get the draggable element
@@ -90,11 +89,15 @@
             const draggable = document.getElementById(id);
             const tile = tiles.find(tile => tile.id === id);
 
+            if (event.target.id === 'items'){
+
+            }
+
             event.target.appendChild(draggable);
-            event.target.style.zIndex = "1";
+            event.target.style.zIndex = '1';
             draggable.classList.remove('hide');
             tile.moved();
-        } else if (event.target.classList.contains("tile") && event.target.parentElement.id === "items"){
+        } else if (event.target.classList.contains('card') && event.target.parentElement.id === 'items'){
             event.target.classList.remove('drag-over');
 
             // get the draggable element
@@ -103,7 +106,7 @@
             const tile = tiles.find(tile => tile.id === id);
 
             event.target.parentElement.appendChild(draggable);
-            event.target.style.zIndex = "1";
+            event.target.style.zIndex = '1';
             draggable.classList.remove('hide');
             tile.moved();
             sort();
