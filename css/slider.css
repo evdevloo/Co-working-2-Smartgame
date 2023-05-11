@@ -23,11 +23,11 @@
     display: none;
 }
 
-#items .tile {
+#items .card {
     margin: 2em 1em;
 }
 
-#slider .tile {
+.card {
     background-size: contain;
     background-repeat: no-repeat;
     width: 85%;
@@ -35,7 +35,7 @@
     padding-top: 43%;
 }
 
-#board .target .tile {
+#board .card {
     width: calc((100% - 0.4em) * 2);
     height: calc(100% - 0.4em);
 }
@@ -44,42 +44,42 @@
     opacity: 0.5;
 }
 
-#tile1 {
+#a {
     background-image: url("../img/tiles/a.png");
 }
 
-#tile2 {
+#b{
     background-image: url("../img/tiles/b.png");
 }
 
-#tile3 {
+#c {
     background-image: url("../img/tiles/c.png");
 }
 
-#tile4 {
+#d {
     background-image: url("../img/tiles/d.png");
 }
 
-#tile5 {
+#e {
     background-image: url("../img/tiles/e.png");
 }
 
-#tile6 {
+#f {
     background-image: url("../img/tiles/f.png");
 }
 
-#tile7 {
+#g {
     background-image: url("../img/tiles/g.png");
 }
 
-#tile8 {
+#h {
     background-image: url("../img/tiles/h.png");
 }
 
-#tile9 {
+#i {
     background-image: url("../img/tiles/i.png");
 }
 
-#tile10 {
+#j {
     background-image: url("../img/tiles/j.png");
 }

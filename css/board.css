@@ -41,13 +41,25 @@ button.challenge-nav span {
     font-size: 3rem;
 }
 
-#previousChallenge {
+#previousChallenge{
     order: -1;
+    transition: 50ms;
 }
 
 
-#previousChallenge:hover {
-    transition: transformX(1em);
+#previousChallenge:hover{
+    transform: translateX(-1em);
+    transition: 50ms;
+}
+
+#nextChallenge{
+    transition: 50ms;
+}
+
+
+#nextChallenge:hover{
+    transform: translateX(1em);
+    transition: 50ms;
 }
 
 /* BOARD */
