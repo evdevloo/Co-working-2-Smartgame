@@ -31,6 +31,7 @@
 }
 
 button.challenge-nav {
+    cursor: pointer;
     background-color: transparent;
     border: none;
     padding: 0;
@@ -39,15 +40,19 @@ button.challenge-nav {
 button.challenge-nav span {
     display: block;
     font-size: 3rem;
+    transition: transform .2s ease-in-out;
 }
 
 #previousChallenge {
     order: -1;
 }
 
+#previousChallenge:hover span {
+    transform: translateX(-.4rem);
+}
 
-#previousChallenge:hover {
-    transition: transformX(1em);
+#nextChallenge:hover span {
+    transform: translateX(.4rem);
 }
 
 /* BOARD */
@@ -88,7 +93,7 @@ button.challenge-nav span {
     height: 100%;
 }
 
-#grid div {
+#grid div:not(.tile) {
     background-color: #c1a078;
     border-radius: .1em;
     width: calc(100% - .4em);
