@@ -16,3 +16,8 @@ main {
     color: black;
     z-index: 1;
 }
+.side-bar-col {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
