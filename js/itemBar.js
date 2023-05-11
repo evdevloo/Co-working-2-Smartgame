@@ -89,6 +89,10 @@
             const draggable = document.getElementById(id);
             const tile = tiles.find(tile => tile.id === id);
 
+            if (event.target.id === 'items'){
+
+            }
+
             event.target.appendChild(draggable);
             event.target.style.zIndex = '1';
             draggable.classList.remove('hide');

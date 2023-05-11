@@ -33,6 +33,7 @@
     width: 85%;
     height: 0;
     padding-top: 43%;
+    transition: all 0.3s ease-out;
 }
 
 #board .card {
@@ -42,6 +43,16 @@
 
 #slider .dragging {
     opacity: 0.5;
+}
+
+.hide {
+    height:0;
+    padding-top:0;
+    padding-bottom:0;
+    opacity: 0;
+
+
+    transition: 0.3s all ease-out;
 }
 
 #a {
