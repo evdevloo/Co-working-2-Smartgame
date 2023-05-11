@@ -1,3 +1,3 @@
-import { game } from './board';
+import { game } from './board.js';
 
-console.log(game);
+console.log(game.getBoardHash());
