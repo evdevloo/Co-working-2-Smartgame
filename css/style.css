@@ -14,7 +14,7 @@
     --wizard: #0669b0;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
     :root {
         --bg: #232133;
         --primary: var(--white);
