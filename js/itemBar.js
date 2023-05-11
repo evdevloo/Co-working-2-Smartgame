@@ -49,9 +49,6 @@
     //const tiles = document.querySelectorAll(`#items div`);
     const targets = document.querySelectorAll(`.target`);
 
-
-    console.log(tiles);
-
     function dragStart(event) {
         event.dataTransfer.setData('text/plain', event.target.id);
         setTimeout(() => {
