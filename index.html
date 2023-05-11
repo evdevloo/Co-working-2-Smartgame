@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/board.css">
+    <link rel="stylesheet" href="css/slider.css">
 
-    <!-- FONT : Inter (Main) -->
+    <!-- FONT : Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
@@ -26,8 +27,14 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <!-- JS -->
+    <script src="js/itemBar.js" defer></script>
     <script src="js/crypto.js"></script>
-    <script src="js/board.js" defer></script>
+    <script src="js/board.js"></script>
+    <!--
+    <script src="js/crypto.js"></script>
+    <script src="js/board.js"></script>
+    -->
+
 </head>
 
 <body>
@@ -50,7 +57,7 @@
             </div>
 
             <div class="challenge-description">
-                <img src="" alt="challenge diagram">
+                <img src="img/challenges/challenge2.png" alt="challenge diagram">
             </div>
 
             <div id="board">
@@ -100,36 +107,67 @@
                         <div class="gate">X</div>
                         <div class="gate">Y</div>
                         <div class="gate">Z</div>
-                        <img class="finish none" src="img/finish.png" alt="finish"></img>
+                        <img class="finish none" src="img/finish.png" alt="finish">
                     </div>
 
                     <div id="grid">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div class = "target"></div>
+                        <div ></div>
+                        <div ></div>
+                        <div ></div>
+                        <div ></div>
                     </div>
 
-                    <div id="tiles"></div>
+
                 </div>
             </div>
         </section>
+        <div id="slider" class="slider">
+            <div id="items" class = "target">
+                <div id = "tile1" class = "tile" draggable="true" >
+                </div>
+                <div id = "tile2" class = "tile" draggable="true" >
+                </div>
+                <div id = "tile3" class = "tile" draggable="true" >
+                </div>
+                <div id = "tile4" class = "tile" draggable="true" >
+                </div>
+                <div id = "tile5" class = "tile" draggable="true" >
+                </div>
+                <div id = "tile6" class = "tile" draggable="true" >
+                </div>
+                <div id = "tile7" class = "tile" draggable="true" >
+                </div>
+                <div id = "tile8" class = "tile" draggable="true" >
+                </div>
+                <div id = "tile9" class = "tile" draggable="true" >
+                </div>
+                <div id = "tile10" class = "tile" draggable="true" >
+                </div>
+            </div>
+            <a id="prev" class="control prev"></a>
+            <a id="next" class="control next"></a>
+        </div>
+
     </main>
     <!-- <footer>
         <div>
