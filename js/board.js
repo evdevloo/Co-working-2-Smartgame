@@ -115,6 +115,11 @@ export const game = new class HorseAcademy {
     }
 
     addPiece(name, x, y, rotation) {
+        if (x < 0 || y < 0 || !(rotation % 2) && x >= this.#cols - 1 || rotation % 2 && y >= this.#rows - 1) {
+            console.error(new Error('Cannot place tile out of board'));
+            return;
+        }
+
         this.board[x][y] = {name, rotation};
         this.renderBoard();
     }
