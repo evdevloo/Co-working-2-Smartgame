@@ -1,7 +1,7 @@
 const grid = document.getElementById('grid');
 
 // Game Class
-class HorseAcademy {
+export const game = new class HorseAcademy {
     #rows = 4;
     #cols = 5;
 
@@ -25,7 +25,7 @@ class HorseAcademy {
         18: {board: '[[null,null,{"name":"j","rotation":3},null],[null,{"name":"b","rotation":1},null,{"name":"a","rotation":0}],[null,{"name":"c","rotation":1},null,null],[null,null,{"name":"f","rotation":0},{"name":"e","rotation":2}],[null,null,null,null]]', completed: false}
     };
 
-    constructor() {
+    constructor(grid) {
         this.newChallenge();
     }
     
@@ -144,8 +144,6 @@ class HorseAcademy {
         return (CryptoJS.SHA1(JSON.stringify(board)) + '').slice(0, 16);
     }
 }
-
-export const game = new HorseAcademy();
 
 // Challenge Navigation
 document.getElementById('previousChallenge').addEventListener('click', function() {
