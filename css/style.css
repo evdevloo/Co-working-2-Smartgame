@@ -21,11 +21,11 @@
     }
 
     .g-icon {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
     }
 
     button[disabled] .g-icon {
-        color: rgba(0, 0, 0, 0.3);
+        color: rgba(255, 255, 255, 0.3);
     }
 }
 
