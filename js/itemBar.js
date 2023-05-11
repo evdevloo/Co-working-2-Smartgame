@@ -47,7 +47,7 @@
     }
 
     //const tiles = document.querySelectorAll(`#items div`);
-    const targets = document.querySelectorAll(`#grid > div`);
+    const targets = document.querySelectorAll(`#grid > div, #items`);
 
     function dragStart(event) {
         event.dataTransfer.setData('text/plain', event.target.id);
