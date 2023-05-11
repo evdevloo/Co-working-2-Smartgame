@@ -14,7 +14,6 @@
             this.oldParent = this.parent;
             this.oldParent.style.zIndex = "";
             this.parent = document.getElementById(this.id).parentElement;
-
             sort();
         }
 
