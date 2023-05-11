@@ -1,3 +1,3 @@
-import { game } from './board.js';
+import {game} from './board.js';
 
-console.log(game.getBoardHash());
+game.addPiece('a', 0, 2, 3);

@@ -1,7 +1,7 @@
 const grid = document.getElementById('grid');
 
 // Game Class
-class HorseAcademy {
+export const game = new class HorseAcademy {
     #rows = 4;
     #cols = 5;
 
@@ -25,7 +25,7 @@ class HorseAcademy {
         18: {board: '[[null,null,{"name":"j","rotation":3},null],[null,{"name":"b","rotation":1},null,{"name":"a","rotation":0}],[null,{"name":"c","rotation":1},null,null],[null,null,{"name":"f","rotation":0},{"name":"e","rotation":2}],[null,null,null,null]]', completed: false}
     };
 
-    constructor() {
+    constructor(grid) {
         this.newChallenge();
     }
     
@@ -77,51 +77,82 @@ class HorseAcademy {
     }
 
     renderBoard() {
-        // reset all cells
+        // reset the grid
         grid.innerHTML = '';
 
-        for (let cell = 0; cell < this.#cols * this.#rows; cell++) {
-            grid.appendChild(document.createElement('div'));
+        for (let y = 0; y < this.#rows; y++) {
+            for (let x = 0; x < this.#cols; x++) {
+                let div = document.createElement('div');
+
+                div.classList.add(
+                    'cell',
+                    'x-' + x,
+                    'y-' + y
+                );
+                grid.appendChild(div);
+            }
         }
 
-        // convert all tiles to html elements and put them on the board
-        let tiles = 0;
+        // convert all tiles to html elements and put them on the board  
+        const cells = grid.querySelectorAll('div');
 
-        for (let x = 0; x < this.#cols; x++) {
-            for (let y = 0; y < this.#rows; y++) {
+        for (let y = 0; y < this.#rows; y++) {
+            for (let x = 0; x < this.#cols; x++) {
                 const cell = this.board[x][y];
 
-                if (!cell) continue;
+                if (!cell) {
+                    if (this.getPiece(x, y)) cells[x + y * this.#cols].remove();
+
+                    continue;
+                }
 
                 const img = document.createElement('img');
                 img.src = `img/tiles/${cell.name}.png`;
                 img.alt = 'tile ' + cell.name;
 
-                const tile = document.createElement('div');
-                tile.appendChild(img);
+                const piece = document.createElement('div');
+                piece.appendChild(img);
 
                 // use css classes to position the tile on the grid
-                tile.classList.add(
+                piece.classList.add(
                     'tile',
                     'x-' + x,
                     'y-' + y,
                     'rotation-' + cell.rotation
                 );
-                const cells = grid.querySelectorAll('div');
-                cells[x + y * this.#cols - tiles++].replaceWith(tile);
-                cells[x + y * this.#cols + 1 - tiles].remove();
+                cells[x + y * this.#cols].replaceWith(piece);
             }
         }
     }
 
     addPiece(name, x, y, rotation) {
+        if (x < 0 || y < 0 || rotation % 2 === 0 && x >= this.#cols - 1 || rotation % 2 && y >= this.#rows - 1) {
+            const err = new Error('Cannot place tile out of board');
+            console.error(err);
+            return err;
+        }
+
+        if (this.getPiece(x, y)) {
+            const err = new Error('Cannot place tile on another tile');
+            console.error(err);
+            return err;
+        }
         this.board[x][y] = {name, rotation};
         this.renderBoard();
+    }
+
+    getPiece(x, y) {
+        if (this.board[x][y]) return this.board[x][y];
+        if (x - 1 > 0 && this.board[x - 1][y]?.rotation % 2 === 0) return this.board[x - 1][y];
+        if (y - 1 > 0 && this.board[x][y - 1]?.rotation % 2 === 1) return this.board[x][y - 1];
+        return false;
     }
 
     removePiece(x, y) {
         this.board[x][y] = null;
         this.renderBoard();
+
+        return this.getPiece(x, y);
     }
 
     solved() {
@@ -144,8 +175,6 @@ class HorseAcademy {
         return (CryptoJS.SHA1(JSON.stringify(board)) + '').slice(0, 16);
     }
 }
-
-export const game = new HorseAcademy();
 
 // Challenge Navigation
 document.getElementById('previousChallenge').addEventListener('click', function() {
