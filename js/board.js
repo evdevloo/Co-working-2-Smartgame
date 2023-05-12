@@ -120,6 +120,7 @@ export const game = new class HorseAcademy {
                     'y-' + y,
                     'rotation-' + cell.rotation
                 );
+                //piece.setAttribute('draggable', true);
                 cells[x + y * this.#cols].replaceWith(piece);
             }
         }

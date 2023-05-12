@@ -1,45 +1,48 @@
 import { game } from './board.js';
 
-    let sliderTiles = document.querySelectorAll(`.card`);
+    //let sliderTiles = document.querySelectorAll(`.card`);
+    let sliderTiles;
 
-    sliderTiles .forEach(element =>{
-        element.addEventListener('dragstart', dragStart);
-    });
+    getPieces();
 
-    function dragStart(event) {
-        event.dataTransfer.setData('text/plain', event.target.id);
-        setTimeout(() => {
-            event.target.classList.add('hide');
+    function getPieces() {
 
-        }, 0);
+        let sliderTiles = document.querySelectorAll(`.card, #grid > div`);
+        sliderTiles .forEach(element =>{
+            element.addEventListener('dragstart', dragStart);
+        });
+
     }
 
-    const rows = 4;
-    const cols = 5;
-    let targets= [];
+
+    let targets;
     getTargets();
 
     function getTargets(){
-        let tempTarg = [...document.querySelectorAll(`#grid > div, #items`)];
-        let h= 0
-        for (var i = 0; i < rows; i++) {
-            targets[i]=[];
-            for (var j = 0; j < cols; j++) {
-                targets[i][j] = tempTarg[h++];
-            }
-        }
+        targets = document.querySelectorAll(`#grid > div, #items`);
 
-        targets.forEach(row => {
-            row.forEach(col => {
-                col.addEventListener('dragenter', dragEnter)
-                col.addEventListener('dragover', dragOver);
-                col.addEventListener('dragleave', dragLeave);
-                col.addEventListener('drop', drop);
-            })
+        targets.forEach(element => {
+
+            element.addEventListener('dragenter', dragEnter)
+            element.addEventListener('dragover', dragOver);
+            element.addEventListener('dragleave', dragLeave);
+            element.addEventListener('drop', drop);
+
         })
     }
 
+    function dragStart(event) {
 
+        if (event.target.classList.contains("tile")){
+            let x = event.target.classList[1].charAt(2);
+            let y = event.target.classList[2].charAt(2);
+            game.removePiece(x,y)
+        }
+        event.dataTransfer.setData('text/plain', event.target.id);
+        setTimeout(() => {
+           event.target.classList.add('hide');
+        }, 0);
+    }
 
     function dragEnter(event){
         event.preventDefault();
@@ -66,16 +69,11 @@ import { game } from './board.js';
             const draggable = document.getElementById(id);
 
             if (event.target.parentElement.id === 'grid'){
-
-                for (let i = 0; i < rows; i++) {
-                    for (let j = 0; j < cols; j++) {
-                        if (event.target === targets[i][j]){
-                            game.addPiece(draggable.id,j,i,0);
-                        }
-                    }
-                }
+                let x = event.target.classList[1].charAt(2);
+                let y = event.target.classList[2].charAt(2);
+                game.addPiece(draggable.id,x,y,0);
                 getTargets();
-
+                getPieces();
             }
 
             event.target.appendChild(draggable);
