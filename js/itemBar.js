@@ -7,7 +7,7 @@ import { game } from './board.js';
 
     function getPieces() {
 
-        let sliderTiles = document.querySelectorAll(`.card, #grid > div`);
+        sliderTiles = document.querySelectorAll(`.card, #grid > div`);
         sliderTiles .forEach(element =>{
             element.addEventListener('dragstart', dragStart);
         });
