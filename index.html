@@ -5,22 +5,23 @@
 <head>
     <!-- Browser Tab -->
     <title>Horse Academy</title>
-    <link rel="icon" href="img/icon.png">
+    <link rel="icon" href="img/icon.png" />
 
     <!-- Meta -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/board.css">
-    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/board.css" />
+    <link rel="stylesheet" href="css/slider.css" />
+    <link rel="stylesheet" href="css/nav.css" />
 
     <!-- FONT : Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap" rel="stylesheet" />
 
     <!-- FONT : Material Symbols Outlined (Google Icons) -->
     <link rel="stylesheet"
@@ -30,13 +31,44 @@
     <script src="js/crypto.js"></script>
     <script src="js/main.js" type="module"></script>
     <script src="js/board.js" type="module"></script>
-    <script src="js/itemBar.js" defer></script>
 
+    <script src="js/nav.js" defer></script>
+
+    <script src="js/itemBar.js" defer></script>
 </head>
 
 <body>
     <header>
-        <nav></nav>
+        <div class="header-alles">
+            <div class="header-nav">
+                <button aria-expanded="false" class="hamburger" id="menu">
+                    <span aria-hidden="true" class="icoontje">
+                        <span></span><span></span><span></span>
+                    </span>
+                    <span></span>
+                </button>
+            </div>
+            <nav aria-expanded="false">
+                <ul>
+                    <li>
+                        <a href="#"><img src="./img/nav/HorseAcademy.png" alt=""></a>
+                        <a href="#">Horse Academy</a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="./img/nav/Challenges.png" alt=""></a>
+                        <a href="#">Challenges</a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="./img/nav/Solutions.png" alt=""></a>
+                        <a href="#">Solutions</a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="./img/nav/GameRules.png" alt=""></a>
+                        <a href="#">Game Rules</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
         <section>

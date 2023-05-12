@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <!-- Browser Tab -->
+    <title>Horse Academy</title>
+    <link rel="icon" href="img/icon.png" />
+
+    <!-- Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/board.css" />
+    <link rel="stylesheet" href="css/slider.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+
+    <!-- FONT : Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FONT : Material Symbols Outlined (Google Icons) -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <!-- JS -->
+    <script src="js/crypto.js"></script>
+    <script src="js/board.js" defer></script>
+    <script src="js/itemBar.js" defer></script>
+    <script src="js/nav.js" defer></script>
+  </head>
+
+  <body>
+    <header>
+      <div class="header-alles">
+        <div class="header-nav">
+          <button aria-expanded="false" class="hamburger" id="menu">
+            <span aria-hidden="true" class="icoontje">
+              <span></span><span></span><span></span>
+            </span>
+            <span></span>
+          </button>
+        </div>
+        <nav aria-expanded="false">
+          <ul>
+            <li>
+              <a href="#"><img src="./img/nav/HorseAcademy.png" alt=""></a>
+              <a href="#">Horse Academy</a>
+            </li>
+            <li>
+              <a href="#"><img src="./img/nav/Challenges.png" alt=""></a>
+              <a href="#">Challenges</a>
+            </li>
+            <li>
+              <a href="#"><img src="./img/nav/Solutions.png" alt=""></a>
+              <a href="#">Solutions</a>
+            </li>
+            <li>
+              <a href="#"><img src="./img/nav/GameRules.png" alt=""></a>
+              <a href="#">Game Rules</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section>
+        <div class="challenge-heading">
+          <div class="challenge-title">
+            <h1>Challenge</h1>
+            <button id="previousChallenge" class="challenge-nav" disabled>
+              <span class="g-icon material-symbols-outlined"
+                >navigate_before</span
+              >
+            </button>
+            <button id="nextChallenge" class="challenge-nav">
+              <span class="g-icon material-symbols-outlined"
+                >navigate_next</span
+              >
+            </button>
+          </div>
+          <h2 aria-describedby="difficulty"></h2>
+        </div>
+
+        <div class="challenge-description">
+          <img src="img/challenges/challenge2.png" alt="challenge diagram" />
+        </div>
+
+        <div id="board">
+          <div>
+            <div id="fence">
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence"></div>
+              <div class="fence"></div>
+              <div class="fence"></div>
+              <div class="fence"></div>
+              <div class="fence"></div>
+              <div class="fence"></div>
+              <div class="fence"></div>
+              <div class="fence vertical"></div>
+              <div class="fence vertical"></div>
+              <div class="fence vertical"></div>
+              <div class="fence vertical"></div>
+              <div class="fence vertical"></div>
+              <div class="fence-corner"></div>
+              <div class="fence-corner"></div>
+              <div class="fence-corner"></div>
+              <div class="fence-corner"></div>
+              <div class="gate">T</div>
+              <div class="gate">U</div>
+              <div class="gate">W</div>
+              <div class="gate">X</div>
+              <div class="gate">Y</div>
+              <div class="gate">Z</div>
+              <img class="finish none" src="img/finish.png" alt="finish" />
+            </div>
+
+            <div id="grid">
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+              <div class="target"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div id="slider" class="slider">
+        <div id="items" class="target">
+          <div id="tile1" class="tile" draggable="true"></div>
+          <div id="tile2" class="tile" draggable="true"></div>
+          <div id="tile3" class="tile" draggable="true"></div>
+          <div id="tile4" class="tile" draggable="true"></div>
+          <div id="tile5" class="tile" draggable="true"></div>
+          <div id="tile6" class="tile" draggable="true"></div>
+          <div id="tile7" class="tile" draggable="true"></div>
+          <div id="tile8" class="tile" draggable="true"></div>
+          <div id="tile9" class="tile" draggable="true"></div>
+          <div id="tile10" class="tile" draggable="true"></div>
+        </div>
+        <a id="prev" class="control prev"></a>
+        <a id="next" class="control next"></a>
+      </div>
+    </main>
+    <!-- <footer>
+        <div>
+            <h1>Licence</h1>
+            <p>Copyright (C) [Evert Devloo, Izzet Poyraz, Kyle Hoeckman, Tommy Baudonck], 2023, All rights reserved</p>
+            <p>Smartgames (R), 2018, https://www.smartgames.eu/uk/terms-use</p>
+        </div>
+    </footer> -->
+  </body>
+</html>
