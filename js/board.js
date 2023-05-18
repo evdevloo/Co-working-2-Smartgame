@@ -1,9 +1,5 @@
-// [DEBUG] Store the solution of level 18 if `localStorage` is empty
-/*if (!localStorage.getItem('horseAcademy_progress')) {
-    localStorage.setItem('horseAcademy_progress', JSON.stringify({
-        18: {board: [[null,null,{"name":"j","rotation":3},null],[null,{"name":"b","rotation":1},null,{"name":"a","rotation":0}],[null,{"name":"c","rotation":1},null,null],[null,null,{"name":"f","rotation":0},{"name":"e","rotation":2}],[null,null,null,null]], completed: false}
-    }));
-}*/
+// Initialize progress
+if (!localStorage.getItem('horseAcademy_progress')) localStorage.setItem('horseAcademy_progress', "{}");
 
 const grid = document.getElementById('grid');
 
@@ -12,18 +8,12 @@ const previousButton = document.getElementById('previousChallenge');
 
 previousButton.addEventListener('click', function() {
     if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
-    if (game.selectedChallenge <= 0) this.setAttribute('disabled', '');
-
-    this.nextElementSibling.removeAttribute('disabled');
 });
 
 const nextButton = document.getElementById('nextChallenge');
 
 nextButton.addEventListener('click', function() {
     if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
-    if (game.selectedChallenge >= game.challenges - 1) this.setAttribute('disabled', '');
-
-    this.previousElementSibling.removeAttribute('disabled');
 });
 
 // Game Class
@@ -48,6 +38,7 @@ export const game = new class HorseAcademy {
     challenges = this.#challenges.length;
 
     constructor(grid) {
+        // Load stored level or initialize challenge 1
         this.newChallenge();
     }
     
@@ -75,6 +66,14 @@ export const game = new class HorseAcademy {
         // update finish position
         document.querySelector('#fence .finish').className = 'finish ' + this.challenge.gate;
 
+        // update level navigation arrows
+        previousButton.removeAttribute('disabled');
+        nextButton.removeAttribute('disabled');
+
+        if (this.selectedChallenge <= 0) previousButton.setAttribute('disabled', '');
+        if (this.selectedChallenge >= this.challenges - 1) nextButton.setAttribute('disabled', '');
+
+        // load the level
         this.loadProgress();
     }
 
