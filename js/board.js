@@ -7,6 +7,25 @@
 
 const grid = document.getElementById('grid');
 
+// Challenge Navigation
+const previousButton = document.getElementById('previousChallenge');
+
+previousButton.addEventListener('click', function() {
+    if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
+    if (game.selectedChallenge <= 0) this.setAttribute('disabled', '');
+
+    this.nextElementSibling.removeAttribute('disabled');
+});
+
+const nextButton = document.getElementById('nextChallenge');
+
+nextButton.addEventListener('click', function() {
+    if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
+    if (game.selectedChallenge >= game.challenges - 1) this.setAttribute('disabled', '');
+
+    this.previousElementSibling.removeAttribute('disabled');
+});
+
 // Game Class
 export const game = new class HorseAcademy {
     #rows = 4;
@@ -188,18 +207,3 @@ export const game = new class HorseAcademy {
         return (CryptoJS.SHA1(JSON.stringify(board)) + '').slice(0, 16);
     }
 }
-
-// Challenge Navigation
-document.getElementById('previousChallenge').addEventListener('click', function() {
-    if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
-    if (game.selectedChallenge <= 0) this.setAttribute('disabled', '');
-
-    this.nextElementSibling.removeAttribute('disabled');
-});
-
-document.getElementById('nextChallenge').addEventListener('click', function() {
-    if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
-    if (game.selectedChallenge >= game.challenges - 1) this.setAttribute('disabled', '');
-
-    this.previousElementSibling.removeAttribute('disabled');
-});

@@ -1,3 +1,7 @@
 import {game} from './board.js';
 
-game.addPiece('a', 0, 2, 3);
+game.resetProgress();
+game.addPiece('e', 1, 0, 1);
+
+console.log(game.getPiece(1, 1));
+console.log(game.board);
