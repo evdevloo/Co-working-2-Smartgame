@@ -1,3 +1,10 @@
+// [DEBUG] Store the solution of level 18 if `localStorage` is empty
+/*if (!localStorage.getItem('horseAcademy_progress')) {
+    localStorage.setItem('horseAcademy_progress', JSON.stringify({
+        18: {board: [[null,null,{"name":"j","rotation":3},null],[null,{"name":"b","rotation":1},null,{"name":"a","rotation":0}],[null,{"name":"c","rotation":1},null,null],[null,null,{"name":"f","rotation":0},{"name":"e","rotation":2}],[null,null,null,null]], completed: false}
+    }));
+}*/
+
 const grid = document.getElementById('grid');
 
 // Game Class
@@ -21,16 +28,16 @@ export const game = new class HorseAcademy {
     ]
     challenges = this.#challenges.length;
 
-    #progress = {
-        18: {board: '[[null,null,{"name":"j","rotation":3},null],[null,{"name":"b","rotation":1},null,{"name":"a","rotation":0}],[null,{"name":"c","rotation":1},null,null],[null,null,{"name":"f","rotation":0},{"name":"e","rotation":2}],[null,null,null,null]]', completed: false}
-    };
-
     constructor(grid) {
         this.newChallenge();
     }
     
     newChallenge(challengeIndex) {
-        this.selectedChallenge = challengeIndex || 0;
+        if (typeof challengeIndex === 'number') localStorage.setItem('horseAcademy_selectedChallenge', challengeIndex);
+        else this.selectedChallenge = +localStorage.getItem('horseAcademy_selectedChallenge');
+        if (typeof this.selectedChallenge !== 'number') this.selectedChallenge = 0;
+
+        localStorage.setItem('horseAcademy_selectedChallenge', this.selectedChallenge);
         this.challenge = this.#challenges[this.selectedChallenge];
 
         // update title
@@ -59,21 +66,26 @@ export const game = new class HorseAcademy {
             .map(cell => null));
 
         this.saveProgress();
-    }
-
-    loadProgress() {
-        this.board = JSON.parse(this.#progress[this.challenge.id]?.board ?? '{}');
-
-        if (Object.keys(this.board).length === 0) this.resetProgress();
-
         this.renderBoard();
     }
 
+    loadProgress() {
+        // Retrieve boardstate
+        this.board = JSON.parse(localStorage.getItem('horseAcademy_progress'))[this.challenge.id]?.board ?? {};
+
+        if (Object.keys(this.board).length === 0) this.resetProgress();
+        else this.renderBoard();
+    }
+
     saveProgress() {
-        this.#progress[this.challenge.id] = {
-            board: JSON.stringify(this.board),
-            completed: this.#progress[this.challenge.id]?.completed || this.solved()
+        let progress = JSON.parse(localStorage.getItem('horseAcademy_progress'));
+
+        progress[this.challenge.id] = {
+            board: this.board,
+            completed: progress[this.challenge.id]?.completed || this.solved()
         };
+
+        localStorage.setItem('horseAcademy_progress', JSON.stringify(progress));
     }
 
     renderBoard() {
@@ -138,18 +150,19 @@ export const game = new class HorseAcademy {
             return err;
         }
         this.board[x][y] = {name, rotation};
+        this.saveProgress();
         this.renderBoard();
     }
 
     getPiece(x, y) {
         if (this.board[x][y]) return this.board[x][y];
-        if (x - 1 > 0 && this.board[x - 1][y]?.rotation % 2 === 0) return this.board[x - 1][y];
-        if (y - 1 > 0 && this.board[x][y - 1]?.rotation % 2 === 1) return this.board[x][y - 1];
-        return false;
+        if (x - 1 >= 0 && this.board[x - 1][y]?.rotation % 2 === 0) return this.board[x - 1][y];
+        if (y - 1 >= 0 && this.board[x][y - 1]?.rotation % 2 === 1) return this.board[x][y - 1];
     }
 
     removePiece(x, y) {
         this.board[x][y] = null;
+        this.saveProgress();
         this.renderBoard();
 
         return this.getPiece(x, y);
