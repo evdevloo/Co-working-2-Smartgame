@@ -116,7 +116,8 @@ export const game = new class HorseAcademy {
                 div.classList.add(
                     'cell',
                     'x-' + x,
-                    'y-' + y
+                    'y-' + y,
+                    'droppable'
                 );
                 grid.appendChild(div);
             }
@@ -149,7 +150,7 @@ export const game = new class HorseAcademy {
                     'y-' + y,
                     'rotation-' + cell.rotation
                 );
-                //piece.setAttribute('draggable', true);
+                piece.setAttribute('draggable', true);
                 cells[x + y * this.#cols].replaceWith(piece);
             }
         }
