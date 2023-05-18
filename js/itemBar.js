@@ -1,101 +1,111 @@
 import { game } from './board.js';
 
-    //let sliderTiles = document.querySelectorAll(`.card`);
-    let sliderTiles;
+let pieces = null;
+let currentDroppable = null;
+let rotation = 0;
+getPieces();
 
-    getPieces();
+function getPieces() {
+    pieces = document.querySelectorAll(`.card, div.tile `);
 
-    function getPieces() {
+    pieces .forEach(piece =>{
+        //piece.addEventListener('dragstart', dragStart);
+        piece.addEventListener('mousedown', onmousedown);
+        piece.ondragstart = function() { return false;};
+    });
+}
 
-        sliderTiles = document.querySelectorAll(`.card, #grid > div`);
-        sliderTiles .forEach(element =>{
-            element.addEventListener('dragstart', dragStart);
-        });
+function onmousedown(event) {
+    let shiftX = event.clientX - event.target.getBoundingClientRect().left;
+    let shiftY = event.clientY - event.target.getBoundingClientRect().top;
 
+    event.target.style.position = 'absolute';
+    event.target.style.zIndex = 1000;
+
+    document.body.append(event.target);
+
+    if (event.target.classList.contains('tile')){
+        let X = event.target.classList[1].charAt(2);
+        let Y = event.target.classList[2].charAt(2);
+        let piece = event.target.firstChild.alt;
+
+        event.target.id = piece.charAt(5);
+        event.target.className = "card";
+        event.target.innerHTML = '';
+        event.target.setAttribute('draggable', true);
+        game.removePiece(X, Y)
+        getPieces();
     }
+    event.target.classList.add("dragging");
 
+    moveAt(event.pageX, event.pageY);
 
-    let targets;
-    getTargets();
+    document.addEventListener('mousemove', onMouseMove);
 
-    function getTargets(){
-        targets = document.querySelectorAll(`#grid > div, #items`);
+    document.addEventListener('keypress', (event) => {
+        let key = event.key;
 
-        targets.forEach(element => {
-
-            element.addEventListener('dragenter', dragEnter)
-            element.addEventListener('dragover', dragOver);
-            element.addEventListener('dragleave', dragLeave);
-            element.addEventListener('drop', drop);
-
-        })
-    }
-
-    function dragStart(event) {
-
-        if (event.target.classList.contains("tile")){
-            let x = event.target.classList[1].charAt(2);
-            let y = event.target.classList[2].charAt(2);
-            game.removePiece(x,y)
-        }
-        event.dataTransfer.setData('text/plain', event.target.id);
-        setTimeout(() => {
-           event.target.classList.add('hide');
-        }, 0);
-    }
-
-    function dragEnter(event){
-        event.preventDefault();
-        event.target.classList.add('drag-over');
-
-    }
-
-    function dragOver(event) {
-        event.preventDefault();
-        event.target.classList.add('drag-over');
-    }
-
-    function dragLeave(event) {
-        event.target.classList.remove('drag-over');
-    }
-
-    function drop(event) {
-
-        if (event.target.parentElement.id === 'grid' || event.target.id === 'items'){
-            event.target.classList.remove('drag-over');
-
-            // get the draggable element
-            const id = event.dataTransfer.getData('text/plain');
-            const draggable = document.getElementById(id);
-
-            if (event.target.parentElement.id === 'grid'){
-                let x = event.target.classList[1].charAt(2);
-                let y = event.target.classList[2].charAt(2);
-                game.addPiece(draggable.id,x,y,0);
-                getTargets();
-                getPieces();
+        if (key === 'r'){
+            console.log("hi")
+            ++rotation;
+            if (rotation === 4){
+                rotation = 0;
             }
-
-            event.target.appendChild(draggable);
-            //event.target.style.zIndex = '1';
-
-            draggable.classList.remove('hide');
-            sort();
-        } else if (event.target.classList.contains('card') && event.target.parentElement.id === 'items'){
-            event.target.classList.remove('drag-over');
-
-            // get the draggable element
-            const id = event.dataTransfer.getData('text/plain');
-            const draggable = document.getElementById(id);
-
-            event.target.parentElement.appendChild(draggable);
-            //event.target.style.zIndex = '1';
-            draggable.classList.remove('hide');
-            sort();
+            document.querySelector('.dragging').style.transformOrigin = 'center';
+            document.querySelector('.dragging').style.transform = `rotate(${rotation * 90}deg)`;
         }
+    });
+
+    event.target.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        event.target.style = '';
+        event.target.classList.remove("dragging")
+        if ( currentDroppable === null|| (!currentDroppable.classList.contains('droppable')) || currentDroppable.id === 'items') {
+            document.querySelector('#items').appendChild(event.target);
+            sort();
+
+        } else if(currentDroppable.parentElement.id === 'grid') {
+            currentDroppable.appendChild(event.target);
+            let x =+currentDroppable.classList[1].charAt(2);
+            let y =+ currentDroppable.classList[2].charAt(2);
+            game.addPiece(event.target.id,x,y,0);
+            getPieces();
+        }
+        event.target.onmouseup = null;
+    };
+
+    function moveAt(pageX, pageY) {
+        event.target.style.left = pageX - shiftX + 'px';
+        event.target.style.top = pageY - shiftY + 'px';
     }
+
+    function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        event.target.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        event.target.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+
+        if (currentDroppable !== droppableBelow) {
+            if (currentDroppable) { // null when we were not over a droppable before this event
+            }
+            currentDroppable = droppableBelow;
+            if (currentDroppable) { // null if we're not coming over a droppable now
+
+            }
+        }
+
+
+    }
+}
+
     function sort() {
         /* Act on the event */
+
         let tile = document.querySelector(`#items`);
         let tileSort = [...document.querySelectorAll(`#items div`)];
 

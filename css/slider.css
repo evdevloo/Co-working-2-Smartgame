@@ -30,29 +30,18 @@
 .card {
     background-size: contain;
     background-repeat: no-repeat;
-    width: 85%;
     height: 0;
     padding-top: 43%;
     transition: all 0.3s ease-out;
 }
 
-#board .card {
-    width: calc((100% - 0.4em) * 2);
-    height: calc(100% - 0.4em);
+#grid div img, #items img {
+    pointer-events: none;
 }
 
-#slider .dragging {
-    opacity: 0.5;
-}
+body .card {
+    width: 14em;
 
-.hide {
-    height:0;
-    padding-top:0;
-    padding-bottom:0;
-    opacity: 0;
-
-
-    transition: 0.3s all ease-out;
 }
 
 #a {
