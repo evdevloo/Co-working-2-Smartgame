@@ -5,12 +5,11 @@ const grid = document.getElementById('grid');
 
 // Challenge Navigation
 const previousButton = document.getElementById('previousChallenge');
+const nextButton = document.getElementById('nextChallenge');
 
 previousButton.addEventListener('click', function() {
     if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
 });
-
-const nextButton = document.getElementById('nextChallenge');
 
 nextButton.addEventListener('click', function() {
     if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
