@@ -1,68 +1,48 @@
-'use strict';
-(function(){
+import { game } from './board.js';
 
-    class Tile {
+    //let sliderTiles = document.querySelectorAll(`.card`);
+    let sliderTiles;
 
-        oldParent;
-        constructor(element) {
-            this.id = element.id;
-            this.parent = element.parentElement;
+    getPieces();
+
+    function getPieces() {
+
+        sliderTiles = document.querySelectorAll(`.card, #grid > div`);
+        sliderTiles .forEach(element =>{
             element.addEventListener('dragstart', dragStart);
-        }
+        });
 
-        moved(){
-            this.oldParent = this.parent;
-            this.oldParent.style.zIndex = "";
-            this.parent = document.getElementById(this.id).parentElement;
-
-            sort();
-        }
-
-        get tileOldParent(){
-            return this.oldParent;
-        }
-
-        get tileParent() {
-            return this.parent
-        }
     }
 
-    let sliderTiles = document.querySelectorAll(`.tile`);
-    let tiles = [];
-    sliderTiles .forEach(element =>{
-        tiles.push(new Tile(element));
-    });
 
-    function sort() {
-            /* Act on the event */
-            let tile = document.querySelector(`#items`);
-            let tileSort = [...document.querySelectorAll(`#items div`)];
+    let targets;
+    getTargets();
 
-            tileSort.sort(function(a, b){
-                return (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0;
-            });
-            for(var i = 0, l = tileSort.length; i < l; i++) {
-                tile.appendChild(tileSort[i]);
-            }
+    function getTargets(){
+        targets = document.querySelectorAll(`#grid > div, #items`);
+
+        targets.forEach(element => {
+
+            element.addEventListener('dragenter', dragEnter)
+            element.addEventListener('dragover', dragOver);
+            element.addEventListener('dragleave', dragLeave);
+            element.addEventListener('drop', drop);
+
+        })
     }
-
-    //const tiles = document.querySelectorAll(`#items div`);
-    const targets = document.querySelectorAll(`.target`);
 
     function dragStart(event) {
+
+        if (event.target.classList.contains("tile")){
+            let x = event.target.classList[1].charAt(2);
+            let y = event.target.classList[2].charAt(2);
+            game.removePiece(x,y)
+        }
         event.dataTransfer.setData('text/plain', event.target.id);
         setTimeout(() => {
-            event.target.classList.add('hide');
-
+           event.target.classList.add('hide');
         }, 0);
     }
-
-    targets.forEach(target => {
-        target.addEventListener('dragenter', dragEnter)
-        target.addEventListener('dragover', dragOver);
-        target.addEventListener('dragleave', dragLeave);
-        target.addEventListener('drop', drop);
-    })
 
     function dragEnter(event){
         event.preventDefault();
@@ -77,37 +57,52 @@
 
     function dragLeave(event) {
         event.target.classList.remove('drag-over');
-        //event.target.parentElement.style.zIndex = "";
     }
 
     function drop(event) {
 
-        if (event.target.classList.contains("target") ){
+        if (event.target.parentElement.id === 'grid' || event.target.id === 'items'){
             event.target.classList.remove('drag-over');
 
             // get the draggable element
             const id = event.dataTransfer.getData('text/plain');
             const draggable = document.getElementById(id);
-            const tile = tiles.find(tile => tile.id === id);
+
+            if (event.target.parentElement.id === 'grid'){
+                let x = event.target.classList[1].charAt(2);
+                let y = event.target.classList[2].charAt(2);
+                game.addPiece(draggable.id,x,y,0);
+                getTargets();
+                getPieces();
+            }
 
             event.target.appendChild(draggable);
-            event.target.style.zIndex = "1";
+            //event.target.style.zIndex = '1';
+
             draggable.classList.remove('hide');
-            tile.moved();
-        } else if (event.target.classList.contains("tile") && event.target.parentElement.id === "items"){
+            sort();
+        } else if (event.target.classList.contains('card') && event.target.parentElement.id === 'items'){
             event.target.classList.remove('drag-over');
 
             // get the draggable element
             const id = event.dataTransfer.getData('text/plain');
             const draggable = document.getElementById(id);
-            const tile = tiles.find(tile => tile.id === id);
 
             event.target.parentElement.appendChild(draggable);
-            event.target.style.zIndex = "1";
+            //event.target.style.zIndex = '1';
             draggable.classList.remove('hide');
-            tile.moved();
             sort();
         }
     }
+    function sort() {
+        /* Act on the event */
+        let tile = document.querySelector(`#items`);
+        let tileSort = [...document.querySelectorAll(`#items div`)];
 
-})();
+        tileSort.sort(function(a, b){
+            return (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0;
+    });
+        for(var i = 0, l = tileSort.length; i < l; i++) {
+            tile.appendChild(tileSort[i]);
+        }
+    }
