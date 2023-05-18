@@ -5,6 +5,12 @@ let currentDroppable = null;
 let rotation = 0;
 getPieces();
 
+let copies = Object.values(pieces).filter(piece => piece.classList.contains('tile'));
+copies.forEach(piece => {
+    let id = piece.firstChild.alt.charAt(5);
+    document.querySelector('#'+id).remove();
+})
+
 function getPieces() {
     pieces = document.querySelectorAll(`.card, div.tile `);
 
@@ -64,13 +70,20 @@ function onmousedown(event) {
             document.querySelector('#items').appendChild(event.target);
             sort();
 
+
         } else if(currentDroppable.parentElement.id === 'grid') {
             currentDroppable.appendChild(event.target);
             let x =+currentDroppable.classList[1].charAt(2);
             let y =+ currentDroppable.classList[2].charAt(2);
+            if (x === 4){
+                document.querySelector('#items').appendChild(event.target);
+                sort();
+            } else {
+                currentDroppable.appendChild(event.target);
+            }
             game.addPiece(event.target.id,x,y,0);
-            getPieces();
         }
+        getPieces();
         event.target.onmouseup = null;
     };
 

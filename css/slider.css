@@ -32,7 +32,6 @@
     background-repeat: no-repeat;
     height: 0;
     padding-top: 43%;
-    transition: all 0.3s ease-out;
 }
 
 #grid div img, #items img {
