@@ -1,3 +1,4 @@
+import { resetSlider } from './itemBar.js';
 // Initialize progress
 if (!localStorage.getItem('horseAcademy_progress')) localStorage.setItem('horseAcademy_progress', "{}");
 
@@ -74,6 +75,7 @@ export const game = new class HorseAcademy {
 
         // load the level
         this.loadProgress();
+        resetSlider();
     }
 
     resetProgress() {

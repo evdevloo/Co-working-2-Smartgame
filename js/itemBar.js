@@ -4,12 +4,7 @@ let pieces = null;
 let currentDroppable = null;
 let rotation = 0;
 getPieces();
-
-let copies = Object.values(pieces).filter(piece => piece.classList.contains('tile'));
-copies.forEach(piece => {
-    let id = piece.firstChild.alt.charAt(5);
-    document.querySelector('#'+id).remove();
-})
+deleteDuplicates();
 
 function getPieces() {
     pieces = document.querySelectorAll(`.card, div.tile `);
@@ -116,16 +111,39 @@ function onmousedown(event) {
     }
 }
 
-    function sort() {
-        /* Act on the event */
+function sort() {
+    /* Act on the event */
 
-        let tile = document.querySelector(`#items`);
-        let tileSort = [...document.querySelectorAll(`#items div`)];
+    let tile = document.querySelector(`#items`);
+    let tileSort = [...document.querySelectorAll(`#items div`)];
 
-        tileSort.sort(function(a, b){
-            return (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0;
-    });
-        for(var i = 0, l = tileSort.length; i < l; i++) {
-            tile.appendChild(tileSort[i]);
-        }
+    tileSort.sort(function(a, b){
+        return (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0;});
+    for(var i = 0, l = tileSort.length; i < l; i++) {
+        tile.appendChild(tileSort[i]);
     }
+}
+
+function deleteDuplicates(){
+    let copies = Object.values(pieces).filter(piece => piece.classList.contains('tile'));
+    copies.forEach(piece => {
+        let id = piece.firstChild.alt.charAt(5);
+        document.querySelector('#'+id).remove();
+    })
+}
+
+export function resetSlider() {
+    let tiles = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+    let slider = document.querySelector('#items');
+    slider.innerHTML = '';
+
+    tiles.forEach(tile => {
+        const div = document.createElement('div');
+        div.id = tile
+        div.className = "card";
+        div.setAttribute('draggable', true);
+        slider.appendChild(div);
+    })
+    getPieces();
+    deleteDuplicates();
+}
