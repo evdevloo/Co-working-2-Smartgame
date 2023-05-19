@@ -6,6 +6,20 @@ let rotation = 0;
 getPieces();
 deleteDuplicates();
 
+document.addEventListener('keypress', (event) => {
+    let key = event.key;
+
+    if (key === 'r'){
+
+        ++rotation;
+        if (rotation === 4){
+            rotation = 0;
+        }
+        //document.querySelector('.dragging').style.transformOrigin = 'center';
+        document.querySelector('.dragging').style.transform = `rotate(${rotation * 90}deg)`;
+    }
+});
+
 function getPieces() {
     pieces = document.querySelectorAll(`.card, div.tile `);
 
@@ -17,6 +31,7 @@ function getPieces() {
 }
 
 function onmousedown(event) {
+
     let shiftX = event.clientX - event.target.getBoundingClientRect().left;
     let shiftY = event.clientY - event.target.getBoundingClientRect().top;
 
@@ -29,11 +44,13 @@ function onmousedown(event) {
         let X = event.target.classList[1].charAt(2);
         let Y = event.target.classList[2].charAt(2);
         let piece = event.target.firstChild.alt;
+        rotation = event.target.classList[3].charAt(9);
 
         event.target.id = piece.charAt(5);
         event.target.className = "card";
         event.target.innerHTML = '';
         event.target.setAttribute('draggable', true);
+        event.target.style.transform = `rotate(${rotation * 90}deg)`;
         game.removePiece(X, Y)
         getPieces();
     }
@@ -43,47 +60,33 @@ function onmousedown(event) {
 
     document.addEventListener('mousemove', onMouseMove);
 
-    document.addEventListener('keypress', (event) => {
-        let key = event.key;
-
-        if (key === 'r'){
-            console.log("hi")
-            ++rotation;
-            if (rotation === 4){
-                rotation = 0;
-            }
-            document.querySelector('.dragging').style.transformOrigin = 'center';
-            document.querySelector('.dragging').style.transform = `rotate(${rotation * 90}deg)`;
-        }
-    });
-
     event.target.onmouseup = function() {
         document.removeEventListener('mousemove', onMouseMove);
         event.target.style = '';
         event.target.classList.remove("dragging")
         if ( currentDroppable === null|| (!currentDroppable.classList.contains('droppable')) || currentDroppable.id === 'items') {
             document.querySelector('#items').appendChild(event.target);
-            sort();
+            //sort();
+            resetSlider()
 
 
         } else if(currentDroppable.parentElement.id === 'grid') {
-            currentDroppable.appendChild(event.target);
             let x =+currentDroppable.classList[1].charAt(2);
             let y =+ currentDroppable.classList[2].charAt(2);
-            if (x === 4){
-                document.querySelector('#items').appendChild(event.target);
-                sort();
+            if(game.addPiece(event.target.id,x,y,rotation) === null){
+                event.target.remove();
             } else {
-                currentDroppable.appendChild(event.target);
+                document.querySelector('#items').appendChild(event.target);
+                resetSlider();
             }
-            game.addPiece(event.target.id,x,y,0);
         }
+        rotation = 0;
         getPieces();
         event.target.onmouseup = null;
     };
 
     function moveAt(pageX, pageY) {
-        event.target.style.left = pageX - shiftX + 'px';
+        event.target.style.left =  pageX - shiftX + 'px';
         event.target.style.top = pageY - shiftY + 'px';
     }
 
@@ -106,8 +109,6 @@ function onmousedown(event) {
 
             }
         }
-
-
     }
 }
 

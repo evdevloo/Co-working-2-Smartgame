@@ -42,6 +42,13 @@ body .card {
     width: 14em;
 
 }
+.dragging {
+    width: 14em;
+    height: 7.25em;
+    transition: transform .2s ease-in-out;
+    padding: 0;
+    transform-origin: 50px 50px;
+}
 
 #a {
     background-image: url("../img/tiles/a.png");
