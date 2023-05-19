@@ -111,9 +111,8 @@ function onmousedown(event) {
         }
     }
 }
-
+/*
 function sort() {
-    /* Act on the event */
 
     let tile = document.querySelector(`#items`);
     let tileSort = [...document.querySelectorAll(`#items div`)];
@@ -124,6 +123,9 @@ function sort() {
         tile.appendChild(tileSort[i]);
     }
 }
+
+ */
+
 
 function deleteDuplicates(){
     let copies = Object.values(pieces).filter(piece => piece.classList.contains('tile'));
