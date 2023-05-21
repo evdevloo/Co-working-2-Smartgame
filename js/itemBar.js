@@ -14,6 +14,8 @@ function getPieces() {
 
     pieces .forEach(piece =>{
         piece.addEventListener('mousedown', onmousedown);
+
+        piece.ondragstart = false;
     });
 }
 function onmousedown(event) {
@@ -120,5 +122,3 @@ export function resetSlider(tiles) {
     getPieces();
     deleteDuplicates();
 }
-
-

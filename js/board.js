@@ -64,7 +64,6 @@ export const game = new class HorseAcademy {
         if (this.selectedChallenge <= 0) previousButton.setAttribute('disabled', '');
         if (this.selectedChallenge >= this.challenges - 1) nextButton.setAttribute('disabled', '');
 
-        // reset piece selection bar
         // load the level
         this.loadProgress();
         resetSlider(this.challenge.tiles);
@@ -144,7 +143,6 @@ export const game = new class HorseAcademy {
                     'y-' + y,
                     'rotation-' + cell.rotation
                 );
-                //piece.setAttribute('draggable', true);
                 cells[x + y * this.#cols].replaceWith(piece);
             }
         }
@@ -174,11 +172,12 @@ export const game = new class HorseAcademy {
     }
 
     removePiece(x, y) {
+        let removedPiece = this.getPiece(x, y);
         this.board[x][y] = null;
         this.saveProgress();
         this.renderBoard();
 
-        return this.getPiece(x, y);
+        return removedPiece;
     }
 
     solved() {
