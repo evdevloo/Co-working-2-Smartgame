@@ -89,20 +89,21 @@ export const game = new class HorseAcademy {
     loadProgress() {
         // Retrieve boardstate
         this.board = JSON.parse(localStorage.getItem('horseAcademy_progress'))[this.challenge.id]?.board ?? {};
+        this.progress = JSON.parse(localStorage.getItem('horseAcademy_progress'));
 
         if (Object.keys(this.board).length === 0) this.resetProgress();
         else this.renderBoard();
     }
 
     saveProgress() {
-        let progress = JSON.parse(localStorage.getItem('horseAcademy_progress'));
+        this.progress = JSON.parse(localStorage.getItem('horseAcademy_progress'));
 
-        progress[this.challenge.id] = {
+        this.progress[this.challenge.id] = {
             board: this.board,
-            completed: progress[this.challenge.id]?.completed || this.solved()
+            completed: this.progress[this.challenge.id]?.completed || this.solved()
         };
 
-        localStorage.setItem('horseAcademy_progress', JSON.stringify(progress));
+        localStorage.setItem('horseAcademy_progress', JSON.stringify(this.progress));
     }
 
     renderBoard() {
@@ -153,6 +154,12 @@ export const game = new class HorseAcademy {
                 cells[x + y * this.#cols].replaceWith(piece);
             }
         }
+
+        // FOR DEBUG ONLY! Change background color to check if correct
+        document.body.style.backgroundColor = 'white';
+
+        if (this.solved()) document.body.style.backgroundColor = 'lime';
+        else if (this.progress[this.challenge.id].completed) document.body.style.backgroundColor = 'aqua';
     }
 
     addPiece(name, x, y, rotation) {
