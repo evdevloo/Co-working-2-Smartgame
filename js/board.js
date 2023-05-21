@@ -209,7 +209,7 @@ export const game = new class HorseAcademy {
             for (let y = 0; y < this.#rows; y++) {
                 let cell = board[x][y];
 
-                if (cell && "abci".includes(cell.name)) {
+                if (cell && 'abci'.includes(cell.name)) {
                     board[x][y].rotation = cell.rotation === 2 ? 0 : cell.rotation === 3 ? 1 : cell.rotation;
                 }
             }
