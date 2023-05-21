@@ -23,10 +23,7 @@ function getPieces() {
         //piece.addEventListener('dragstart', dragStart);
         piece.addEventListener('mousedown', onmousedown);
 
-        // Kyle - deze lijn word niet gebruikt?
-        //piece.ondragstart = function () { return false; };
-        // en hoezo niet gewoon dit
-        //piece.ondragstart = false;
+        piece.ondragstart = false;
     });
 }
 

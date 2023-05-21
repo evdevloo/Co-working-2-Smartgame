@@ -66,7 +66,8 @@ export const game = new class HorseAcademy {
 
         // reset piece selection bar
         try {
-            resetSlider();
+            resetSlider(this.challenge.tiles);
+            
         } catch (err) {
             console.log(err);
         }
@@ -179,11 +180,12 @@ export const game = new class HorseAcademy {
     }
 
     removePiece(x, y) {
+        let removedPiece = this.getPiece(x, y);
         this.board[x][y] = null;
         this.saveProgress();
         this.renderBoard();
 
-        return this.getPiece(x, y);
+        return removedPiece;
     }
 
     solved() {
