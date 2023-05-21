@@ -11,7 +11,6 @@ deleteDuplicates();
 
 function getPieces() {
     pieces = document.querySelectorAll(`.card, div.tile `);
-
     pieces .forEach(piece =>{
         piece.addEventListener('mousedown', onmousedown);
 
