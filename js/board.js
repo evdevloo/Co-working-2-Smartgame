@@ -66,7 +66,14 @@ export const game = new class HorseAcademy {
 
         // load the level
         this.loadProgress();
-        resetSlider(this.challenge.tiles);
+
+        // reset piece selection bar
+        try {
+            resetSlider(this.challenge.tiles);
+
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     resetProgress() {
@@ -149,6 +156,9 @@ export const game = new class HorseAcademy {
     }
 
     addPiece(name, x, y, rotation) {
+        if (rotation === 2) x--;
+        if (rotation === 3) y--;
+
         if (x < 0 || y < 0 || rotation % 2 === 0 && x >= this.#cols - 1 || rotation % 2 && y >= this.#rows - 1) {
             const err = new Error('Cannot place tile out of board');
             console.error(err);
@@ -202,7 +212,6 @@ export const game = new class HorseAcademy {
 }
 
 // Challenge navitation
-
 previousButton.addEventListener('click', function() {
     if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
 });

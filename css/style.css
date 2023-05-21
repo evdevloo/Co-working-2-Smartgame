@@ -94,6 +94,8 @@ header {
 /* MAIN */
 
 main {
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
     max-width: 60em;
     text-align: center;
@@ -144,5 +146,13 @@ footer h1 {
 
     main h2 {
         font-size: 1.5rem;
+    }
+}
+
+/* SLIDER */
+
+@media only screen and (min-width: 62em) {
+    main {
+        flex-direction: row;
     }
 }

@@ -1,18 +1,10 @@
-main {
-    display: flex;
-    gap: 2em;
-    margin-right: 0;
-}
-
 /* slider */
 #slider {
-    /*position: absolute;
-
-     */
     width: 12em;
     height: 100%;
     top: 0;
     right: 0;
+    margin-left: auto;
     display: flex;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
