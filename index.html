@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/board.css" />
     <link rel="stylesheet" href="css/slider.css" />
     <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/popup.css">
 
     <!-- FONT : Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,6 +36,7 @@
     <script src="js/nav.js" defer></script>
 
     <script src="js/itemBar.js" defer></script>
+    <script src="js/popup.js" defer></script>
 </head>
 
 <body>
@@ -54,9 +56,9 @@
                         <a href="#"><img src="./img/nav/HorseAcademy.png" alt=""></a>
                         <a href="#">Horse Academy</a>
                     </li>
-                    <li class="popup">
-                        <a href="#"><img src="./img/nav/Challenges.png" alt=""></a>
-                        <a href="#">Challenges</a>
+                    <li>
+                        <a href="#" id="open-btn"><img src="./img/nav/Challenges.png" alt=""></a>
+                        <a href="#" id="open-btn">Challenges</a>
                     </li>
                     <li>
                         <a href="#"><img src="./img/nav/Solutions.png" alt=""></a>
@@ -168,6 +170,13 @@
             </div>
             <a id="prev" class="control prev"></a>
             <a id="next" class="control next"></a>
+        </div>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <h1>Pop-up Titel</h1>
+                <p>Test</p>
+                <button id="close-btn">Sluiten</button>
+            </div>
         </div>
     </main>
     <!-- <footer>

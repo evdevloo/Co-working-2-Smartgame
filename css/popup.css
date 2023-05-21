@@ -1,0 +1,36 @@
+@import url(board.css);
+@import url(board.css);
+@import url(board.css);
+
+
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Vervaagde achtergrondkleur */
+    backdrop-filter: blur(5px); /* Vervaagt de achtergrond */
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup.flex{
+    display: flex;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .close-btn {
+    background-color: #ccc;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 3px;
+  }
+  
