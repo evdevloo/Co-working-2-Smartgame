@@ -3,7 +3,6 @@ import { game } from './board.js';
 let pieces = null;
 let currentDroppable = null;
 let rotation = 0;
-let deg = 0;
 let tiles_challenge;
 
 getPieces();
@@ -83,7 +82,6 @@ function onmousedown(event) {
         }
         resetSlider(tiles_challenge);
         rotation = 0;
-        deg = 0;
         getPieces();
         document.removeEventListener('mouseup', onMouseUp);
     }
