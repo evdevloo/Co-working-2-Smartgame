@@ -7,24 +7,29 @@ const grid = document.getElementById('grid');
 const previousButton = document.getElementById('previousChallenge');
 const nextButton = document.getElementById('nextChallenge');
 
-// Game Class
+/**
+ * Initializes the last loaded level and loads the board from memory
+ * 
+ * @class HorseAcademy
+ * @classdesc Game Class for the HorseAcademy game. Handles everything on the board
+ */
 export const game = new class HorseAcademy {
-    #rows = 4;
-    #cols = 5;
+    rows = 4;
+    cols = 5;
 
     #challenges = [
-        {id: 1, difficulty: 'Starter', tiles: 'f', gate: 'x', solution: 'b47bcf64684dbed8'},
-        {id: 2, difficulty: 'Starter', tiles: 'ae', gate: 't', solution: '8b25dd891d549090'},
-        {id: 17, difficulty: 'Junior', tiles: 'dej', gate: 't', solution: '8e7e375e43cb1965'},
-        {id: 18, difficulty: 'Junior', tiles: 'abcefj', gate: 'y', solution: '7ad39d6cbf19a677'},
-        {id: 33, difficulty: 'Expert', tiles: 'adegij', gate: 't', solution: ''},
-        {id: 34, difficulty: 'Expert', tiles: 'bcdefgij', gate: 'u', solution: ''},
-        {id: 49, difficulty: 'Master', tiles: 'abcefghj', gate: 't', solution: ''},
-        {id: 50, difficulty: 'Master', tiles: 'abdeghij', gate: 'x', solution: ''},
-        {id: 63, difficulty: 'Master', tiles: 'bdefghij', gate: 'w', solution: ''},
-        {id: 65, difficulty: 'Wizard', tiles: 'bdefgi', gate: 'none', solution: ''},
-        {id: 66, difficulty: 'Wizard', tiles: 'acdefg', gate: 'none', solution: ''},
-        {id: 80, difficulty: 'Wizard', tiles: 'abcdefhij', gate: 'none', solution: ''}
+        { id: 1, difficulty: 'Starter', tiles: 'f', gate: 'x', solution: 'b47bcf64684dbed8' },
+        { id: 2, difficulty: 'Starter', tiles: 'ae', gate: 't', solution: '8b25dd891d549090' },
+        { id: 17, difficulty: 'Junior', tiles: 'dej', gate: 't', solution: '8e7e375e43cb1965' },
+        { id: 18, difficulty: 'Junior', tiles: 'abcefj', gate: 'y', solution: '7ad39d6cbf19a677' },
+        { id: 33, difficulty: 'Expert', tiles: 'adegij', gate: 't', solution: '' },
+        { id: 34, difficulty: 'Expert', tiles: 'bcdefghij', gate: 'u', solution: '' },
+        { id: 49, difficulty: 'Master', tiles: 'abcefghj', gate: 't', solution: '' },
+        { id: 50, difficulty: 'Master', tiles: 'abdeghij', gate: 'x', solution: '' },
+        { id: 63, difficulty: 'Master', tiles: 'bdefghij', gate: 'w', solution: '' },
+        { id: 65, difficulty: 'Wizard', tiles: 'bdefgi', gate: 'none', solution: '' },
+        { id: 66, difficulty: 'Wizard', tiles: 'acdefg', gate: 'none', solution: '' },
+        { id: 80, difficulty: 'Wizard', tiles: 'abcdefhij', gate: 'none', solution: '' }
     ]
     challenges = this.#challenges.length;
 
@@ -32,7 +37,7 @@ export const game = new class HorseAcademy {
         // Load stored level or initialize challenge 1
         this.newChallenge();
     }
-    
+
     newChallenge(challengeIndex) {
         if (typeof challengeIndex === 'number') localStorage.setItem('horseAcademy_selectedChallenge', challengeIndex);
         else this.selectedChallenge = +localStorage.getItem('horseAcademy_selectedChallenge');
@@ -78,9 +83,9 @@ export const game = new class HorseAcademy {
 
     resetProgress() {
         // create 2d array
-        this.board = [...Array(this.#cols)].fill()
-            .map(col => [...Array(this.#rows)].fill()
-            .map(cell => null));
+        this.board = [...Array(this.cols)].fill()
+            .map(col => [...Array(this.rows)].fill()
+                .map(cell => null));
 
         this.saveProgress();
         this.renderBoard();
@@ -110,8 +115,8 @@ export const game = new class HorseAcademy {
         // reset the grid
         grid.innerHTML = '';
 
-        for (let y = 0; y < this.#rows; y++) {
-            for (let x = 0; x < this.#cols; x++) {
+        for (let y = 0; y < this.rows; y++) {
+            for (let x = 0; x < this.cols; x++) {
                 let div = document.createElement('div');
 
                 div.classList.add(
@@ -127,12 +132,12 @@ export const game = new class HorseAcademy {
         // convert all tiles to html elements and put them on the board  
         const cells = grid.querySelectorAll('div');
 
-        for (let y = 0; y < this.#rows; y++) {
-            for (let x = 0; x < this.#cols; x++) {
+        for (let y = 0; y < this.rows; y++) {
+            for (let x = 0; x < this.cols; x++) {
                 const cell = this.board[x][y];
 
                 if (!cell) {
-                    if (this.getPiece(x, y)) cells[x + y * this.#cols].remove();
+                    if (this.getPiece(x, y)) cells[x + y * this.cols].remove();
 
                     continue;
                 }
@@ -151,7 +156,7 @@ export const game = new class HorseAcademy {
                     'y-' + y,
                     'rotation-' + cell.rotation
                 );
-                cells[x + y * this.#cols].replaceWith(piece);
+                cells[x + y * this.cols].replaceWith(piece);
             }
         }
 
@@ -166,23 +171,24 @@ export const game = new class HorseAcademy {
         if (rotation === 2) x--;
         if (rotation === 3) y--;
 
-        if (x < 0 || y < 0 || rotation % 2 === 0 && x >= this.#cols - 1 || rotation % 2 && y >= this.#rows - 1) {
+        if (x < 0 || y < 0 || rotation % 2 === 0 && x >= this.cols - 1 || rotation % 2 && y >= this.rows - 1) {
             const err = new Error('Cannot place tile out of board');
-            console.error(err);
+            //console.error(err);
             return err;
         }
 
-        if (this.getPiece(x, y)) {
+        if (this.getPiece(x, y) || this.getPiece(x + (rotation === 0), y + (rotation === 1))) {
             const err = new Error('Cannot place tile on another tile');
-            console.error(err);
+            //console.error(err);
             return err;
         }
-        this.board[x][y] = {name, rotation};
+        this.board[x][y] = { name, rotation };
         this.saveProgress();
         this.renderBoard();
     }
 
     getPiece(x, y) {
+        console.log(this);
         if (this.board[x][y]) return this.board[x][y];
         if (x - 1 >= 0 && this.board[x - 1][y]?.rotation % 2 === 0) return this.board[x - 1][y];
         if (y - 1 >= 0 && this.board[x][y - 1]?.rotation % 2 === 1) return this.board[x][y - 1];
@@ -203,13 +209,13 @@ export const game = new class HorseAcademy {
 
     getBoardHash() {
         // Account for symmetric pieces
-        let board = this.board.map(row => row.slice());
+        let board = this.board.map(row => [...row]);
 
-        for (let x = 0; x < this.#cols; x++) {
-            for (let y = 0; y < this.#rows; y++) {
+        for (let x = 0; x < this.cols; x++) {
+            for (let y = 0; y < this.rows; y++) {
                 let cell = board[x][y];
 
-                if (cell && 'abci'.includes(cell.name)) {
+                if (cell && 'abc'.includes(cell.name)) {
                     board[x][y].rotation = cell.rotation === 2 ? 0 : cell.rotation === 3 ? 1 : cell.rotation;
                 }
             }
@@ -219,10 +225,10 @@ export const game = new class HorseAcademy {
 }
 
 // Challenge navitation
-previousButton.addEventListener('click', function() {
+previousButton.addEventListener('click', function () {
     if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
 });
 
-nextButton.addEventListener('click', function() {
+nextButton.addEventListener('click', function () {
     if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
 });
