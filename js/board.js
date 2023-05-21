@@ -188,7 +188,6 @@ export const game = new class HorseAcademy {
     }
 
     getPiece(x, y) {
-        console.log(this);
         if (this.board[x][y]) return this.board[x][y];
         if (x - 1 >= 0 && this.board[x - 1][y]?.rotation % 2 === 0) return this.board[x - 1][y];
         if (y - 1 >= 0 && this.board[x][y - 1]?.rotation % 2 === 1) return this.board[x][y - 1];
