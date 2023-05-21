@@ -3,96 +3,59 @@ import { game } from './board.js';
 let pieces = null;
 let currentDroppable = null;
 let rotation = 0;
+let deg = 0;
+let tiles_challenge;
 
 getPieces();
 deleteDuplicates();
 
-document.addEventListener('keypress', event => {
-    if (event.key === 'r') {
-        if (++rotation === 4) rotation = 0;
-
-        //document.querySelector('.dragging').style.transformOrigin = 'center';
-        document.querySelector('.dragging').style.transform = `rotate(${rotation * 90}deg)`;
-    }
-});
-
 function getPieces() {
-    pieces = document.querySelectorAll('.card, div.tile');
+    pieces = document.querySelectorAll(`.card, div.tile `);
 
-    pieces.forEach(piece => {
-        //piece.addEventListener('dragstart', dragStart);
+    pieces .forEach(piece =>{
         piece.addEventListener('mousedown', onmousedown);
-
-        // Kyle - deze lijn word niet gebruikt?
-        //piece.ondragstart = function () { return false; };
-        // en hoezo niet gewoon dit
-        //piece.ondragstart = false;
     });
 }
-
 function onmousedown(event) {
     const piece = event.target;
-
-    let rect = piece.getBoundingClientRect();
-    let shiftX = event.clientX - rect.left;
-    let shiftY = event.clientY - rect.top;
 
     piece.style.position = 'absolute';
     piece.style.zIndex = 99;
 
-    document.body.append(piece);
-
     if (piece.classList.contains('tile')) {
+        let X = piece.classList[1].slice(-1);
+        let Y = piece.classList[2].slice(-1);
         rotation = piece.classList[3].slice(-1);
-
         piece.id = piece.firstChild.alt.slice(-1);
         piece.className = 'card';
         piece.innerHTML = '';
-        piece.setAttribute('draggable', 'true');
         piece.style.transform = `rotate(${rotation * 90}deg)`;
-        game.removePiece(piece.classList[1].slice(-1), piece.classList[2].slice(-1));
+        game.removePiece(X, Y);
         getPieces();
     }
+
+    document.body.append(piece);
     piece.classList.add("dragging");
 
     moveAt(event.pageX, event.pageY);
 
     document.addEventListener('mousemove', onMouseMove);
-
-    piece.onmouseup = function () {
-        document.removeEventListener('mousemove', onMouseMove);
-        piece.style = '';
-        piece.classList.remove("dragging");
-
-        if (currentDroppable === null || !currentDroppable.classList.contains('droppable') || currentDroppable.id === 'items') {
-            document.querySelector('#items').appendChild(piece);
-            //sort();
-            resetSlider();
-
-        } else if (currentDroppable.parentElement.id === 'grid') { // itemBar.js:69 Uncaught TypeError: Cannot read properties of null (reading 'id')
-            let x = +currentDroppable.classList[1].slice(-1);
-            let y = + currentDroppable.classList[2].slice(-1);
-
-            if (game.addPiece(piece.id, x, y, rotation) !== undefined) {
-                piece.remove();
-
-            } else {
-                document.querySelector('#items').appendChild(piece);
-                resetSlider();
-            }
-        }
-        rotation = 0;
-        getPieces();
-        piece.onmouseup = null;
-    };
+    document.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('keypress', rotating)
 
     function moveAt(pageX, pageY) {
-        piece.style.left = pageX - shiftX + 'px';
-        piece.style.top = pageY - shiftY + 'px';
+        piece.style.left = pageX - 50 + 'px';
+        piece.style.top = pageY  - 50 + 'px';
     }
 
     function onMouseMove(event) {
         moveAt(event.pageX, event.pageY);
+    }
+
+    function onMouseUp(event){
+
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('keypress', rotating)
 
         piece.hidden = true;
         let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
@@ -102,54 +65,60 @@ function onmousedown(event) {
 
         let droppableBelow = elemBelow.closest('.droppable');
 
-        if (currentDroppable !== droppableBelow) {
-            if (currentDroppable) { // null when we were not over a droppable before this event
-            }
-            currentDroppable = droppableBelow;
+        if (currentDroppable !== droppableBelow) currentDroppable = droppableBelow;
 
-            if (currentDroppable) { // null if we're not coming over a droppable now
-
+        piece.style = '';
+        piece.classList.remove('dragging')
+        if ( currentDroppable === null|| (!currentDroppable.classList.contains('droppable')) || currentDroppable.id === 'items') {
+            document.querySelector('#items').appendChild(piece);
+        } else if(currentDroppable.parentElement.id === 'grid') {
+            let x =+ currentDroppable.classList[1].slice(-1);
+            let y =+ currentDroppable.classList[2].slice(-1);
+            if(game.addPiece(piece.id,x,y,(rotation%4)) === undefined ){
+                event.target.remove();
+            } else {
+                document.querySelector('#items').appendChild(piece);
             }
         }
+        resetSlider(tiles_challenge);
+        rotation = 0;
+        deg = 0;
+        getPieces();
+        document.removeEventListener('mouseup', onMouseUp);
     }
+
 }
 
-/*
-function sort() {
-
-    let tile = document.querySelector(`#items`);
-    let tileSort = [...document.querySelectorAll(`#items div`)];
-
-    tileSort.sort(function(a, b){
-        return (a.id > b.id) ? 1 : (a.id < b.id) ? -1 : 0;});
-    for(var i = 0, l = tileSort.length; i < l; i++) {
-        tile.appendChild(tileSort[i]);
+function rotating(event){
+    if (event.key === 'r') {
+        ++rotation;
+        document.querySelector('.dragging').style.transform = `rotate(${rotation * 90}deg)`;
     }
 }
- */
 
 function deleteDuplicates() {
-    console.log(pieces);
     let copies = Object.values(pieces).filter(piece => piece.classList.contains('tile'));
 
     copies.forEach(piece => {
-        let id = piece.firstChild.alt.slice(-1);
-        document.querySelector('#' + id).remove();
+        let id = piece.firstChild.alt.charAt(5);
+        document.querySelector(`#${id}`).remove();
     })
 }
 
-export function resetSlider() {
-    let tiles = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+export function resetSlider(tiles) {
+    tiles_challenge = tiles;
+
     let slider = document.querySelector('#items');
     slider.innerHTML = '';
 
-    tiles.forEach(tile => {
+    [...tiles_challenge].forEach(tile => {
         const div = document.createElement('div');
         div.id = tile;
         div.className = 'card';
-        div.setAttribute('draggable', 'true');
         slider.appendChild(div);
     })
     getPieces();
     deleteDuplicates();
 }
+
+
