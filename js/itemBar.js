@@ -46,14 +46,14 @@ function onmousedown(event) {
 
     function moveAt(pageX, pageY) {
         piece.style.left = pageX - 50 + 'px';
-        piece.style.top = pageY - 50 + 'px';
+        piece.style.top = pageY  - 50 + 'px';
     }
 
     function onMouseMove(event) {
         moveAt(event.pageX, event.pageY);
     }
 
-    function onMouseUp(event) {
+    function onMouseUp(event){
 
         document.removeEventListener('mousemove', onMouseMove);
         document.removeEventListener('keypress', rotating)
@@ -90,7 +90,7 @@ function onmousedown(event) {
 
 }
 
-function rotating(event) {
+function rotating(event){
     if (event.key === 'r') {
         ++rotation;
         document.querySelector('.dragging').style.transform = `rotate(${rotation * 90}deg)`;
