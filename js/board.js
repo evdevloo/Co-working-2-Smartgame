@@ -1,20 +1,11 @@
 import { resetSlider } from './itemBar.js';
+
 // Initialize progress
 if (!localStorage.getItem('horseAcademy_progress')) localStorage.setItem('horseAcademy_progress', "{}");
 
 const grid = document.getElementById('grid');
-
-// Challenge Navigation
 const previousButton = document.getElementById('previousChallenge');
 const nextButton = document.getElementById('nextChallenge');
-
-previousButton.addEventListener('click', function() {
-    if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
-});
-
-nextButton.addEventListener('click', function() {
-    if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
-});
 
 // Game Class
 export const game = new class HorseAcademy {
@@ -73,9 +64,15 @@ export const game = new class HorseAcademy {
         if (this.selectedChallenge <= 0) previousButton.setAttribute('disabled', '');
         if (this.selectedChallenge >= this.challenges - 1) nextButton.setAttribute('disabled', '');
 
+        // reset piece selection bar
+        try {
+            resetSlider();
+        } catch (err) {
+            console.log(err);
+        }
+
         // load the level
         this.loadProgress();
-        resetSlider();
     }
 
     resetProgress() {
@@ -209,3 +206,13 @@ export const game = new class HorseAcademy {
         return (CryptoJS.SHA1(JSON.stringify(board)) + '').slice(0, 16);
     }
 }
+
+// Challenge navitation
+
+previousButton.addEventListener('click', function() {
+    if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
+});
+
+nextButton.addEventListener('click', function() {
+    if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
+});

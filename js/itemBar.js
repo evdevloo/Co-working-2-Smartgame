@@ -3,99 +3,100 @@ import { game } from './board.js';
 let pieces = null;
 let currentDroppable = null;
 let rotation = 0;
+
 getPieces();
 deleteDuplicates();
 
-document.addEventListener('keypress', (event) => {
-    let key = event.key;
+document.addEventListener('keypress', event => {
+    if (event.key === 'r') {
+        if (++rotation === 4) rotation = 0;
 
-    if (key === 'r'){
-
-        ++rotation;
-        if (rotation === 4){
-            rotation = 0;
-        }
         //document.querySelector('.dragging').style.transformOrigin = 'center';
         document.querySelector('.dragging').style.transform = `rotate(${rotation * 90}deg)`;
     }
 });
 
 function getPieces() {
-    pieces = document.querySelectorAll(`.card, div.tile `);
+    pieces = document.querySelectorAll('.card, div.tile');
 
-    pieces .forEach(piece =>{
+    pieces.forEach(piece => {
         //piece.addEventListener('dragstart', dragStart);
         piece.addEventListener('mousedown', onmousedown);
-        piece.ondragstart = function() { return false;};
+
+        // Kyle - deze lijn word niet gebruikt?
+        //piece.ondragstart = function () { return false; };
+        // en hoezo niet gewoon dit
+        //piece.ondragstart = false;
     });
 }
 
 function onmousedown(event) {
+    const piece = event.target;
 
-    let shiftX = event.clientX - event.target.getBoundingClientRect().left;
-    let shiftY = event.clientY - event.target.getBoundingClientRect().top;
+    let rect = piece.getBoundingClientRect();
+    let shiftX = event.clientX - rect.left;
+    let shiftY = event.clientY - rect.top;
 
-    event.target.style.position = 'absolute';
-    event.target.style.zIndex = 1000;
+    piece.style.position = 'absolute';
+    piece.style.zIndex = 99;
 
-    document.body.append(event.target);
+    document.body.append(piece);
 
-    if (event.target.classList.contains('tile')){
-        let X = event.target.classList[1].charAt(2);
-        let Y = event.target.classList[2].charAt(2);
-        let piece = event.target.firstChild.alt;
-        rotation = event.target.classList[3].charAt(9);
+    if (piece.classList.contains('tile')) {
+        rotation = piece.classList[3].slice(-1);
 
-        event.target.id = piece.charAt(5);
-        event.target.className = "card";
-        event.target.innerHTML = '';
-        event.target.setAttribute('draggable', true);
-        event.target.style.transform = `rotate(${rotation * 90}deg)`;
-        game.removePiece(X, Y)
+        piece.id = piece.firstChild.alt.slice(-1);
+        piece.className = 'card';
+        piece.innerHTML = '';
+        piece.setAttribute('draggable', 'true');
+        piece.style.transform = `rotate(${rotation * 90}deg)`;
+        game.removePiece(piece.classList[1].slice(-1), piece.classList[2].slice(-1));
         getPieces();
     }
-    event.target.classList.add("dragging");
+    piece.classList.add("dragging");
 
     moveAt(event.pageX, event.pageY);
 
     document.addEventListener('mousemove', onMouseMove);
 
-    event.target.onmouseup = function() {
+    piece.onmouseup = function () {
         document.removeEventListener('mousemove', onMouseMove);
-        event.target.style = '';
-        event.target.classList.remove("dragging")
-        if ( currentDroppable === null|| (!currentDroppable.classList.contains('droppable')) || currentDroppable.id === 'items') {
-            document.querySelector('#items').appendChild(event.target);
+        piece.style = '';
+        piece.classList.remove("dragging");
+
+        if (currentDroppable === null || !currentDroppable.classList.contains('droppable') || currentDroppable.id === 'items') {
+            document.querySelector('#items').appendChild(piece);
             //sort();
-            resetSlider()
+            resetSlider();
 
+        } else if (currentDroppable.parentElement.id === 'grid') { // itemBar.js:69 Uncaught TypeError: Cannot read properties of null (reading 'id')
+            let x = +currentDroppable.classList[1].slice(-1);
+            let y = + currentDroppable.classList[2].slice(-1);
 
-        } else if(currentDroppable.parentElement.id === 'grid') {
-            let x =+currentDroppable.classList[1].charAt(2);
-            let y =+ currentDroppable.classList[2].charAt(2);
-            if(game.addPiece(event.target.id,x,y,rotation) === null){
-                event.target.remove();
+            if (game.addPiece(piece.id, x, y, rotation) !== undefined) {
+                piece.remove();
+
             } else {
-                document.querySelector('#items').appendChild(event.target);
+                document.querySelector('#items').appendChild(piece);
                 resetSlider();
             }
         }
         rotation = 0;
         getPieces();
-        event.target.onmouseup = null;
+        piece.onmouseup = null;
     };
 
     function moveAt(pageX, pageY) {
-        event.target.style.left =  pageX - shiftX + 'px';
-        event.target.style.top = pageY - shiftY + 'px';
+        piece.style.left = pageX - shiftX + 'px';
+        piece.style.top = pageY - shiftY + 'px';
     }
 
     function onMouseMove(event) {
         moveAt(event.pageX, event.pageY);
 
-        event.target.hidden = true;
+        piece.hidden = true;
         let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
-        event.target.hidden = false;
+        piece.hidden = false;
 
         if (!elemBelow) return;
 
@@ -105,12 +106,14 @@ function onmousedown(event) {
             if (currentDroppable) { // null when we were not over a droppable before this event
             }
             currentDroppable = droppableBelow;
+
             if (currentDroppable) { // null if we're not coming over a droppable now
 
             }
         }
     }
 }
+
 /*
 function sort() {
 
@@ -123,28 +126,28 @@ function sort() {
         tile.appendChild(tileSort[i]);
     }
 }
-
  */
 
-
-function deleteDuplicates(){
+function deleteDuplicates() {
+    console.log(pieces);
     let copies = Object.values(pieces).filter(piece => piece.classList.contains('tile'));
+
     copies.forEach(piece => {
-        let id = piece.firstChild.alt.charAt(5);
-        document.querySelector('#'+id).remove();
+        let id = piece.firstChild.alt.slice(-1);
+        document.querySelector('#' + id).remove();
     })
 }
 
 export function resetSlider() {
-    let tiles = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+    let tiles = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
     let slider = document.querySelector('#items');
     slider.innerHTML = '';
 
     tiles.forEach(tile => {
         const div = document.createElement('div');
-        div.id = tile
-        div.className = "card";
-        div.setAttribute('draggable', true);
+        div.id = tile;
+        div.className = 'card';
+        div.setAttribute('draggable', 'true');
         slider.appendChild(div);
     })
     getPieces();
