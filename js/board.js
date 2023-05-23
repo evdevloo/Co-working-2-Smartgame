@@ -161,10 +161,10 @@ export const game = new class HorseAcademy {
         }
 
         // FOR DEBUG ONLY! Change background color to check if correct
-        document.body.style.backgroundColor = 'white';
+        /*document.body.style.backgroundColor = 'white';
 
         if (this.solved()) document.body.style.backgroundColor = 'lime';
-        else if (this.progress[this.challenge.id].completed) document.body.style.backgroundColor = 'aqua';
+        else if (this.progress[this.challenge.id].completed) document.body.style.backgroundColor = 'aqua';*/
     }
 
     addPiece(name, x, y, rotation) {
