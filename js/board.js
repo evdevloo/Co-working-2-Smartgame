@@ -1,7 +1,12 @@
 import { resetSlider } from './itemBar.js';
 
 // Initialize progress
-if (!localStorage.getItem('horseAcademy_progress')) localStorage.setItem('horseAcademy_progress', "{}");
+let progress = localStorage.getItem('horseAcademy_progress');
+
+if (!progress) localStorage.setItem('horseAcademy_progress', "{}");
+else if (progress.constructor === Object) localStorage.setItem('horseAcademy_progress', "{}");
+
+delete progress;
 
 const grid = document.getElementById('grid');
 const previousButton = document.getElementById('previousChallenge');
