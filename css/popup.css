@@ -35,4 +35,8 @@
     top: 0;
     right: 0;
   }
+  .popcl {
+    display: flex;
+    flex-wrap: wrap;
+  }
   
