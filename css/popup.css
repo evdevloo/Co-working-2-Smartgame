@@ -31,5 +31,8 @@
     border: none;
     padding: 8px 16px;
     border-radius: 3px;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
   

@@ -7,12 +7,14 @@
     const board = document.getElementById('board');
     const heading = document.getElementById('challenge-heading');
     const headingdesc = document.getElementById('challenge-description');
+    const slider  = document.getElementById('slider');
 
     openBtn.addEventListener('click', function () {
         popup.style.display = 'flex';
         board.style.opacity = 0;
         heading.style.opacity = 0;
         headingdesc.style.opacity = 0;
+        slider.style.visibility = 'hidden';
     });
 
     closeBtn.addEventListener('click', function () {
@@ -20,5 +22,6 @@
         board.style.opacity = 1;
         heading.style.opacity = 1;
         headingdesc.style.opacity = 1;
+        slider.style.visibility = 'visible';
     });
 })();
