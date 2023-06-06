@@ -14,6 +14,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/board.css">
     <link rel="stylesheet" href="css/slider.css">
 
@@ -28,14 +29,45 @@
 
     <!-- JS -->
     <script src="js/crypto.js"></script>
+    <script src="js/nav.js" type="module"></script>
     <script src="js/board.js" type="module"></script>
     <script src="js/itemBar.js" type="module"></script>
 </head>
 
 <body>
     <header>
-        <nav></nav>
-    </header>
+        <div class="header-alles">
+          <div class="header-nav">
+            <button aria-expanded="false" class="hamburger" id="menu">
+              <span aria-hidden="true" class="icoontje">
+                <span></span><span></span><span></span>
+              </span>
+              <span></span>
+            </button>
+          </div>
+          <nav aria-expanded="false">
+            <ul>
+              <li>
+                <a href="#"><img src="./img/nav/HorseAcademy.png" alt="" /></a>
+                <a class="navHorse" href="#">Horse Academy</a>
+              </li>
+              <li class="challenges">
+                <a href="#"><img src="./img/nav/Challenges.png" alt="" /></a>
+                <!-- <span class="g-icon material-symbols-outlined">collections bookmark</span> -->
+                <a href="#">Challenges</a>
+              </li>
+              <li>
+                <a href="#"><img src="./img/nav/Solutions.png" alt="" /></a>
+                <a href="#">Solutions</a>
+              </li>
+              <li>
+                <a href="#"><img src="./img/nav/GameRules.png" alt="" /></a>
+                <a href="#">Game Rules</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
     <main>
         <section>
             <div class="challenge-heading">
