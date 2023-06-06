@@ -40,6 +40,8 @@ html {
     font-family: Inter, sans-serif;
     font-variant-caps: all-small-caps;
     color: var(--primary);
+    overflow: hidden;
+    margin: 0
 }
 
 /* ATOMS */
@@ -47,7 +49,9 @@ html {
 body {
     display: flex;
     flex-direction: column;
-    min-height: 95vh; /* Should be 100 but sometimes overflows on y */
+    min-height: 100vh; /* Should be 100 but sometimes overflows on y */
+    overflow: hidden;
+    margin: 0
 }
 
 p {
@@ -96,11 +100,12 @@ header {
 main {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
-    max-width: 60em;
     text-align: center;
 }
-
+main section {
+    max-width: 60em;
+    margin: 0 auto;
+}
 main h1 {
     font-size: 2rem;
     font-weight: 900;
@@ -154,5 +159,19 @@ footer h1 {
 @media only screen and (min-width: 62em) {
     main {
         flex-direction: row;
+        text-align: center;
+        position: relative;
     }
+    main section {
+        display: inline-block;
+        text-align: center;
+    }
+
+    main #slider {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+    }
+
 }
