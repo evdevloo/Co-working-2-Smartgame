@@ -3,173 +3,170 @@
 <html lang="en">
 
 <head>
-    <!-- Browser Tab -->
-    <title>Horse Academy</title>
-    <link rel="icon" href="img/icon.png">
+  <!-- Browser Tab -->
+  <title>Horse Academy</title>
+  <link rel="icon" href="img/icon.png">
 
-    <!-- Meta -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Meta -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/board.css">
-    <link rel="stylesheet" href="css/slider.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/board.css">
+  <link rel="stylesheet" href="css/slider.css">
 
-    <!-- FONT : Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
+  <!-- FONT : Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
 
-    <!-- FONT : Material Symbols Outlined (Google Icons) -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <!-- FONT : Material Symbols Outlined (Google Icons) -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
 
-    <!-- JS -->
-    <script src="js/crypto.js"></script>
-    <script src="js/nav.js" type="module"></script>
-    <script src="js/board.js" type="module"></script>
-    <script src="js/itemBar.js" type="module"></script>
+  <!-- JS -->
+  <script src="js/crypto.js"></script>
+  <script src="js/nav.js" type="module"></script>
+  <script src="js/board.js" type="module"></script>
+  <script src="js/itemBar.js" type="module"></script>
 </head>
 
 <body>
-    <header>
-        <div class="header-alles">
-          <div class="header-nav">
-            <button aria-expanded="false" class="hamburger" id="menu">
-              <span aria-hidden="true" class="icoontje">
-                <span></span><span></span><span></span>
-              </span>
-              <span></span>
-            </button>
+  <header>
+    <div class="header-alles">
+      <div class="header-nav">
+        <button aria-expanded="false" class="hamburger" id="menu">
+          <span aria-hidden="true" class="icoontje">
+            <span></span><span></span><span></span>
+          </span>
+          <span></span>
+        </button>
+      </div>
+      <nav aria-expanded="false">
+        <ul>
+          <li>
+            <img src="./img/nav/HorseAcademy.png" alt="logo">
+            <a href="./" class="navHorse">Horse Academy</a>
+          </li>
+          <li class="challenges">
+            <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">book</span>Challenges</a>
+          </li>
+          <li>
+            <a href="#"><span class="g-icon material-symbols-outlined"
+                aria-hidden="true">check</span>Solutions</a>
+          </li>
+          <li>
+            <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">info</span>Game Rules</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section>
+      <div class="challenge-heading">
+        <div class="challenge-title">
+          <h1>Challenge</h1>
+          <button id="previousChallenge" class="challenge-nav" aria-label="navigate previous challenge">
+            <span class="g-icon material-symbols-outlined">navigate_before</span>
+          </button>
+          <button id="nextChallenge" class="challenge-nav" aria-label="navigate previous challenge">
+            <span class="g-icon material-symbols-outlined">navigate_next</span>
+          </button>
+        </div>
+        <h2 aria-label="difficulty"></h2>
+      </div>
+
+      <div class="challenge-description">
+        <img src="" alt="challenge diagram">
+      </div>
+
+      <div id="board">
+        <div>
+          <div id="fence">
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence-post"></div>
+            <div class="fence"></div>
+            <div class="fence"></div>
+            <div class="fence"></div>
+            <div class="fence"></div>
+            <div class="fence"></div>
+            <div class="fence"></div>
+            <div class="fence"></div>
+            <div class="fence vertical"></div>
+            <div class="fence vertical"></div>
+            <div class="fence vertical"></div>
+            <div class="fence vertical"></div>
+            <div class="fence vertical"></div>
+            <div class="fence-corner"></div>
+            <div class="fence-corner"></div>
+            <div class="fence-corner"></div>
+            <div class="fence-corner"></div>
+            <div class="gate">T</div>
+            <div class="gate">U</div>
+            <div class="gate">W</div>
+            <div class="gate">X</div>
+            <div class="gate">Y</div>
+            <div class="gate">Z</div>
+            <img class="finish none" src="img/finish.png" alt="finish">
           </div>
-          <nav aria-expanded="false">
-            <ul>
-              <li>
-                <a href="#"><img src="./img/nav/HorseAcademy.png" alt="" /></a>
-                <a class="navHorse" href="#">Horse Academy</a>
-              </li>
-              <li class="challenges">
-                <a href="#"><img src="./img/nav/Challenges.png" alt="" /></a>
-                <!-- <span class="g-icon material-symbols-outlined">collections bookmark</span> -->
-                <a href="#">Challenges</a>
-              </li>
-              <li>
-                <a href="#"><img src="./img/nav/Solutions.png" alt="" /></a>
-                <a href="#">Solutions</a>
-              </li>
-              <li>
-                <a href="#"><img src="./img/nav/GameRules.png" alt="" /></a>
-                <a href="#">Game Rules</a>
-              </li>
-            </ul>
-          </nav>
+
+          <div id="grid"></div>
         </div>
-      </header>
-    <main>
-        <section>
-            <div class="challenge-heading">
-                <div class="challenge-title">
-                    <h1>Challenge</h1>
-                    <button id="previousChallenge" class="challenge-nav">
-                        <span class="g-icon material-symbols-outlined">navigate_before</span>
-                    </button>
-                    <button id="nextChallenge" class="challenge-nav">
-                        <span class="g-icon material-symbols-outlined">navigate_next</span>
-                    </button>
-                </div>
-                <h2 aria-describedby="difficulty"></h2>
-            </div>
-
-            <div class="challenge-description">
-                <img src="" alt="challenge diagram">
-            </div>
-
-            <div id="board">
-                <div>
-                    <div id="fence">
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence-post"></div>
-                        <div class="fence"></div>
-                        <div class="fence"></div>
-                        <div class="fence"></div>
-                        <div class="fence"></div>
-                        <div class="fence"></div>
-                        <div class="fence"></div>
-                        <div class="fence"></div>
-                        <div class="fence vertical"></div>
-                        <div class="fence vertical"></div>
-                        <div class="fence vertical"></div>
-                        <div class="fence vertical"></div>
-                        <div class="fence vertical"></div>
-                        <div class="fence-corner"></div>
-                        <div class="fence-corner"></div>
-                        <div class="fence-corner"></div>
-                        <div class="fence-corner"></div>
-                        <div class="gate">T</div>
-                        <div class="gate">U</div>
-                        <div class="gate">W</div>
-                        <div class="gate">X</div>
-                        <div class="gate">Y</div>
-                        <div class="gate">Z</div>
-                        <img class="finish none" src="img/finish.png" alt="finish">
-                    </div>
-
-                    <div id="grid"></div>
-                </div>
-            </div>
-        </section>
-        <div id="slider" class="slider">
-            <div id="items" class="droppable">
-                <div id="a" class="card" draggable="true">
-                </div>
-                <div id="b" class="card" draggable="true">
-                </div>
-                <div id="c" class="card" draggable="true">
-                </div>
-                <div id="d" class="card" draggable="true">
-                </div>
-                <div id="e" class="card" draggable="true">
-                </div>
-                <div id="f" class="card" draggable="true">
-                </div>
-                <div id="g" class="card" draggable="true">
-                </div>
-                <div id="h" class="card" draggable="true">
-                </div>
-                <div id="i" class="card" draggable="true">
-                </div>
-                <div id="j" class="card" draggable="true">
-                </div>
-            </div>
-            <a id="prev" class="control prev"></a>
-            <a id="next" class="control next"></a>
+      </div>
+    </section>
+    <div id="slider" class="slider">
+      <div id="items" class="droppable">
+        <div id="a" class="card" draggable="true">
         </div>
+        <div id="b" class="card" draggable="true">
+        </div>
+        <div id="c" class="card" draggable="true">
+        </div>
+        <div id="d" class="card" draggable="true">
+        </div>
+        <div id="e" class="card" draggable="true">
+        </div>
+        <div id="f" class="card" draggable="true">
+        </div>
+        <div id="g" class="card" draggable="true">
+        </div>
+        <div id="h" class="card" draggable="true">
+        </div>
+        <div id="i" class="card" draggable="true">
+        </div>
+        <div id="j" class="card" draggable="true">
+        </div>
+      </div>
+      <a id="prev" class="control prev"></a>
+      <a id="next" class="control next"></a>
+    </div>
 
-    </main>
-    <!-- <footer>
+  </main>
+  <!-- <footer>
         <div>
             <h1>Licence</h1>
             <p>Copyright (C) [Evert Devloo, Izzet Poyraz, Kyle Hoeckman, Tommy Baudonck], 2023, All rights reserved</p>

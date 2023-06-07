@@ -1,5 +1,9 @@
 /* CHALLANGE */
 
+main section:has(#slider) {
+    flex-shrink: 1;
+}
+
 .challenge-heading {
     margin: 2rem 0;
 }

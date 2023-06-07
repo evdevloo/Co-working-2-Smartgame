@@ -208,7 +208,7 @@ export const game = new class HorseAcademy {
         return this.getBoardHash() === this.challenge.solution;
     }
 
-    getBoardHash() {
+    async getBoardHash() {
         // Account for symmetric pieces
         let board = this.board.map(row => [...row]);
 
@@ -221,7 +221,13 @@ export const game = new class HorseAcademy {
                 }
             }
         }
-        return (CryptoJS.SHA1(JSON.stringify(board)) + '').slice(0, 16);
+        //return (CryptoJS.SHA1(JSON.stringify(board)) + '').slice(0, 16);
+
+        // No need for CryptoJS library
+        return (await crypto.subtle.digest(
+            'SHA-1',
+            (new TextEncoder).encode(JSON.stringify(board))
+        )).slice(0, 16)
     }
 }
 

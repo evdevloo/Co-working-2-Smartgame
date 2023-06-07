@@ -1,3 +1,11 @@
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+}
+
 /* ROOT */
 
 :root {
@@ -5,7 +13,7 @@
     --black: #000;
     --bg: var(--white);
     --primary: var(--black);
-    --accent: #0f8;
+    --accent: #69e969;
 
     --starter: #afcb34;
     --junior: #fab932;
@@ -46,8 +54,9 @@ html {
 
 body {
     display: flex;
-    flex-direction: column;
-    min-height: 95vh; /* Should be 100 but sometimes overflows on y */
+    flex-wrap: nowrap;
+    margin: 0;
+    min-height: 100vh;
 }
 
 p {
@@ -86,10 +95,7 @@ button {
 
 /* HEADER */
 
-header {
-    background-color: var(--primary);
-    color: var(--bg);
-}
+
 
 /* MAIN */
 
@@ -151,8 +157,19 @@ footer h1 {
 
 /* SLIDER */
 
-@media only screen and (min-width: 62em) {
+@media only screen and (min-width: 75em) {
     main {
         flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    main section {
+        flex-shrink: 1;
+    }
+
+    main #slider {
+        flex: 1 0;
     }
 }
