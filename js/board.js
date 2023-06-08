@@ -10,6 +10,11 @@ const grid = document.getElementById('grid');
 const previousButton = document.getElementById('previousChallenge');
 const nextButton = document.getElementById('nextChallenge');
 
+const showSolutionButton = document.getElementById('showSolution');
+const hideSolutionButton = document.querySelector('.challenge-popup-close');
+const solutionPopup = document.querySelector('.challenge-popup');
+const darkerBackground = document.querySelector('.challenge-popup + div');
+
 /**
  * Initializes the last loaded level and loads the board from memory
  * 
@@ -50,7 +55,7 @@ export const game = new class HorseAcademy {
         this.challenge = this.#challenges[this.selectedChallenge];
 
         // update title
-        document.querySelector('.challenge-heading h1').innerText = 'Challenge ' + (this.selectedChallenge + 1);
+        document.querySelector('.challenge-heading h1').innerText = 'Challenge ' + this.challenge.id;
 
         // update subtitle
         const subtitle = document.querySelector('.challenge-heading h2');
@@ -60,7 +65,7 @@ export const game = new class HorseAcademy {
         // update challenge description
         const description = document.querySelector('.challenge-description img');
         description.src = `img/challenges/challenge${this.challenge.id}.png`;
-        description.alt = 'challenge diagram ' + (this.selectedChallenge + 1);
+        description.alt = 'challenge diagram ' + this.challenge.id;
 
         // update finish position
         document.querySelector('#fence .finish').className = 'finish ' + this.challenge.gate;
@@ -82,6 +87,14 @@ export const game = new class HorseAcademy {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    giveupChallenge() {
+        this.progress = JSON.parse(localStorage.getItem('horseAcademy_progress'));
+        this.progress[this.challenge.id].givenUp = true;
+        localStorage.setItem('horseAcademy_progress', JSON.stringify(this.progress));
+
+        this.updateSolved();
     }
 
     resetProgress() {
@@ -108,7 +121,8 @@ export const game = new class HorseAcademy {
 
         this.progress[this.challenge.id] = {
             board: this.board,
-            completed: this.progress[this.challenge.id]?.completed || this.solved()
+            completed: this.progress[this.challenge.id]?.completed || this.solved(),
+            givenUp: this.progress[this.challenge.id]?.givenUp ?? false
         };
 
         localStorage.setItem('horseAcademy_progress', JSON.stringify(this.progress));
@@ -162,11 +176,32 @@ export const game = new class HorseAcademy {
                 cells[x + y * this.cols].replaceWith(piece);
             }
         }
+        this.updateSolved();
+    }
 
-        // FOR DEBUG ONLY! Change background color to check if correct
+    updateSolved() {
+        const challengeSolved = document.querySelector('.challenge-solved');
+        const challengeSolvedText = challengeSolved.querySelector('span:first-child');
 
-        if (this.solved()) console.log('solved');
-        else if (this.progress[this.challenge.id].completed) console.log('solved in the past');
+        if (this.progress[this.challenge.id].givenUp) {
+            challengeSolvedText.innerText = 'Given Up';
+            challengeSolved.classList.add('given-up');
+            challengeSolved.classList.remove('solved', 'solved-before');
+
+        } else if (this.solved()) {
+            challengeSolvedText.innerText = 'Solved';
+            challengeSolved.classList.add('solved');
+            challengeSolved.classList.remove('solved-before', 'given-up');
+
+        } else if (this.progress[this.challenge.id].completed) {
+            challengeSolvedText.innerText = 'Solved Before';
+            challengeSolved.classList.add('solved-before');
+            challengeSolved.classList.remove('solved', 'given-up');
+
+        } else {
+            challengeSolvedText.innerText = 'Unsolved';
+            challengeSolved.classList.remove('solved', 'solved-before', 'given-up');
+        }
     }
 
     addPiece(name, x, y, rotation) {
@@ -175,13 +210,11 @@ export const game = new class HorseAcademy {
 
         if (x < 0 || y < 0 || rotation % 2 === 0 && x >= this.cols - 1 || rotation % 2 && y >= this.rows - 1) {
             const err = new Error('Cannot place tile out of board');
-            //console.error(err);
             return err;
         }
 
         if (this.getPiece(x, y) || this.getPiece(x + (rotation === 0), y + (rotation === 1))) {
             const err = new Error('Cannot place tile on another tile');
-            //console.error(err);
             return err;
         }
         this.board[x][y] = { name, rotation };
@@ -208,7 +241,7 @@ export const game = new class HorseAcademy {
         return this.getBoardHash() === this.challenge.solution;
     }
 
-    async getBoardHash() {
+    getBoardHash() {
         // Account for symmetric pieces
         let board = this.board.map(row => [...row]);
 
@@ -221,21 +254,49 @@ export const game = new class HorseAcademy {
                 }
             }
         }
-        //return (CryptoJS.SHA1(JSON.stringify(board)) + '').slice(0, 16);
-
-        // No need for CryptoJS library
-        return (await crypto.subtle.digest(
-            'SHA-1',
-            (new TextEncoder).encode(JSON.stringify(board))
-        )).slice(0, 16)
+        return (CryptoJS.SHA1(JSON.stringify(board)) + '').slice(0, 16);
     }
 }
 
 // Challenge navitation
-previousButton.addEventListener('click', function () {
+previousButton.addEventListener('click', () => {
     if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
 });
 
-nextButton.addEventListener('click', function () {
+nextButton.addEventListener('click', () => {
     if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
 });
+
+// Show solution popup
+let solutionShown = 0;
+
+const closePopup = event => {
+    if (!event.code || event.code === 'Escape') {
+        solutionShown = 0;
+        solutionPopup.setAttribute('hidden', '');
+        darkerBackground.setAttribute('hidden', '');
+    }
+};
+
+showSolutionButton.addEventListener('click', () => {
+    solutionShown ^= 1;
+
+    if (solutionShown) {
+        game.giveupChallenge();
+
+        solutionPopup.querySelector('img').src = `./img/solutions/solution${game.challenge.id}.png`;
+
+        // Give time for image to load
+        setTimeout(() => {
+            solutionPopup.removeAttribute('hidden');
+            darkerBackground.removeAttribute('hidden');
+        }, 0);
+        solutionPopup.focus();
+
+    } else closePopup();
+});
+
+// Hide solution
+hideSolutionButton.addEventListener('click', closePopup);
+darkerBackground.addEventListener('click', closePopup);
+document.addEventListener('keydown', closePopup);

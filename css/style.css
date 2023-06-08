@@ -170,6 +170,6 @@ footer h1 {
     }
 
     main #slider {
-        flex: 1 0;
+        flex-grow: 1;
     }
 }
