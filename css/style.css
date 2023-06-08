@@ -40,7 +40,6 @@ html {
     font-family: Inter, sans-serif;
     font-variant-caps: all-small-caps;
     color: var(--primary);
-    overflow: hidden;
     margin: 0
 }
 

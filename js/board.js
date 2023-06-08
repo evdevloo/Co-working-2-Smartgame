@@ -292,8 +292,8 @@ showSolutionButton.addEventListener('click', () => {
         setTimeout(() => {
             solutionPopup.removeAttribute('hidden');
             darkerBackground.removeAttribute('hidden');
-        }, 0);
-        solutionPopup.focus();
+            solutionPopup.focus();
+        }, 10);
 
     } else closePopup();
 });

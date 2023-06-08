@@ -1,3 +1,4 @@
+'use strict';
 (function () {
     const openBtn = document.getElementById('open-btn');
     const openBtn2 = document.getElementById('openChal');
@@ -29,11 +30,11 @@
     });
 
     openBtn2.addEventListener('click', function () {
+        popup2.style.display = 'flex';
         board.style.opacity = 0;
         heading.style.opacity = 0;
         headingdesc.style.opacity = 0;
         slider.style.visibility = 'hidden';
-        popup2.style.display = 'flex';
         popup.style.display = 'none';
     });
 
