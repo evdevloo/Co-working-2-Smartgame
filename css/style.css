@@ -48,6 +48,8 @@ html {
     font-family: Inter, sans-serif;
     font-variant-caps: all-small-caps;
     color: var(--primary);
+    overflow: hidden;
+    margin: 0
 }
 
 /* ATOMS */
@@ -102,11 +104,12 @@ button {
 main {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
-    max-width: 60em;
     text-align: center;
 }
-
+main section {
+    max-width: 60em;
+    margin: 0 auto;
+}
 main h1 {
     font-size: 2rem;
     font-weight: 900;
@@ -172,4 +175,5 @@ footer h1 {
     main #slider {
         flex-grow: 1;
     }
+
 }

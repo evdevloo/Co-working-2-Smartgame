@@ -8,6 +8,9 @@ let rotation = 0;
 getPieces();
 deleteDuplicates();
 
+document.querySelector("#slider")
+document.querySelector("main section")
+
 function getPieces() {
     pieces = document.querySelectorAll(`.card, div.tile `);
 
