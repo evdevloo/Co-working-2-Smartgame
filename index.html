@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/board.css">
   <link rel="stylesheet" href="css/slider.css">
+  <link rel="stylesheet" href="css/popup.css">
+  <link rel="stylesheet" href="css/popup2.css">
 
   <!-- FONT : Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +34,7 @@
   <script src="js/nav.js" type="module"></script>
   <script src="js/board.js" type="module"></script>
   <script src="js/itemBar.js" type="module"></script>
+  <script src="js/popup.js" defer></script>
 </head>
 
 <body>
@@ -52,10 +55,10 @@
             <a href="./" class="navHorse">Horse Academy</a>
           </li>
           <li class="challenges">
-            <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">book</span>Challenges</a>
+            <a href="#" id="open-btn"><span class="g-icon material-symbols-outlined" aria-hidden="true">book</span>Challenges</a>
           </li>
           <li>
-            <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">check</span>Solutions</a>
+            <a href="#" id="openChal"><span class="g-icon material-symbols-outlined" aria-hidden="true">check</span>Solutions</a>
           </li>
           <li>
             <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">info</span>Game Rules</a>
