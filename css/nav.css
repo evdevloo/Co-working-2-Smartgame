@@ -37,8 +37,6 @@ header nav a {
 }
 
 header nav {
-  animation: fadeIn 0.3s ease-in-out;
-  animation-fill-mode: forwards;
   background-color: var(--black);
   max-width: 10em;
   height: 100vh;
@@ -68,8 +66,13 @@ header li a:hover span {
 header .header-alles {
   position: fixed;
   top: 0;
-  left: 0;
+  left: -10rem;
+  transition: left .3s ease;
   z-index: 2;
+}
+
+header .header-alles:has(nav[aria-expanded="true"]) {
+  left: 0;
 }
 
 header .g-icon {
@@ -78,106 +81,43 @@ header .g-icon {
 }
 
 #menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--black);
-  border-radius: 0 .3em .3em 0;
+  border-radius: 0 .5rem .5rem 0;
   position: absolute;
-  top: 3em;
-  padding: 0.3em;
+  top: 2.5rem;
+  left: 10rem;
+  padding: 1.5rem;
   width: 2.5rem;
   height: 2.5rem;
   z-index: 2;
 }
 
-#menu.active {
-  left: 10rem;
+.icon {
+  display: inherit;
 }
 
-.icon span {
-  height: 0.11em;
-  width: 0.5em;
-  background-color: var(--white);
+.icon[aria-hidden="false"] svg:nth-child(1) {
+  display: none;
 }
 
-.hamburger .icon {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.icon[aria-hidden="false"] span:nth-child(1) {
-  transform: translateY(0.3rem) translateX(0.07em) rotate(225deg);
-  transition: 0.2s ease-in-out;
-}
-
-.icon[aria-hidden="false"] span:nth-child(2) {
-  opacity: 0;
-}
-
-.icon[aria-hidden="false"] span:nth-child(3) {
-  transform: translateY(-0.43rem) translateX(0.07em) rotate(-225deg);
-  transition: 0.2s ease-in-out;
-}
-
-.icon[aria-hidden="true"] span:nth-child(1) {
-  transform: translateY(0.135rem) translateX(0.1em) rotate(38deg);
-  transition: 0.2s ease-in-out;
-}
-
-.icon[aria-hidden="true"] span:nth-child(2) {
-  opacity: 0;
-}
-
-.icon[aria-hidden="true"] span:nth-child(3) {
-  transform: translateY(-0.21rem) translateX(0.14rem) rotate(-38deg);
-  transition: 0.2s ease-in-out;
+.icon[aria-hidden="true"] svg:nth-child(2) {
+  display: none;
 }
 
 .hamburger {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.2rem;
-  font-size: 1.5rem;
   cursor: pointer;
   border: none;
-  background-color: var(--black);
 }
 
 @media (min-width: 75em) {
-  header>.header-alles {
-    position: relative;
-    width: 10rem;
-  }
-
   #menu {
     display: none;
   }
 
-  header nav[aria-expanded="false"] {
-    animation: none;
-  }
-
-  header nav[aria-expanded="true"] {
-    animation: none;
-  }
-}
-
-@keyframes fadeOut {
-  0% {
-    margin-left: 0;
-  }
-
-  100% {
-    margin-left: -100rem;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    margin-left: -100rem;
-  }
-
-  100% {
-    margin-left: 0;
+  header .header-alles {
+    left: 0;
   }
 }

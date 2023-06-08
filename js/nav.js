@@ -1,20 +1,23 @@
-const menu = document.querySelector("#menu");
-const nav = document.querySelector("nav");
-const hamburger = document.querySelector(".icon");
+const menu = document.querySelector('#menu');
+const nav = document.querySelector('nav');
+const hamburgerToggleButton = document.querySelector('.icon');
 
-if (window.matchMedia("(min-width: 75em)").matches) {
-  nav.setAttribute("aria-expanded", "true");
-  hamburger.setAttribute("aria-hidden", "true");
-}
+let navOpen = 0;
 
-menu.addEventListener("click", () => {
-  nav.setAttribute(
-    "aria-expanded",
-    nav.getAttribute("aria-expanded") === "true" ? "false" : "true"
-  );
-  hamburger.setAttribute(
-    "aria-hidden",
-    hamburger.getAttribute("aria-hidden") === "true" ? "false" : "true"
-  );
-  menu.classList.toggle("active");
+const closeNav = () => {
+  if (window.matchMedia('(min-width: 75em)').matches) {
+    menu.setAttribute('aria-expanded', false);
+    nav.setAttribute('aria-expanded', false);
+    hamburgerToggleButton.setAttribute('aria-hidden', false);
+  }
+};
+closeNav();
+
+window.addEventListener('resize', closeNav);
+
+menu.addEventListener('click', () => {
+  navOpen ^= 1;
+  menu.setAttribute('aria-expanded', !!navOpen);
+  nav.setAttribute('aria-expanded', !!navOpen);
+  hamburgerToggleButton.setAttribute('aria-hidden', !!navOpen);
 });

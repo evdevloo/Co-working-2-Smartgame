@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/slider.css">
   <link rel="stylesheet" href="css/popup.css">
   <link rel="stylesheet" href="css/popup2.css">
+  <link rel="stylesheet" href="css/dialog.css">
 
   <!-- FONT : Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,20 +35,47 @@
   <script src="js/nav.js" type="module"></script>
   <script src="js/board.js" type="module"></script>
   <script src="js/itemBar.js" type="module"></script>
+  <script src="js/dialog.js" defer></script>
   <script src="js/popup.js" defer></script>
 </head>
 
 <body>
   <header>
     <div class="header-alles">
-      <div class="header-nav">
-        <button aria-expanded="false" class="hamburger" id="menu">
-          <span aria-hidden="true" class="icon">
-            <span></span><span></span><span></span>
-          </span>
-          <span></span>
-        </button>
-      </div>
+      <button aria-expanded="false" class="hamburger" id="menu">
+        <span aria-hidden="false" class="icon">
+          <svg width="24" height="24" viewBox="0 0 91 89" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="77.2788" y="83.022" width="100" height="10" transform="rotate(-134.343 77.2788 83.022)"
+              fill="white" />
+            <rect x="77.2788" y="83.022" width="100" height="10" transform="rotate(-134.343 77.2788 83.022)"
+              fill="white" />
+            <rect x="77.2788" y="83.022" width="100" height="10" transform="rotate(-134.343 77.2788 83.022)"
+              fill="white" />
+            <rect x="85.2207" y="12.9529" width="100" height="10" transform="rotate(135.657 85.2207 12.9529)"
+              fill="white" />
+            <rect x="85.2207" y="12.9529" width="100" height="10" transform="rotate(135.657 85.2207 12.9529)"
+              fill="white" />
+            <rect x="85.2207" y="12.9529" width="100" height="10" transform="rotate(135.657 85.2207 12.9529)"
+              fill="white" />
+          </svg>
+          <svg width="24" height="24" viewBox="0 0 88 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8.6958" y="0.968018" width="92.2649" height="12.9998" transform="rotate(41.8028 8.6958 0.968018)"
+              fill="white" />
+            <rect x="8.6958" y="0.968018" width="92.2649" height="12.9998" transform="rotate(41.8028 8.6958 0.968018)"
+              fill="white" />
+            <rect x="8.6958" y="0.968018" width="92.2649" height="12.9998" transform="rotate(41.8028 8.6958 0.968018)"
+              fill="white" />
+            <rect x="7.36377" y="140.803" width="92.1491" height="13.001" transform="rotate(-48.1705 7.36377 140.803)"
+              fill="white" />
+            <rect x="7.36377" y="140.803" width="92.1491" height="13.001" transform="rotate(-48.1705 7.36377 140.803)"
+              fill="white" />
+            <rect x="7.36377" y="140.803" width="92.1491" height="13.001" transform="rotate(-48.1705 7.36377 140.803)"
+              fill="white" />
+            <rect x="68.8057" y="72.1533" width="13" height="13" transform="rotate(-48.1781 68.8057 72.1533)"
+              fill="white" />
+          </svg>
+        </span>
+      </button>
       <nav aria-expanded="false">
         <ul>
           <li>
@@ -60,7 +88,7 @@
           <li>
             <a href="#" id="openChal"><span class="g-icon material-symbols-outlined" aria-hidden="true">check</span>Solutions</a>
           </li>
-          <li>
+          <li class="info">
             <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">info</span>Game Rules</a>
           </li>
         </ul>
@@ -292,96 +320,105 @@
                         <div>
                             <img src="/img/challenges/solution11.png" alt="Image about the solution of challenge 1">
                         </div>
-                        
+
                     </div>
                     <div class="box">
                         <h2>Challenge 2</h2>
                         <div>
                             <img src="/img/challenges/solution22.png" alt="Image about the solution of challenge 2">
                         </div>
-                        
+
                     </div>
                     <div class="box">
                         <h2>Challenge 17</h2>
                         <div>
                             <img src="/img/challenges/solution17.png" alt="Image about the solution of challenge 17">
                         </div>
-                        
+
                     </div>
                     <div class="box">
                         <h2>Challenge 18</h2>
                         <div>
                             <img src="/img/challenges/solution18.png" alt="Image about the solution of challenge 18">
                         </div>
-                        
+
                     </div>
                     <div class="box">
                         <h2>Challenge 33</h2>
                         <div>
                             <img src="/img/challenges/solutions33.png" alt="Image about the solution of challenge 33">
                         </div>
-                        
+
                     </div>
                     <div class="box">
                         <h2>Challenge 34</h2>
                         <div>
                             <img src="/img/challenges/solution34.png" alt="Image about the solution of challenge 34">
                         </div>
-                        
+
                     </div>
                     <div class="box">
                         <h2>Challenge 49</h2>
                         <div>
                             <img src="/img/challenges/solution49.png" alt="Image about the solution of challenge 49">
                         </div>
-                        
+
                     </div>
                     <div class="box">
                         <h2>Challenge 50</h2>
                         <div>
                             <img src="/img/challenges/solution50.png" alt="Image about the solution of challenge 50">
                         </div>
-                        
+
                     </div>
                     <div class="box">
                         <h2>Challenge 63</h2>
                         <div>
                             <img src="/img/challenges/solution63.png" alt="Image about the solution of challenge 63">
                         </div>
-                        
+
                     </div>
                     <div class="box">
                         <h2>Challenge 65</h2>
                         <div>
                             <img src="/img/challenges/solution65.png" alt="Image about the solution of challenge 65">
                         </div>
-                        
+
                     </div>
                     <div class="box">
                         <h2>Challenge 66</h2>
                         <div>
                             <img src="/img/challenges/solution66.png" alt="Image about the solution of challenge 66">
                         </div>
-                        
+
                     </div>
                     <div class="box">
                         <h2>Challenge 80</h2>
                         <div>
                             <img src="/img/challenges/solution80.png" alt="Image about the solution of challenge 80">
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
+
+      <dialog id="gameRules">
+          <div>
+
+          </div>
+          <figure>
+              <img src="./img/info/info1.png" alt="game rules part 1">
+          </figure>
+          <figure>
+              <img src="./img/info/info2.png" alt="game rules part 2">
+          </figure>
+          <div>
+              <button id="close" aria-label="close">Play</button>
+          </div>
+      </dialog>
+
     </main>
-    <!-- <footer>
-        <div>
-            <h1>Licence</h1>
-            <p>Copyright (C) [Evert Devloo, Izzet Poyraz, Kyle Hoeckman, Tommy Baudonck], 2023, All rights reserved</p>
-            <p>Smartgames (R), 2018, https://www.smartgames.eu/uk/terms-use</p>
-        </div>
-    </footer> -->
 </body>
 
 </html>
