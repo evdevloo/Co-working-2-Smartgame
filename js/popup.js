@@ -1,43 +1,68 @@
-'use strict';
-(function () {
-    const openBtn = document.getElementById('open-btn');
-    const openBtn2 = document.getElementById('openChal');
-    const closeBtn = document.getElementById('close-btn');
-    const popup = document.getElementById('popup');
-    const popup2 = document.getElementById('popup2');
-    const board = document.getElementById('board');
-    const heading = document.getElementById('challenge-heading');
-    const headingdesc = document.getElementById('challenge-description');
-    const slider = document.getElementById('slider');
-    const closeBtn2 = document.getElementById('close-btn2');
+import { HorseAcademy, game } from './board.js';
 
-    openBtn.addEventListener('click', function () {
-        popup.style.display = 'flex';
-        popup2.style.display = "none";
+const challengesContent = document.querySelector('#challenges-content');
+const challengesContentList = document.querySelector('#challenges-content .grid-container');
+const challengesOpenButton = document.querySelector('nav li:nth-child(2) a');
+const challengesCloseButton = document.querySelector('#challenges-content .close-btn');
 
-        slider.style.visibility = 'hidden';
-        
-    });
+challengesOpenButton.addEventListener('click', () => {
+    challengesContent.removeAttribute('hidden');
+});
 
-    closeBtn.addEventListener('click', function () {
-        popup.style.display = 'none';
-        popup2.style.display = 'none';
-        slider.style.visibility = 'visible';
-    });
+challengesCloseButton.addEventListener('click', () => {
+    challengesContent.setAttribute('hidden', '');
+});
 
-    openBtn2.addEventListener('click', function () {
-        popup2.style.display = 'flex';
-        popup.style.display = 'none';
+challengesContentList.innerHTML = '';
 
-        slider.style.visibility = 'hidden';
-        
-    });
+for (let challengeIndex in HorseAcademy.challenges) {
+    const challenge = HorseAcademy.challenges[challengeIndex];
 
+    const box = document.createElement('div');
+    box.innerHTML = `
+        <h2>Challenge ${challenge.id}</h2>
+        <img src="./img/challenges/challenge${challenge.id}.png" alt="Challenge diagram ${challenge.id}">
+        <button class="container-button">Play</button>
+    `;
+    box.classList.add('box', challenge.difficulty.toLowerCase());
     
-    closeBtn2.addEventListener('click', function () {
-        popup2.style.display = 'none';
-
-        slider.style.visibility = 'visible';
-        popup.style.display = 'none';
+    box.querySelector('button').addEventListener('click', () => {
+        game.newChallenge(challengeIndex);
+        challengesContent.setAttribute('hidden', '');
     });
-})();
+
+    challengesContentList.appendChild(box);
+}
+
+const solutionsContent = document.querySelector('#solutions-content');
+const solutionsContentList = document.querySelector('#solutions-content .grid-container');
+const solutionsOpenButton = document.querySelector('nav li:nth-child(3) a');
+const solutionsCloseButton = document.querySelector('#solutions-content .close-btn');
+
+solutionsOpenButton.addEventListener('click', () => {
+    solutionsContent.removeAttribute('hidden');
+});
+
+solutionsCloseButton.addEventListener('click', () => {
+    solutionsContent.setAttribute('hidden', '');
+});
+
+solutionsContentList.innerHTML = '';
+
+for (let challengeIndex in HorseAcademy.challenges) {
+    const challenge = HorseAcademy.challenges[challengeIndex];
+
+    const box = document.createElement('div');
+    box.innerHTML = `
+        <img src="./img/solutions/solution${challenge.id}.png" alt="challenge solution ${challenge.id}">
+        <button class="container-button">Play</button>
+    `;
+    box.classList.add('box', challenge.difficulty.toLowerCase());
+    
+    box.querySelector('button').addEventListener('click', () => {
+        game.newChallenge(challengeIndex);
+        solutionsContent.setAttribute('hidden', '');
+    });
+
+    solutionsContentList.appendChild(box);
+}

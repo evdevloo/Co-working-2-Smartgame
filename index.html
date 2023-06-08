@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="css/board.css">
   <link rel="stylesheet" href="css/slider.css">
   <link rel="stylesheet" href="css/popup.css">
-  <link rel="stylesheet" href="css/popup2.css">
   <link rel="stylesheet" href="css/dialog.css">
 
   <!-- FONT : Inter -->
@@ -35,8 +34,8 @@
   <script src="js/nav.js" type="module"></script>
   <script src="js/board.js" type="module"></script>
   <script src="js/itemBar.js" type="module"></script>
-  <script src="js/dialog.js" defer></script>
-  <script src="js/popup.js" defer></script>
+  <script src="js/dialog.js" type="module"></script>
+  <script src="js/popup.js" type="module"></script>
 </head>
 
 <body>
@@ -79,15 +78,16 @@
       <nav aria-expanded="false">
         <ul>
           <li>
-            <img src="./img/nav/HorseAcademy.png" alt="logo">
+            <img src="./img/nav/horseAcademy.png" alt="logo">
             <a href="./" class="navHorse">Horse Academy</a>
           </li>
           <li class="challenges">
-            <a href="#" id="open-btn"><span class="g-icon material-symbols-outlined" aria-hidden="true">book</span>Challenges</a>
+            <a href="#"><span class="g-icon material-symbols-outlined"
+                aria-hidden="true">book</span>Challenges</a>
           </li>
           <li>
-            <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">check</span>Solutions</a>
-            <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">check</span>Solutions</a>
+            <a href="#"><span class="g-icon material-symbols-outlined"
+                aria-hidden="true">check</span>Solutions</a>
           </li>
           <li class="info">
             <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">info</span>Game Rules</a>
@@ -200,246 +200,70 @@
             <img class="finish none" src="img/finish.png" alt="finish">
           </div>
 
-                    <div id="grid"></div>
-                </div>
-            </div>
-        </section>
-        <div id="slider" class="slider">
-            <div id="items" class="droppable">
-                <div id="a" class="card" draggable="true">
-                </div>
-                <div id="b" class="card" draggable="true">
-                </div>
-                <div id="c" class="card" draggable="true">
-                </div>
-                <div id="d" class="card" draggable="true">
-                </div>
-                <div id="e" class="card" draggable="true">
-                </div>
-                <div id="f" class="card" draggable="true">
-                </div>
-                <div id="g" class="card" draggable="true">
-                </div>
-                <div id="h" class="card" draggable="true">
-                </div>
-                <div id="i" class="card" draggable="true">
-                </div>
-                <div id="j" class="card" draggable="true">
-                </div>
-            </div>
-            <button id="prev" class="arrow">
-                <span class="g-icon material-symbols-outlined">navigate_before</span>
-            </button>
-            <button id="next" class="arrow">
-                <span class="g-icon material-symbols-outlined">navigate_next</span>
-            </button>
+          <div id="grid"></div>
         </div>
-        <div id="popup" class="popup">
-            <div id="close-btn" class="close-btn"></div>
-
-            <div class="popup-content">
-                <h1>Challenges</h1>
-                <div class="grid-container">
-                    <div class="box">
-                        <h2>Challenges 1</h2>
-                        <div>
-                            <img src="/img/challenges/challenge1.png" alt="Image about the challenge 1">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 2</h2>
-                        <div>
-                            <img src="/img/challenges/challenge2.png" alt="Image about the challenge 2">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 17</h2>
-                        <div>
-                            <img src="/img/challenges/challenge17.png" alt="Image about the challenge 17">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 18</h2>
-                        <div>
-                            <img src="/img/challenges/challenge18.png" alt="Image about the challenge 18">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 33</h2>
-                        <div>
-                            <img src="/img/challenges/challenge33.png" alt="Image about the challenge 33">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 34</h2>
-                        <div>
-                            <img class="fotoBreed" src="/img/challenges/challenge34.png" alt="Image about the challenge 34">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 49</h2>
-                        <div>
-                            <img src="/img/challenges/challenge49.png" alt="Image about the challenge 49">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 50</h2>
-                        <div>
-                            <img src="/img/challenges/challenge50.png" alt="Image about the challenge 50">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 63</h2>
-                        <div>
-                            <img src="/img/challenges/challenge63.png" alt="Image about the challenge 63">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 65</h2>
-                        <div>
-                            <img src="/img/challenges/challenge65.png" alt="Image about the challenge 65">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 66</h2>
-                        <div>
-                            <img src="/img/challenges/challenge66.png" alt="Image about the challenge 66">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 80</h2>
-                        <div>
-                            <img src="/img/challenges/challenge80.png" alt="Image about the challenge 80">
-                        </div>
-                        <button>Play</button>
-                    </div>
-                </div>
-            </div>
-
-
-
-
+      </div>
+    </section>
+    <div id="slider" class="slider">
+      <div id="items" class="droppable">
+        <div id="a" class="card" draggable="true">
         </div>
-        <div class="popup2" id="popup2">
-            <div id="close-btn2" class="close-btn"></div>
-            <div class="popup-content2" tabindex="0">
-                <h1>Solutions</h1>
-                <div class="grid-container">
-                    <div class="box">
-                        <h2>Challenge 1</h2>
-                        <div>
-                            <img src="/img/challenges/solution11.png" alt="Image about the solution of challenge 1">
-                        </div>
-
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 2</h2>
-                        <div>
-                            <img src="/img/challenges/solution22.png" alt="Image about the solution of challenge 2">
-                        </div>
-
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 17</h2>
-                        <div>
-                            <img src="/img/challenges/solution17.png" alt="Image about the solution of challenge 17">
-                        </div>
-
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 18</h2>
-                        <div>
-                            <img src="/img/challenges/solution18.png" alt="Image about the solution of challenge 18">
-                        </div>
-
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 33</h2>
-                        <div>
-                            <img src="/img/challenges/solutions33.png" alt="Image about the solution of challenge 33">
-                        </div>
-
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 34</h2>
-                        <div>
-                            <img src="/img/challenges/solution34.png" alt="Image about the solution of challenge 34">
-                        </div>
-
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 49</h2>
-                        <div>
-                            <img src="/img/challenges/solution49.png" alt="Image about the solution of challenge 49">
-                        </div>
-
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 50</h2>
-                        <div>
-                            <img src="/img/challenges/solution50.png" alt="Image about the solution of challenge 50">
-                        </div>
-
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 63</h2>
-                        <div>
-                            <img src="/img/challenges/solution63.png" alt="Image about the solution of challenge 63">
-                        </div>
-
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 65</h2>
-                        <div>
-                            <img src="/img/challenges/solution65.png" alt="Image about the solution of challenge 65">
-                        </div>
-
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 66</h2>
-                        <div>
-                            <img src="/img/challenges/solution66.png" alt="Image about the solution of challenge 66">
-                        </div>
-
-                    </div>
-                    <div class="box">
-                        <h2>Challenge 80</h2>
-                        <div>
-                            <img src="/img/challenges/solution80.png" alt="Image about the solution of challenge 80">
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+        <div id="b" class="card" draggable="true">
         </div>
+        <div id="c" class="card" draggable="true">
+        </div>
+        <div id="d" class="card" draggable="true">
+        </div>
+        <div id="e" class="card" draggable="true">
+        </div>
+        <div id="f" class="card" draggable="true">
+        </div>
+        <div id="g" class="card" draggable="true">
+        </div>
+        <div id="h" class="card" draggable="true">
+        </div>
+        <div id="i" class="card" draggable="true">
+        </div>
+        <div id="j" class="card" draggable="true">
+        </div>
+      </div>
+      <button id="prev" class="arrow">
+        <span class="g-icon material-symbols-outlined">navigate_before</span>
+      </button>
+      <button id="next" class="arrow">
+        <span class="g-icon material-symbols-outlined">navigate_next</span>
+      </button>
+    </div>
 
-      <dialog id="gameRules">
-          <div>
+    <div class="popup" id="challenges-content" hidden>
+      <div class="close-btn"></div>
+      <div class="popup-content">
+        <h1>Challenges</h1>
+        <div class="grid-container"></div>
+      </div>
+    </div>
 
-          </div>
-          <figure>
-              <img src="./img/info/info1.png" alt="game rules part 1">
-          </figure>
-          <figure>
-              <img src="./img/info/info2.png" alt="game rules part 2">
-          </figure>
-          <div>
-              <button id="close" aria-label="close">Play</button>
-          </div>
-      </dialog>
+    <div class="popup" id="solutions-content" hidden>
+      <div class="close-btn"></div>
+      <div class="popup-content">
+        <h1>Solutions</h1>
+        <div class="grid-container"></div>
+      </div>
+    </div>
 
-    </main>
+    <dialog id="gameRules">
+      <figure>
+        <img src="./img/info/info1.png" alt="game rules part 1">
+      </figure>
+      <figure>
+        <img src="./img/info/info2.png" alt="game rules part 2">
+      </figure>
+      <div>
+        <button id="close" aria-label="close">Play</button>
+        <button id="challenges-reset-progress">Reset progress</button>
+      </div>
+    </dialog>
+  </main>
 </body>
 
 </html>
