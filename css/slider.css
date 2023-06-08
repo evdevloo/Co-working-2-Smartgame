@@ -165,9 +165,8 @@ button.arrow span {
         overflow-x: hidden;
         overflow-y: scroll;
         justify-content: center;
-        margin-top: 1em;
-        height: 90%;
-
+        margin: 1rem 0;
+        height: 100vh;
     }
 
     #items .card {

@@ -1,7 +1,7 @@
 /* CHALLANGE */
 
 .challenge-popup {
-    background-color: var(--bg);
+    background-color: var(--white);
     border-radius: .3rem;
     box-shadow: 0 0 2rem -.5rem var(--black);
     position: fixed;
@@ -97,7 +97,7 @@
 
 .challenge-solved span:last-child {
     order: -1;
-    background-color: #F55;
+    background-color: #888;
     border-radius: 50% 50%;
     box-shadow: 0 0 1rem #0008;
     width: 1.75rem;
@@ -110,6 +110,10 @@
 
 .challenge-solved.solved-before span:last-child {
     background-color: #FA5;
+}
+
+.challenge-solved.given-up span:last-child {
+    background-color: #F55;
 }
 
 .challenge-description :last-child {

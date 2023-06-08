@@ -23,11 +23,8 @@ const darkerBackground = document.querySelector('.challenge-popup + div');
  * @class HorseAcademy
  * @classdesc Game Class for the HorseAcademy game. Handles everything on the board
  */
-export const game = new class HorseAcademy {
-    rows = 4;
-    cols = 5;
-
-    #challenges = [
+export class HorseAcademy {
+    static challenges = [
         { id: 1, difficulty: 'Starter', tiles: 'f', gate: 'x', solution: 'b47bcf64684dbed8' },
         { id: 2, difficulty: 'Starter', tiles: 'ae', gate: 't', solution: '8b25dd891d549090' },
         { id: 17, difficulty: 'Junior', tiles: 'dej', gate: 't', solution: '8e7e375e43cb1965' },
@@ -41,15 +38,13 @@ export const game = new class HorseAcademy {
         { id: 66, difficulty: 'Wizard', tiles: 'acdefg', gate: 'none', solution: '3b0ce17ee27e2313' },
         { id: 80, difficulty: 'Wizard', tiles: 'abcdefhij', gate: 'none', solution: '5e1ae1542ee01f21' }
     ]
-    challenges = this.#challenges.length;
+
+    rows = 4;
+    cols = 5;
 
     constructor(grid) {
         // Load stored level or initialize on challenge 1
         this.newChallenge();
-    }
-
-    getChallenges() {
-        return this.#challenges;
     }
 
     newChallenge(challengeIndex) {
@@ -58,7 +53,7 @@ export const game = new class HorseAcademy {
         if (typeof this.selectedChallenge !== 'number') this.selectedChallenge = 0;
 
         localStorage.setItem('horseAcademy_selectedChallenge', this.selectedChallenge);
-        this.challenge = this.#challenges[this.selectedChallenge];
+        this.challenge = HorseAcademy.challenges[this.selectedChallenge];
 
         // update title
         document.querySelector('.challenge-heading h1').innerText = 'Challenge ' + this.challenge.id;
@@ -81,7 +76,7 @@ export const game = new class HorseAcademy {
         nextButton.removeAttribute('disabled');
 
         if (this.selectedChallenge <= 0) previousButton.setAttribute('disabled', '');
-        if (this.selectedChallenge >= this.challenges - 1) nextButton.setAttribute('disabled', '');
+        if (this.selectedChallenge >= HorseAcademy.challenges.length - 1) nextButton.setAttribute('disabled', '');
 
         // load the level
         this.loadProgress();
@@ -264,13 +259,16 @@ export const game = new class HorseAcademy {
     }
 }
 
+// Initizalize game
+export const game = new HorseAcademy();
+
 // Challenge navitation
 previousButton.addEventListener('click', () => {
     if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
 });
 
 nextButton.addEventListener('click', () => {
-    if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
+    if (game.selectedChallenge < HorseAcademy.challenges.length - 1) game.newChallenge(++game.selectedChallenge);
 });
 
 // Show solution popup
@@ -297,7 +295,7 @@ showSolutionButton.addEventListener('click', () => {
             solutionPopup.removeAttribute('hidden');
             darkerBackground.removeAttribute('hidden');
             solutionPopup.focus();
-        }, 10);
+        }, 1);
 
     } else closePopup();
 });

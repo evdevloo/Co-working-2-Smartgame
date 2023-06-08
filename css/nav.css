@@ -113,6 +113,14 @@ header .g-icon {
 }
 
 @media (min-width: 75em) {
+  header {
+    position: static;
+  }
+
+  header .header-alles {
+    position: static;
+  }
+
   #menu {
     display: none;
   }

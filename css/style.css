@@ -50,7 +50,6 @@ body {
     flex-wrap: nowrap;
     margin: 0;
     min-height: 100vh;
-    flex-direction: column;
 }
 
 p {

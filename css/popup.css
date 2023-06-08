@@ -1,6 +1,3 @@
-@import url(board.css);
-@import url(popup.css);
-
 .popup {
   position: fixed;
   top: 0;
@@ -8,7 +5,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(0.3rem);
   display: none;
   justify-content: center;
   align-items: center;
@@ -20,35 +17,36 @@
 }
 
 .popup-content {
-  padding: 20px;
-  border-radius: 5px;
+  padding: 1rem;
+  border-radius: 0.3rem;
   height: 80%;
   width: 100%;
   padding: 0 15%;
-  flex-direction: column; 
+  flex-direction: column;
   overflow-y: auto;
 }
+
 .popup-content::-webkit-scrollbar {
-  width: 0.5em; 
+  width: 17px;
 }
 
 .popup-content::-webkit-scrollbar-track {
-  background-color: transparent; 
+  background-color: transparent;
 }
 
 .popup-content::-webkit-scrollbar-thumb {
-  background-color: transparent; 
+  background-color: transparent;
 }
 
 .close-btn {
   border: none;
-  padding: 8px 16px;
-  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  border-radius: .3rem;
   position: absolute;
-  top: 30px;
-  right: 30px;
-  width: 30px;
-  height: 30px;
+  top: 2rem;
+  right: 2rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -63,8 +61,8 @@
 .close-btn::after {
   content: "";
   position: absolute;
-  width: 24px;
-  height: 4px;
+  width: 1.5rem;
+  height: 0.3rem;
   background-color: var(--white);
 }
 
@@ -79,8 +77,8 @@
 
 .container-button {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0.75rem;
+  right: 0.75rem;
   width: 20%;
   height: 100%;
   display: flex;
@@ -91,30 +89,34 @@
 .container-button .box {
   width: 100%;
 }
+
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
-  grid-gap: 3rem; 
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 3rem;
   grid-template-columns: 1fr;
 }
 
 .box {
   color: var(--black);
   background-color: var(--white);
-  border-radius: 4px;
-  padding: 20px;
+  border-radius: 0.3rem;
+  padding: 1.5rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .box img {
   height: auto !important;
-  width: 400px;
+  width: 25rem;
 }
+
 .box div {
   margin-bottom: 2rem;
 }
+
 .box a {
   text-decoration: none;
   color: var(--black);
@@ -122,39 +124,38 @@
   border: 2px solid var(--black);
   padding: 0.5rem;
 }
+
 .box a:hover {
   background-color: var(--black);
   color: var(--white);
 }
-.box:nth-child(1):hover,
-.box:nth-child(2):hover {
-  box-shadow: inset 0 0 13px var(--starter);
-}
-.box:nth-child(3):hover,
-.box:nth-child(4):hover {
-  box-shadow: inset 0 0 13px var(--junior);
-}
-.box:nth-child(5):hover,
-.box:nth-child(6):hover {
-  box-shadow: inset 0 0 13px var(--expert);
-}
-.box:nth-child(7):hover,
-.box:nth-child(8):hover {
-  box-shadow: inset 0 0 13px var(--master);
-}
-.box:nth-child(9):hover,
-.box:nth-child(10):hover,
-.box:nth-child(11):hover,
-.box:nth-child(12):hover{
-  box-shadow: inset 0 0 13px var(--wizard);
+
+.box.strter:hover {
+  box-shadow: inset 0 0 1rem var(--starter);
 }
 
-@media (min-width: 1110px) {
+.box.junior:hover {
+  box-shadow: inset 0 0 1rem var(--junior);
+}
+
+.box.expert:hover {
+  box-shadow: inset 0 0 1rem var(--expert);
+}
+
+.box.master:hover {
+  box-shadow: inset 0 0 1rem var(--master);
+}
+
+.box.wizard:hover {
+  box-shadow: inset 0 0 1rem var(--wizard);
+}
+
+@media (min-width: 75em) {
   .grid-container {
-    grid-template-columns: repeat(2, 1fr); 
-
+    grid-template-columns: repeat(2, 1fr);
   }
+
   .box img {
-    height: 90px;
+    height: 5rem;
   }
 }

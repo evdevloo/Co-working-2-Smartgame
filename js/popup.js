@@ -1,50 +1,31 @@
-'use strict';
-(function () {
-    const openBtn = document.getElementById('open-btn');
-    const openBtn2 = document.getElementById('openChal');
-    const closeBtn = document.getElementById('close-btn');
-    const popup = document.getElementById('popup');
-    const popup2 = document.getElementById('popup2');
-    const board = document.getElementById('board');
-    const heading = document.getElementById('challenge-heading');
-    const headingdesc = document.getElementById('challenge-description');
-    const slider = document.getElementById('slider');
-    const closeBtn2 = document.getElementById('close-btn2');
+import { HorseAcademy } from './board.js';
 
-    openBtn.addEventListener('click', function () {
-        popup.style.display = 'flex';
-        board.style.opacity = 0;
-        heading.style.opacity = 0;
-        headingdesc.style.opacity = 0;
-        slider.style.visibility = 'hidden';
-        popup2.style.display = "none";
-    });
+const openBtn = document.querySelector();
 
-    closeBtn.addEventListener('click', function () {
-        popup.style.display = 'none';
-        popup2.style.display = 'none';
-        board.style.opacity = 1;
-        heading.style.opacity = 1;
-        headingdesc.style.opacity = 1;
-        slider.style.visibility = 'visible';
-    });
+const challengesContent = document.getElementById('challenges-content');
 
-    openBtn2.addEventListener('click', function () {
-        popup2.style.display = 'flex';
-        board.style.opacity = 0;
-        heading.style.opacity = 0;
-        headingdesc.style.opacity = 0;
-        slider.style.visibility = 'hidden';
-        popup.style.display = 'none';
-    });
+for (let challenge of HorseAcademy.challenges) {
+    const box = document.createElement('div');
+    box.innerHTML = `
+        <div class="box">
+            <h2>Challenge ${challenge.id}</h2>
+            <img src="./img/challenges/challenge${challenge.id}.png" alt="Challenge diagram ${challenge.id}">
+            <button>Play</button>
+        </div>
+    `;
+    challengesContent.appendChild(box);
+}
 
-    
-    closeBtn2.addEventListener('click', function () {
-        popup2.style.display = 'none';
-        board.style.opacity = 1;
-        heading.style.opacity = 1;
-        headingdesc.style.opacity = 1;
-        slider.style.visibility = 'visible';
-        popup.style.display = 'none';
-    });
-})();
+const solutionsContent = document.getElementById('solutions-content');
+
+for (let solution of HorseAcademy.challenges) {
+    const box = document.createElement('div');
+    box.innerHTML = `
+        <div class="box">
+            <h2>Solution ${solution.id}</h2>
+            <img src="./img/raw_solutions/solution${solution.id}.png" alt="challenge solution ${solution.id}">
+            <button>Play</button>
+        </div>
+    `;
+    challengesContent.appendChild(box);
+}
