@@ -124,6 +124,7 @@
     background-color: var(--white);
     border-radius: .3rem;
     box-shadow: 0 0 .5rem .5rem var(--white);
+    max-width: clamp(15rem, 70vw, 30rem);
     max-width: clamp(12rem, 70vw, 24rem);
     height: 9rem;
 }

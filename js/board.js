@@ -197,10 +197,7 @@ export const game = new class HorseAcademy {
             challengeSolved.classList.add('solved-before');
             challengeSolved.classList.remove('solved', 'given-up');
 
-        } else {
-            challengeSolvedText.innerText = 'Unsolved';
-            challengeSolved.classList.remove('solved', 'solved-before', 'given-up');
-        }
+        // FOR DEBUG ONLY! Change background color to check if correct
 
         if (this.progress[this.challenge.id].givenUp) {
             challengeSolved.classList.add('given-up');
