@@ -46,14 +46,9 @@ export class HorseAcademy {
         if (typeof challengeIndex === 'number') localStorage.setItem('horseAcademy_selectedChallenge', challengeIndex);
         else this.selectedChallenge = +localStorage.getItem('horseAcademy_selectedChallenge');
 
-        console.log(Number.isInteger(this.selectedChallenge))
-        console.log(challengeIndex, this.selectedChallenge)
-
         this.selectedChallenge = Number.isInteger(this.selectedChallenge) ? challengeIndex : 0;
         localStorage.setItem('horseAcademy_selectedChallenge', this.selectedChallenge);
         this.challenge = HorseAcademy.challenges[this.selectedChallenge];
-
-        console.log(challengeIndex, this.selectedChallenge)
 
         // update title
         document.querySelector('.challenge-heading h1').innerText = 'Challenge ' + this.challenge.id;
@@ -192,7 +187,10 @@ export class HorseAcademy {
             challengeSolved.classList.add('solved-before');
             challengeSolved.classList.remove('solved', 'given-up');
 
-        // FOR DEBUG ONLY! Change background color to check if correct
+        } else {
+            challengeSolvedText.innerText = 'Unsolved';
+            challengeSolved.classList.remove('solved', 'solved-before', 'given-up');
+        }
 
         if (this.progress[this.challenge.id].givenUp) {
             challengeSolved.classList.add('given-up');
