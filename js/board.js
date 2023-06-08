@@ -30,14 +30,14 @@ export const game = new class HorseAcademy {
         { id: 2, difficulty: 'Starter', tiles: 'ae', gate: 't', solution: '8b25dd891d549090' },
         { id: 17, difficulty: 'Junior', tiles: 'dej', gate: 't', solution: '8e7e375e43cb1965' },
         { id: 18, difficulty: 'Junior', tiles: 'abcefj', gate: 'y', solution: '7ad39d6cbf19a677' },
-        { id: 33, difficulty: 'Expert', tiles: 'adegij', gate: 't', solution: '' },
-        { id: 34, difficulty: 'Expert', tiles: 'bcdefghij', gate: 'u', solution: '' },
-        { id: 49, difficulty: 'Master', tiles: 'abcefghj', gate: 't', solution: '' },
-        { id: 50, difficulty: 'Master', tiles: 'abdeghij', gate: 'x', solution: '' },
-        { id: 63, difficulty: 'Master', tiles: 'bdefghij', gate: 'w', solution: '' },
-        { id: 65, difficulty: 'Wizard', tiles: 'bdefgi', gate: 'none', solution: '' },
-        { id: 66, difficulty: 'Wizard', tiles: 'acdefg', gate: 'none', solution: '' },
-        { id: 80, difficulty: 'Wizard', tiles: 'abcdefhij', gate: 'none', solution: '' }
+        { id: 33, difficulty: 'Expert', tiles: 'adegij', gate: 't', solution: '5357a15732b44058' },
+        { id: 34, difficulty: 'Expert', tiles: 'bcdefghij', gate: 'u', solution: '90198111396d359a' },
+        { id: 49, difficulty: 'Master', tiles: 'abcefghj', gate: 't', solution: '1f0367ea681eed22' },
+        { id: 50, difficulty: 'Master', tiles: 'abdeghij', gate: 'x', solution: '9b612b333b6f0969' },
+        { id: 63, difficulty: 'Master', tiles: 'bdefghij', gate: 'w', solution: '14328115a11f1e0e' },
+        { id: 65, difficulty: 'Wizard', tiles: 'bdefgi', gate: 'none', solution: 'e7885f11ea2fe2c7' },
+        { id: 66, difficulty: 'Wizard', tiles: 'acdefg', gate: 'none', solution: '3b0ce17ee27e2313' },
+        { id: 80, difficulty: 'Wizard', tiles: 'abcdefhij', gate: 'none', solution: '5e1ae1542ee01f21' }
     ]
     challenges = this.#challenges.length;
 
@@ -91,7 +91,7 @@ export const game = new class HorseAcademy {
 
     giveupChallenge() {
         this.progress = JSON.parse(localStorage.getItem('horseAcademy_progress'));
-        this.progress[this.challenge.id].givenUp = true;
+        if (!this.progress[this.challenge.id].completed) this.progress[this.challenge.id].givenUp = true;
         localStorage.setItem('horseAcademy_progress', JSON.stringify(this.progress));
 
         this.updateSolved();
@@ -124,7 +124,6 @@ export const game = new class HorseAcademy {
             completed: this.progress[this.challenge.id]?.completed || this.solved(),
             givenUp: this.progress[this.challenge.id]?.givenUp ?? false
         };
-
         localStorage.setItem('horseAcademy_progress', JSON.stringify(this.progress));
     }
 
@@ -183,12 +182,7 @@ export const game = new class HorseAcademy {
         const challengeSolved = document.querySelector('.challenge-solved');
         const challengeSolvedText = challengeSolved.querySelector('span:first-child');
 
-        if (this.progress[this.challenge.id].givenUp) {
-            challengeSolvedText.innerText = 'Given Up';
-            challengeSolved.classList.add('given-up');
-            challengeSolved.classList.remove('solved', 'solved-before');
-
-        } else if (this.solved()) {
+        if (this.solved()) {
             challengeSolvedText.innerText = 'Solved';
             challengeSolved.classList.add('solved');
             challengeSolved.classList.remove('solved-before', 'given-up');
@@ -198,9 +192,11 @@ export const game = new class HorseAcademy {
             challengeSolved.classList.add('solved-before');
             challengeSolved.classList.remove('solved', 'given-up');
 
-        } else {
-            challengeSolvedText.innerText = 'Unsolved';
-            challengeSolved.classList.remove('solved', 'solved-before', 'given-up');
+        // FOR DEBUG ONLY! Change background color to check if correct
+
+        if (this.progress[this.challenge.id].givenUp) {
+            challengeSolved.classList.add('given-up');
+            challengeSolved.classList.remove('solved', 'solved-before');
         }
     }
 

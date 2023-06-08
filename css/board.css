@@ -76,59 +76,13 @@
     vertical-align: middle;
 }
 
-.challenge-description {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 1rem;
-    margin: 0 2rem;
-}
-
-.challenge-solved {
-    order: -1;
-    display: flex;
-    align-items: flex-end;
-    gap: 1rem;
-    font-size: 2rem;
-    margin-right: auto;
-}
-
-.challenge-solved span:first-child {
-    white-space: nowrap;
-    width: min-content;
-}
-
-.challenge-solved span:last-child {
-    order: -1;
-    background-color: #F55;
-    border-radius: 50% 50%;
-    box-shadow: 0 0 1rem #0008;
-    text-align: left;
-    width: 1.75rem;
-    height: 1.75rem;
-}
-
-.challenge-solved.solved span:last-child {
-    background-color: #5F5;
-}
-
-.challenge-solved.solved-before span:last-child {
-    background-color: #FA5;
-}
-
-.challenge-description :last-child {
-    order: -1;
-    align-self: flex-end;
-    margin-left: auto;
-}
-
 .challenge-description img {
     aspect-ratio: 4 / 1;
     object-fit: contain;
     background-color: var(--white);
     border-radius: .3rem;
     box-shadow: 0 0 .5rem .5rem var(--white);
-    max-width: clamp(12rem, 70vw, 24rem);
-    margin: 1rem;
+    max-width: clamp(15rem, 70vw, 30rem);
     height: 9rem;
 }
 
