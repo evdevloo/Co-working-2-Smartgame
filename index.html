@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/board.css">
   <link rel="stylesheet" href="css/slider.css">
+  <link rel="stylesheet" href="css/dialog.css">
 
   <!-- FONT : Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +33,7 @@
   <script src="js/nav.js" type="module"></script>
   <script src="js/board.js" type="module"></script>
   <script src="js/itemBar.js" type="module"></script>
+  <script src="js/dialog.js" defer></script>
 </head>
 
 <body>
@@ -57,7 +59,7 @@
           <li>
             <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">check</span>Solutions</a>
           </li>
-          <li>
+          <li class="info">
             <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">info</span>Game Rules</a>
           </li>
         </ul>
@@ -182,6 +184,21 @@
                 <span class="g-icon material-symbols-outlined">navigate_next</span>
             </button>
         </div>
+
+    <dialog id="gameRules">
+      <div>
+
+      </div>
+      <figure>
+        <img src="./img/info/info1.png" alt="game rules part 1">
+      </figure>
+      <figure>
+        <img src="./img/info/info2.png" alt="game rules part 2">
+      </figure>
+      <div>
+        <button id="close" aria-label="close">Play</button>
+      </div>
+    </dialog>
 
   </main>
   <!-- <footer>
