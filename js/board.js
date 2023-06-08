@@ -140,8 +140,7 @@ export const game = new class HorseAcademy {
                 div.classList.add(
                     'cell',
                     'x-' + x,
-                    'y-' + y,
-                    'droppable'
+                    'y-' + y
                 );
                 grid.appendChild(div);
             }
@@ -211,11 +210,13 @@ export const game = new class HorseAcademy {
 
         if (x < 0 || y < 0 || rotation % 2 === 0 && x >= this.cols - 1 || rotation % 2 && y >= this.rows - 1) {
             const err = new Error('Cannot place tile out of board');
+            //console.error(err);
             return err;
         }
 
         if (this.getPiece(x, y) || this.getPiece(x + (rotation === 0), y + (rotation === 1))) {
             const err = new Error('Cannot place tile on another tile');
+            //console.error(err);
             return err;
         }
         this.board[x][y] = { name, rotation };
