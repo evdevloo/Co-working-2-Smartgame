@@ -3,8 +3,7 @@ dialog#gameRules::backdrop {
 }
 #gameRules {
     padding: 0;
-    position: relative;
-
+    background-color: #0d9cb3;;
 }
 
 #gameRules figure{
@@ -13,13 +12,11 @@ dialog#gameRules::backdrop {
 }
 
 #gameRules div {
-    position: absolute;
     width: 60%;
     align-self: center;
     display: flex;
     flex-direction: column;
-    bottom: -25em;
-    margin: 0 20%;
+    margin: 0 auto 1em auto;
 }
 #gameRules button {
     border-radius: 25px;
