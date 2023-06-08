@@ -1,8 +1,4 @@
 /* slider */
-
-section {
-    z-index: 99;
-}
 #slider {
     height: fit-content;
     width: 100%;
@@ -14,6 +10,7 @@ section {
     background: rgba(0, 0, 0, 0.5);
     justify-content: center;
     position: relative;
+    margin-top: auto;
 }
 
 #slider #items {
@@ -23,6 +20,7 @@ section {
     display: flex;
     flex-direction: row;
     scroll-behavior: smooth;
+    padding: 1em;
 }
 
 #slider #items::-webkit-scrollbar {
@@ -147,7 +145,7 @@ button.arrow span {
 }
 
 
-@media only screen and (min-width: 62em) {
+@media only screen and (min-width: 75em) {
     main {
         position: relative;
     }
@@ -159,11 +157,11 @@ button.arrow span {
         height: 100%;
         width: fit-content;
         padding: 0;
-
+        margin-top: 0;
     }
     #slider #items {
         flex-direction: column;
-        padding: 0 0.5em 0 1em;
+        padding: 0 2em 0 3em;
         overflow-x: hidden;
         overflow-y: scroll;
         justify-content: center;
@@ -176,5 +174,4 @@ button.arrow span {
     #slider button.arrow {
         display: none;
     }
-
 }
