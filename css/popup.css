@@ -122,6 +122,10 @@
   border: 2px solid var(--black);
   padding: 0.5rem;
 }
+.box a:hover {
+  background-color: var(--black);
+  color: var(--white);
+}
 .box:nth-child(1):hover,
 .box:nth-child(2):hover {
   box-shadow: inset 0 0 13px var(--starter);
