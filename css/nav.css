@@ -6,7 +6,7 @@ header nav ul {
   display: flex;
   flex-direction: column;
   gap: 2em;
-  padding: 2rem 2rem 4rem 2rem;
+  padding: 2rem 1rem 4rem 1rem;
   margin: 0;
   height: 100%;
 }
@@ -17,6 +17,7 @@ header nav ul li {
 
 header li:first-child {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   margin-bottom: auto;
 }
@@ -99,42 +100,42 @@ header .g-icon {
   left: 10rem;
 }
 
-.icoontje span {
+.icon span {
   height: 0.11em;
   width: 0.5em;
   background-color: var(--white);
 }
 
-.hamburger .icoontje {
+.hamburger .icon {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
 
-.icoontje[aria-hidden="false"] span:nth-child(1) {
+.icon[aria-hidden="false"] span:nth-child(1) {
   transform: translateY(0.3rem) translateX(0.07em) rotate(225deg);
   transition: 0.2s ease-in-out;
 }
 
-.icoontje[aria-hidden="false"] span:nth-child(2) {
+.icon[aria-hidden="false"] span:nth-child(2) {
   opacity: 0;
 }
 
-.icoontje[aria-hidden="false"] span:nth-child(3) {
+.icon[aria-hidden="false"] span:nth-child(3) {
   transform: translateY(-0.43rem) translateX(0.07em) rotate(-225deg);
   transition: 0.2s ease-in-out;
 }
 
-.icoontje[aria-hidden="true"] span:nth-child(1) {
+.icon[aria-hidden="true"] span:nth-child(1) {
   transform: translateY(0.135rem) translateX(0.1em) rotate(38deg);
   transition: 0.2s ease-in-out;
 }
 
-.icoontje[aria-hidden="true"] span:nth-child(2) {
+.icon[aria-hidden="true"] span:nth-child(2) {
   opacity: 0;
 }
 
-.icoontje[aria-hidden="true"] span:nth-child(3) {
+.icon[aria-hidden="true"] span:nth-child(3) {
   transform: translateY(-0.21rem) translateX(0.14rem) rotate(-38deg);
   transition: 0.2s ease-in-out;
 }

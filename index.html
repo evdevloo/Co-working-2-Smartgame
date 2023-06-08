@@ -39,7 +39,7 @@
     <div class="header-alles">
       <div class="header-nav">
         <button aria-expanded="false" class="hamburger" id="menu">
-          <span aria-hidden="true" class="icoontje">
+          <span aria-hidden="true" class="icon">
             <span></span><span></span><span></span>
           </span>
           <span></span>
@@ -55,8 +55,7 @@
             <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">book</span>Challenges</a>
           </li>
           <li>
-            <a href="#"><span class="g-icon material-symbols-outlined"
-                aria-hidden="true">check</span>Solutions</a>
+            <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">check</span>Solutions</a>
           </li>
           <li>
             <a href="#"><span class="g-icon material-symbols-outlined" aria-hidden="true">info</span>Game Rules</a>
@@ -67,6 +66,14 @@
   </header>
   <main>
     <section>
+      <article class="challenge-popup" hidden tabindex="0">
+        <h2>Solution</h2>
+        <img src="" alt="challenge solution">
+        <button class="challenge-popup-close">
+          <span class="g-icon material-symbols-outlined">close</span>
+        </button>
+      </article>
+      <div hidden></div>
       <div class="challenge-heading">
         <div class="challenge-title">
           <h1>Challenge</h1>
@@ -81,7 +88,14 @@
       </div>
 
       <div class="challenge-description">
+        <div class="challenge-solved">
+          <span></span>
+          <span aria-description="challenge status"></span>
+        </div>
         <img src="" alt="challenge diagram">
+        <button id="showSolution" class="challenge-nav" aria-expanded="false">
+          <span class="g-icon material-symbols-outlined">flag</span>
+        </button>
       </div>
 
       <div id="board">
