@@ -142,7 +142,8 @@
 }
 .box:nth-child(9):hover,
 .box:nth-child(10):hover,
-.box:nth-child(11):hover{
+.box:nth-child(11):hover,
+.box:nth-child(12):hover{
   box-shadow: inset 0 0 13px var(--wizard);
 }
 
