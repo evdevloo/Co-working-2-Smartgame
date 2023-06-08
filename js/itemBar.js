@@ -5,6 +5,8 @@ let rotation = 0;
 let productContainers;
 let prev;
 let next;
+let cell;
+let dragging;
 
 getPieces();
 deleteDuplicates();
@@ -39,6 +41,12 @@ function onmousedown(event) {
     document.body.append(piece);
     piece.classList.add("dragging");
 
+    cell = document.querySelector("#board #grid div.cell");
+    dragging = document.querySelector(".dragging");
+    let measurement = window.getComputedStyle(cell).getPropertyValue('width');
+    dragging.style.width = `${measurement.split("p")[0] * 2}px`;
+    dragging.style.height = measurement;
+
     moveAt(event.pageX, event.pageY);
 
     document.addEventListener('mousemove', onMouseMove);
@@ -46,8 +54,8 @@ function onmousedown(event) {
     document.addEventListener('keypress', rotating)
 
     function moveAt(pageX, pageY) {
-        piece.style.left = pageX - 50 + 'px';
-        piece.style.top = pageY  - 50 + 'px';
+        piece.style.left = pageX - (measurement.split("p")[0] / 2) + 'px';
+        piece.style.top = pageY  - (measurement.split("p")[0] / 2) + 'px';
     }
 
     function onMouseMove(event) {
