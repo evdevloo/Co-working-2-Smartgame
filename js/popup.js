@@ -15,6 +15,7 @@
         heading.style.opacity = 0;
         headingdesc.style.opacity = 0;
         slider.style.visibility = 'hidden';
+        popup2.style.display = "none";
     });
 
     closeBtn.addEventListener('click', function () {
@@ -32,6 +33,7 @@
         headingdesc.style.opacity = 0;
         slider.style.visibility = 'hidden';
         popup2.style.display = 'flex';
+        popup.style.display = 'none';
     });
 
     const closeBtn2 = popup2.querySelector('.close-btn');
@@ -41,5 +43,6 @@
         heading.style.opacity = 1;
         headingdesc.style.opacity = 1;
         slider.style.visibility = 'visible';
+        popup.style.display = 'none';
     });
 })();
