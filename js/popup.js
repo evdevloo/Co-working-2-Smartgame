@@ -8,6 +8,7 @@
     const heading = document.getElementById('challenge-heading');
     const headingdesc = document.getElementById('challenge-description');
     const slider = document.getElementById('slider');
+    const closeBtn2 = document.getElementById('close-btn2');
 
     openBtn.addEventListener('click', function () {
         popup.style.display = 'flex';
@@ -36,7 +37,7 @@
         popup.style.display = 'none';
     });
 
-    const closeBtn2 = popup2.querySelector('.close-btn');
+    
     closeBtn2.addEventListener('click', function () {
         popup2.style.display = 'none';
         board.style.opacity = 1;
