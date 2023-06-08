@@ -127,8 +127,7 @@ export const game = new class HorseAcademy {
                 div.classList.add(
                     'cell',
                     'x-' + x,
-                    'y-' + y,
-                    'droppable'
+                    'y-' + y
                 );
                 grid.appendChild(div);
             }
@@ -236,3 +235,5 @@ previousButton.addEventListener('click', function () {
 nextButton.addEventListener('click', function () {
     if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
 });
+
+game.resetProgress();

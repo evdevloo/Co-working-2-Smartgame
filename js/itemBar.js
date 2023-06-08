@@ -1,15 +1,13 @@
 import { game } from './board.js';
 
 let pieces = null;
-let currentDroppable = null;
 let rotation = 0;
-//let tiles_challenge;
+let productContainers;
+let prev;
+let next;
 
 getPieces();
 deleteDuplicates();
-
-document.querySelector("#slider")
-document.querySelector("main section")
 
 function getPieces() {
     pieces = document.querySelectorAll(`.card, div.tile `);
@@ -67,19 +65,17 @@ function onmousedown(event) {
 
         if (!elemBelow) return;
 
-        let droppableBelow = elemBelow.closest('.droppable');
-
-        if (currentDroppable !== droppableBelow) currentDroppable = droppableBelow;
 
         piece.style = '';
         piece.classList.remove('dragging')
 
-        if (currentDroppable === null || (!currentDroppable.classList.contains('droppable')) || currentDroppable.id === 'items') {
+
+        if (Array.from(document.querySelectorAll("main section #board div#grid div.cell")).find(el => el.isEqualNode(elemBelow)) === undefined) {
             document.querySelector('#items').appendChild(piece);
 
-        } else if (currentDroppable.parentElement.id === 'grid') {
-            let x = +currentDroppable.classList[1].slice(-1);
-            let y = +currentDroppable.classList[2].slice(-1);
+        } else {
+            let x = +elemBelow.classList[1].slice(-1);
+            let y = +elemBelow.classList[2].slice(-1);
 
             if (game.addPiece(piece.id, x, y, rotation % 4) === undefined) piece.remove();
             else document.querySelector('#items').appendChild(piece);
@@ -123,4 +119,21 @@ export function resetSlider(tiles) {
     })
     getPieces();
     deleteDuplicates();
+
+    productContainers = [...document.querySelectorAll('#slider #items')];
+    prev = [...document.querySelectorAll('#prev')];
+    next = [...document.querySelectorAll('#next')];
+
+    productContainers.forEach((item, i) => {
+        let containerDimensions = item.getBoundingClientRect();
+        let containerWidth = containerDimensions.width;
+
+        prev[i].addEventListener('click', () => {
+            item.scrollLeft -= containerWidth;
+        })
+
+        next[i].addEventListener('click', () => {
+            item.scrollLeft += containerWidth;
+        })
+    })
 }

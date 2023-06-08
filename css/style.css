@@ -101,10 +101,12 @@ main {
     display: flex;
     flex-direction: column;
     text-align: center;
+    flex-grow: 1;
+
 }
 main section {
     max-width: 60em;
-    margin: 0 auto;
+    margin: auto;
 }
 main h1 {
     font-size: 2rem;
@@ -160,18 +162,10 @@ footer h1 {
     main {
         flex-direction: row;
         text-align: center;
-        position: relative;
     }
-    main section {
+    body main section {
         display: inline-block;
         text-align: center;
+        margin: 0 auto 0 auto;
     }
-
-    main #slider {
-        position: absolute;
-        top: 0;
-        right: 0;
-
-    }
-
 }
