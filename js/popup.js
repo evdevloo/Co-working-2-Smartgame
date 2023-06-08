@@ -13,11 +13,12 @@
 
     openBtn.addEventListener('click', function () {
         popup.style.display = 'flex';
+        popup2.style.display = "none";
         board.style.opacity = 0;
         heading.style.opacity = 0;
         headingdesc.style.opacity = 0;
         slider.style.visibility = 'hidden';
-        popup2.style.display = "none";
+        
     });
 
     closeBtn.addEventListener('click', function () {
@@ -31,11 +32,12 @@
 
     openBtn2.addEventListener('click', function () {
         popup2.style.display = 'flex';
+        popup.style.display = 'none';
         board.style.opacity = 0;
         heading.style.opacity = 0;
         headingdesc.style.opacity = 0;
         slider.style.visibility = 'hidden';
-        popup.style.display = 'none';
+        
     });
 
     
