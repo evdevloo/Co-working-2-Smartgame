@@ -28,7 +28,7 @@
     height: 10px;
 }
 #slider #items::-webkit-scrollbar-thumb {
-    background: var(--bg);
+    background: #232133;
     border-radius: 10px;
 }
 #slider #items::-webkit-scrollbar-track {
@@ -165,6 +165,8 @@ button.arrow span {
         overflow-x: hidden;
         overflow-y: scroll;
         justify-content: center;
+        margin-top: 1em;
+        height: 90%;
 
     }
 
@@ -173,5 +175,9 @@ button.arrow span {
     }
     #slider button.arrow {
         display: none;
+    }
+
+    #slider #items::-webkit-scrollbar {
+        margin-right: 0.5em;
     }
 }
