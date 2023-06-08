@@ -12,6 +12,11 @@ const grid = document.getElementById('grid');
 const previousButton = document.getElementById('previousChallenge');
 const nextButton = document.getElementById('nextChallenge');
 
+const showSolutionButton = document.getElementById('showSolution');
+const hideSolutionButton = document.querySelector('.challenge-popup-close');
+const solutionPopup = document.querySelector('.challenge-popup');
+const darkerBackground = document.querySelector('.challenge-popup + div');
+
 /**
  * Initializes the last loaded level and loads the board from memory
  * 
@@ -27,14 +32,14 @@ export const game = new class HorseAcademy {
         { id: 2, difficulty: 'Starter', tiles: 'ae', gate: 't', solution: '8b25dd891d549090' },
         { id: 17, difficulty: 'Junior', tiles: 'dej', gate: 't', solution: '8e7e375e43cb1965' },
         { id: 18, difficulty: 'Junior', tiles: 'abcefj', gate: 'y', solution: '7ad39d6cbf19a677' },
-        { id: 33, difficulty: 'Expert', tiles: 'adegij', gate: 't', solution: '' },
-        { id: 34, difficulty: 'Expert', tiles: 'bcdefghij', gate: 'u', solution: '' },
-        { id: 49, difficulty: 'Master', tiles: 'abcefghj', gate: 't', solution: '' },
-        { id: 50, difficulty: 'Master', tiles: 'abdeghij', gate: 'x', solution: '' },
-        { id: 63, difficulty: 'Master', tiles: 'bdefghij', gate: 'w', solution: '' },
-        { id: 65, difficulty: 'Wizard', tiles: 'bdefgi', gate: 'none', solution: '' },
-        { id: 66, difficulty: 'Wizard', tiles: 'acdefg', gate: 'none', solution: '' },
-        { id: 80, difficulty: 'Wizard', tiles: 'abcdefhij', gate: 'none', solution: '' }
+        { id: 33, difficulty: 'Expert', tiles: 'adegij', gate: 't', solution: '5357a15732b44058' },
+        { id: 34, difficulty: 'Expert', tiles: 'bcdefghij', gate: 'u', solution: '90198111396d359a' },
+        { id: 49, difficulty: 'Master', tiles: 'abcefghj', gate: 't', solution: '1f0367ea681eed22' },
+        { id: 50, difficulty: 'Master', tiles: 'abdeghij', gate: 'x', solution: '9b612b333b6f0969' },
+        { id: 63, difficulty: 'Master', tiles: 'bdefghij', gate: 'w', solution: '14328115a11f1e0e' },
+        { id: 65, difficulty: 'Wizard', tiles: 'bdefgi', gate: 'none', solution: 'e7885f11ea2fe2c7' },
+        { id: 66, difficulty: 'Wizard', tiles: 'acdefg', gate: 'none', solution: '3b0ce17ee27e2313' },
+        { id: 80, difficulty: 'Wizard', tiles: 'abcdefhij', gate: 'none', solution: '5e1ae1542ee01f21' }
     ]
     challenges = this.#challenges.length;
 
@@ -52,7 +57,7 @@ export const game = new class HorseAcademy {
         this.challenge = this.#challenges[this.selectedChallenge];
 
         // update title
-        document.querySelector('.challenge-heading h1').innerText = 'Challenge ' + (this.selectedChallenge + 1);
+        document.querySelector('.challenge-heading h1').innerText = 'Challenge ' + this.challenge.id;
 
         // update subtitle
         const subtitle = document.querySelector('.challenge-heading h2');
@@ -62,7 +67,7 @@ export const game = new class HorseAcademy {
         // update challenge description
         const description = document.querySelector('.challenge-description img');
         description.src = `img/challenges/challenge${this.challenge.id}.png`;
-        description.alt = 'challenge diagram ' + (this.selectedChallenge + 1);
+        description.alt = 'challenge diagram ' + this.challenge.id;
 
         // update finish position
         document.querySelector('#fence .finish').className = 'finish ' + this.challenge.gate;
@@ -84,6 +89,14 @@ export const game = new class HorseAcademy {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    giveupChallenge() {
+        this.progress = JSON.parse(localStorage.getItem('horseAcademy_progress'));
+        if (!this.progress[this.challenge.id].completed) this.progress[this.challenge.id].givenUp = true;
+        localStorage.setItem('horseAcademy_progress', JSON.stringify(this.progress));
+
+        this.updateSolved();
     }
 
     resetProgress() {
@@ -110,9 +123,9 @@ export const game = new class HorseAcademy {
 
         this.progress[this.challenge.id] = {
             board: this.board,
-            completed: this.progress[this.challenge.id]?.completed || this.solved()
+            completed: this.progress[this.challenge.id]?.completed || this.solved(),
+            givenUp: this.progress[this.challenge.id]?.givenUp ?? false
         };
-
         localStorage.setItem('horseAcademy_progress', JSON.stringify(this.progress));
     }
 
@@ -163,12 +176,32 @@ export const game = new class HorseAcademy {
                 cells[x + y * this.cols].replaceWith(piece);
             }
         }
+        this.updateSolved();
+    }
 
-        // FOR DEBUG ONLY! Change background color to check if correct
-        /*document.body.style.backgroundColor = 'white';
+    updateSolved() {
+        const challengeSolved = document.querySelector('.challenge-solved');
+        const challengeSolvedText = challengeSolved.querySelector('span:first-child');
 
-        if (this.solved()) document.body.style.backgroundColor = 'lime';
-        else if (this.progress[this.challenge.id].completed) document.body.style.backgroundColor = 'aqua';*/
+        if (this.solved()) {
+            challengeSolvedText.innerText = 'Solved';
+            challengeSolved.classList.add('solved');
+            challengeSolved.classList.remove('solved-before', 'given-up');
+
+        } else if (this.progress[this.challenge.id].completed) {
+            challengeSolvedText.innerText = 'Solved Before';
+            challengeSolved.classList.add('solved-before');
+            challengeSolved.classList.remove('solved', 'given-up');
+
+        } else {
+            challengeSolvedText.innerText = 'Unsolved';
+            challengeSolved.classList.remove('solved', 'solved-before', 'given-up');
+        }
+
+        if (this.progress[this.challenge.id].givenUp) {
+            challengeSolved.classList.add('given-up');
+            challengeSolved.classList.remove('solved', 'solved-before');
+        }
     }
 
     addPiece(name, x, y, rotation) {
@@ -228,12 +261,44 @@ export const game = new class HorseAcademy {
 }
 
 // Challenge navitation
-previousButton.addEventListener('click', function () {
+previousButton.addEventListener('click', () => {
     if (game.selectedChallenge > 0) game.newChallenge(--game.selectedChallenge);
 });
 
-nextButton.addEventListener('click', function () {
+nextButton.addEventListener('click', () => {
     if (game.selectedChallenge < game.challenges - 1) game.newChallenge(++game.selectedChallenge);
 });
 
-game.resetProgress();
+// Show solution popup
+let solutionShown = 0;
+
+const closePopup = event => {
+    if (!event.code || event.code === 'Escape') {
+        solutionShown = 0;
+        solutionPopup.setAttribute('hidden', '');
+        darkerBackground.setAttribute('hidden', '');
+    }
+};
+
+showSolutionButton.addEventListener('click', () => {
+    solutionShown ^= 1;
+
+    if (solutionShown) {
+        game.giveupChallenge();
+
+        solutionPopup.querySelector('img').src = `./img/solutions/solution${game.challenge.id}.png`;
+
+        // Give time for image to load
+        setTimeout(() => {
+            solutionPopup.removeAttribute('hidden');
+            darkerBackground.removeAttribute('hidden');
+        }, 0);
+        solutionPopup.focus();
+
+    } else closePopup();
+});
+
+// Hide solution
+hideSolutionButton.addEventListener('click', closePopup);
+darkerBackground.addEventListener('click', closePopup);
+document.addEventListener('keydown', closePopup);

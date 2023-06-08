@@ -5,7 +5,7 @@
     --black: #000;
     --bg: var(--white);
     --primary: var(--black);
-    --accent: #0f8;
+    --accent: #69e969;
 
     --starter: #afcb34;
     --junior: #fab932;
@@ -48,10 +48,9 @@ html {
 
 body {
     display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Should be 100 but sometimes overflows on y */
-    overflow: hidden;
-    margin: 0
+    flex-wrap: nowrap;
+    margin: 0;
+    min-height: 100vh;
 }
 
 p {
@@ -90,10 +89,7 @@ button {
 
 /* HEADER */
 
-header {
-    background-color: var(--primary);
-    color: var(--bg);
-}
+
 
 /* MAIN */
 
@@ -106,7 +102,7 @@ main {
 }
 main section {
     max-width: 60em;
-    margin: auto;
+    margin: 0 auto;
 }
 main h1 {
     font-size: 2rem;
@@ -158,14 +154,20 @@ footer h1 {
 
 /* SLIDER */
 
-@media only screen and (min-width: 62em) {
+@media only screen and (min-width: 75em) {
     main {
         flex-direction: row;
-        text-align: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        width: 100%;
     }
-    body main section {
-        display: inline-block;
-        text-align: center;
-        margin: 0 auto 0 auto;
+
+    main section {
+        flex-shrink: 1;
     }
+
+    main #slider {
+        flex-grow: 1;
+    }
+
 }
