@@ -1,31 +1,68 @@
-import { HorseAcademy } from './board.js';
+import { HorseAcademy, game } from './board.js';
 
-const openBtn = document.querySelector();
+const challengesContent = document.querySelector('#challenges-content');
+const challengesContentList = document.querySelector('#challenges-content .grid-container');
+const challengesOpenButton = document.querySelector('nav li:nth-child(2) a');
+const challengesCloseButton = document.querySelector('#challenges-content .close-btn');
 
-const challengesContent = document.getElementById('challenges-content');
+challengesOpenButton.addEventListener('click', () => {
+    challengesContent.removeAttribute('hidden');
+});
 
-for (let challenge of HorseAcademy.challenges) {
+challengesCloseButton.addEventListener('click', () => {
+    challengesContent.setAttribute('hidden', '');
+});
+
+challengesContentList.innerHTML = '';
+
+for (let challengeIndex in HorseAcademy.challenges) {
+    const challenge = HorseAcademy.challenges[challengeIndex];
+
     const box = document.createElement('div');
     box.innerHTML = `
-        <div class="box">
-            <h2>Challenge ${challenge.id}</h2>
-            <img src="./img/challenges/challenge${challenge.id}.png" alt="Challenge diagram ${challenge.id}">
-            <button>Play</button>
-        </div>
+        <h2>Challenge ${challenge.id}</h2>
+        <img src="./img/challenges/challenge${challenge.id}.png" alt="Challenge diagram ${challenge.id}">
+        <button class="container-button">Play</button>
     `;
-    challengesContent.appendChild(box);
+    box.classList.add('box', challenge.difficulty.toLowerCase());
+    
+    box.querySelector('button').addEventListener('click', () => {
+        game.newChallenge(challengeIndex);
+        challengesContent.setAttribute('hidden', '');
+    });
+
+    challengesContentList.appendChild(box);
 }
 
-const solutionsContent = document.getElementById('solutions-content');
+const solutionsContent = document.querySelector('#solutions-content');
+const solutionsContentList = document.querySelector('#solutions-content .grid-container');
+const solutionsOpenButton = document.querySelector('nav li:nth-child(3) a');
+const solutionsCloseButton = document.querySelector('#solutions-content .close-btn');
 
-for (let solution of HorseAcademy.challenges) {
+solutionsOpenButton.addEventListener('click', () => {
+    solutionsContent.removeAttribute('hidden');
+});
+
+solutionsCloseButton.addEventListener('click', () => {
+    solutionsContent.setAttribute('hidden', '');
+});
+
+solutionsContentList.innerHTML = '';
+
+for (let challengeIndex in HorseAcademy.challenges) {
+    const challenge = HorseAcademy.challenges[challengeIndex];
+
     const box = document.createElement('div');
     box.innerHTML = `
-        <div class="box">
-            <h2>Solution ${solution.id}</h2>
-            <img src="./img/raw_solutions/solution${solution.id}.png" alt="challenge solution ${solution.id}">
-            <button>Play</button>
-        </div>
+        <img src="./img/solutions/solution${challenge.id}.png" alt="challenge solution ${challenge.id}">
+        <button class="container-button">Play</button>
     `;
-    challengesContent.appendChild(box);
+    box.classList.add('box', challenge.difficulty.toLowerCase());
+    
+    box.querySelector('button').addEventListener('click', () => {
+        game.newChallenge(challengeIndex);
+        solutionsContent.setAttribute('hidden', '');
+    });
+
+    solutionsContentList.appendChild(box);
 }

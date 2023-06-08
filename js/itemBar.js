@@ -55,14 +55,14 @@ function onmousedown(event) {
 
     function moveAt(pageX, pageY) {
         piece.style.left = pageX - (measurement.split("p")[0] / 2) + 'px';
-        piece.style.top = pageY  - (measurement.split("p")[0] / 2) + 'px';
+        piece.style.top = pageY - (measurement.split("p")[0] / 2) + 'px';
     }
 
     function onMouseMove(event) {
         moveAt(event.pageX, event.pageY);
     }
 
-    function onMouseUp(event){
+    function onMouseUp(event) {
 
         document.removeEventListener('mousemove', onMouseMove);
         document.removeEventListener('keypress', rotating)
@@ -97,8 +97,8 @@ function onmousedown(event) {
 
 }
 
-function rotating(event){
-    if (event.key === 'r') {
+function rotating(event) {
+    if (event.key === 'r' || event.code === 'Space') {
         ++rotation;
         document.querySelector('.dragging').style.transform = `rotate(${rotation * 90}deg)`;
     }
@@ -109,7 +109,7 @@ function deleteDuplicates() {
 
     copies.forEach(piece => {
         let id = piece.firstChild.alt.slice(-1);
-        document.querySelector(`#${id}`).remove();
+        document.getElementById(id).remove();
     })
 }
 

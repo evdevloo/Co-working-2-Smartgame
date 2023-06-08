@@ -14,7 +14,9 @@ dialog#gameRules::backdrop {
 }
 
 #gameRules div {
-    display: block;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
     position: absolute;
     bottom: -50rem;
     width: 100%;

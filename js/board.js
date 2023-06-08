@@ -12,11 +12,6 @@ const grid = document.getElementById('grid');
 const previousButton = document.getElementById('previousChallenge');
 const nextButton = document.getElementById('nextChallenge');
 
-const showSolutionButton = document.getElementById('showSolution');
-const hideSolutionButton = document.querySelector('.challenge-popup-close');
-const solutionPopup = document.querySelector('.challenge-popup');
-const darkerBackground = document.querySelector('.challenge-popup + div');
-
 /**
  * Initializes the last loaded level and loads the board from memory
  * 
@@ -50,10 +45,15 @@ export class HorseAcademy {
     newChallenge(challengeIndex) {
         if (typeof challengeIndex === 'number') localStorage.setItem('horseAcademy_selectedChallenge', challengeIndex);
         else this.selectedChallenge = +localStorage.getItem('horseAcademy_selectedChallenge');
-        if (typeof this.selectedChallenge !== 'number') this.selectedChallenge = 0;
 
+        console.log(Number.isInteger(this.selectedChallenge))
+        console.log(challengeIndex, this.selectedChallenge)
+
+        this.selectedChallenge = Number.isInteger(this.selectedChallenge) ? challengeIndex : 0;
         localStorage.setItem('horseAcademy_selectedChallenge', this.selectedChallenge);
         this.challenge = HorseAcademy.challenges[this.selectedChallenge];
+
+        console.log(challengeIndex, this.selectedChallenge)
 
         // update title
         document.querySelector('.challenge-heading h1').innerText = 'Challenge ' + this.challenge.id;
@@ -272,6 +272,11 @@ nextButton.addEventListener('click', () => {
 });
 
 // Show solution popup
+const showSolutionButton = document.getElementById('showSolution');
+const hideSolutionButton = document.querySelector('.challenge-popup-close');
+const solutionPopup = document.querySelector('.challenge-popup');
+const darkerBackground = document.querySelector('.challenge-popup + div');
+
 let solutionShown = 0;
 
 const closePopup = event => {
@@ -304,3 +309,9 @@ showSolutionButton.addEventListener('click', () => {
 hideSolutionButton.addEventListener('click', closePopup);
 darkerBackground.addEventListener('click', closePopup);
 document.addEventListener('keydown', closePopup);
+
+// Reset progress
+document.getElementById('challenges-reset-progress').addEventListener('click', () => {
+    game.resetProgress();
+    location.reload();
+});

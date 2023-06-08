@@ -82,11 +82,11 @@
             <a href="./" class="navHorse">Horse Academy</a>
           </li>
           <li class="challenges">
-            <a href="#" id="open-btn"><span class="g-icon material-symbols-outlined"
+            <a href="#"><span class="g-icon material-symbols-outlined"
                 aria-hidden="true">book</span>Challenges</a>
           </li>
           <li>
-            <a href="#" id="openChal"><span class="g-icon material-symbols-outlined"
+            <a href="#"><span class="g-icon material-symbols-outlined"
                 aria-hidden="true">check</span>Solutions</a>
           </li>
           <li class="info">
@@ -215,24 +215,23 @@
       </button>
     </div>
 
-    <div id="challenges-content">
-      <div></div>
-      <div>
+    <div class="popup" id="challenges-content" hidden>
+      <div class="close-btn"></div>
+      <div class="popup-content">
         <h1>Challenges</h1>
         <div class="grid-container"></div>
       </div>
     </div>
 
-    <div id="solutions-content">
-      <div></div>
-      <div>
+    <div class="popup" id="solutions-content" hidden>
+      <div class="close-btn"></div>
+      <div class="popup-content">
         <h1>Solutions</h1>
         <div class="grid-container"></div>
       </div>
     </div>
 
     <dialog id="gameRules">
-      <div></div>
       <figure>
         <img src="./img/info/info1.png" alt="game rules part 1">
       </figure>
@@ -241,6 +240,7 @@
       </figure>
       <div>
         <button id="close" aria-label="close">Play</button>
+        <button id="challenges-reset-progress">Reset progress</button>
       </div>
     </dialog>
   </main>
