@@ -14,9 +14,7 @@
     openBtn.addEventListener('click', function () {
         popup.style.display = 'flex';
         popup2.style.display = "none";
-        board.style.opacity = 0;
-        heading.style.opacity = 0;
-        headingdesc.style.opacity = 0;
+
         slider.style.visibility = 'hidden';
         
     });
@@ -24,18 +22,13 @@
     closeBtn.addEventListener('click', function () {
         popup.style.display = 'none';
         popup2.style.display = 'none';
-        board.style.opacity = 1;
-        heading.style.opacity = 1;
-        headingdesc.style.opacity = 1;
         slider.style.visibility = 'visible';
     });
 
     openBtn2.addEventListener('click', function () {
         popup2.style.display = 'flex';
         popup.style.display = 'none';
-        board.style.opacity = 0;
-        heading.style.opacity = 0;
-        headingdesc.style.opacity = 0;
+
         slider.style.visibility = 'hidden';
         
     });
@@ -43,9 +36,7 @@
     
     closeBtn2.addEventListener('click', function () {
         popup2.style.display = 'none';
-        board.style.opacity = 1;
-        heading.style.opacity = 1;
-        headingdesc.style.opacity = 1;
+
         slider.style.visibility = 'visible';
         popup.style.display = 'none';
     });
