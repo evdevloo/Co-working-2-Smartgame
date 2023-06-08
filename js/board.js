@@ -49,8 +49,6 @@ export class HorseAcademy {
         localStorage.setItem('horseAcademy_selectedChallenge', this.selectedChallenge);
         this.challenge = HorseAcademy.challenges[this.selectedChallenge];
 
-        console.log(challengeIndex, this.selectedChallenge)
-
         // update title
         document.querySelector('.challenge-heading h1').innerText = 'Challenge ' + this.challenge.id;
 
