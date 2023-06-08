@@ -35,17 +35,8 @@ header nav a {
   width: 7em;
 }
 
-header nav[aria-expanded="false"] {
+header nav {
   animation: fadeIn 0.3s ease-in-out;
-  animation-fill-mode: forwards;
-  background-color: var(--black);
-  max-width: 10em;
-  height: 100vh;
-  z-index: 2;
-}
-
-header nav[aria-expanded="true"] {
-  animation: fadeOut 0.3s ease-in-out;
   animation-fill-mode: forwards;
   background-color: var(--black);
   max-width: 10em;

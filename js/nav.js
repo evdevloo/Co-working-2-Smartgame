@@ -2,7 +2,7 @@ const menu = document.querySelector("#menu");
 const nav = document.querySelector("nav");
 const hamburger = document.querySelector(".icon");
 
-if (window.matchMedia("(min-width: 62em)").matches) {
+if (window.matchMedia("(min-width: 75em)").matches) {
   nav.setAttribute("aria-expanded", "true");
   hamburger.setAttribute("aria-hidden", "true");
 }
