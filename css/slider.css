@@ -6,7 +6,7 @@
     right: 0;
     display: flex;
     z-index: 1;
-    padding: 3em 4em;
+    padding: 1rem 2rem;
     background: rgba(0, 0, 0, 0.5);
     justify-content: center;
     position: relative;
