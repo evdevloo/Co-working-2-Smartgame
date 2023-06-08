@@ -1,8 +1,6 @@
 @import url(board.css);
 @import url(popup.css);
 
-
-
 .popup {
   position: fixed;
   top: 0;
