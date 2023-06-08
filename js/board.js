@@ -44,8 +44,12 @@ export const game = new class HorseAcademy {
     challenges = this.#challenges.length;
 
     constructor(grid) {
-        // Load stored level or initialize challenge 1
+        // Load stored level or initialize on challenge 1
         this.newChallenge();
+    }
+
+    getChallenges() {
+        return this.#challenges;
     }
 
     newChallenge(challengeIndex) {
