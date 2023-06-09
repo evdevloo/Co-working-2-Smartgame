@@ -24,12 +24,12 @@ dialog#gameRules::backdrop {
 
 #gameRules button {
     cursor: pointer;
-    background-color: var(--bg);
+    background-color: var(--white);
     border: none;
     border-radius: 3rem;
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--text);
+    color: var(--black);
     padding: 0 5rem;
     height: 3rem;
     transition: background-color .2s ease-in-out,
@@ -39,5 +39,5 @@ dialog#gameRules::backdrop {
 #gameRules button:hover,
 #gameRules button:focus-visible {
     background-color: var(--black);
-    color: var(--bg);
+    color: var(--white);
 }
