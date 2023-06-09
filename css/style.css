@@ -163,11 +163,6 @@ footer h1 {
     }
 
     main section {
-        flex-shrink: 1;
+        margin-right: auto;
     }
-
-    main #slider {
-        flex-grow: 1;
-    }
-
 }
