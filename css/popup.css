@@ -47,22 +47,26 @@
 }
 
 .close-btn {
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  background-color: transparent;
   border: none;
   padding: 0.5rem 1rem;
-  border-radius: .3rem;
+  border-radius: 50% 50%;
   position: absolute;
   top: 2rem;
   right: 2rem;
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color .2s ease-in-out;
 }
 
-.close-btn:hover {
-  cursor: pointer;
+.close-btn:hover,
+.close-btn:focus-visible {
+  background-color: #F55;
 }
 
 .close-btn::before,
