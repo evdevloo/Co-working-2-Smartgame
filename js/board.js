@@ -43,17 +43,11 @@ export class HorseAcademy {
     }
 
     newChallenge(challengeIndex) {
-        if (typeof challengeIndex === 'number') localStorage.setItem('horseAcademy_selectedChallenge', challengeIndex);
-        else this.selectedChallenge = +localStorage.getItem('horseAcademy_selectedChallenge');
+        if (!Number.isInteger(this.selectedChallenge)) this.selectedChallenge = +localStorage.getItem('horseAcademy_selectedChallenge');
+        else this.selectedChallenge = Number.isInteger(+challengeIndex) ? +challengeIndex : 0;
 
-        console.log(Number.isInteger(this.selectedChallenge))
-        console.log(challengeIndex, this.selectedChallenge)
-
-        this.selectedChallenge = Number.isInteger(this.selectedChallenge) ? challengeIndex : 0;
         localStorage.setItem('horseAcademy_selectedChallenge', this.selectedChallenge);
         this.challenge = HorseAcademy.challenges[this.selectedChallenge];
-
-        console.log(challengeIndex, this.selectedChallenge)
 
         // update title
         document.querySelector('.challenge-heading h1').innerText = 'Challenge ' + this.challenge.id;
@@ -312,6 +306,6 @@ document.addEventListener('keydown', closePopup);
 
 // Reset progress
 document.getElementById('challenges-reset-progress').addEventListener('click', () => {
-    game.resetProgress();
+    localStorage.clear();
     location.reload();
 });
