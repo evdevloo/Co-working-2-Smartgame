@@ -306,6 +306,6 @@ document.addEventListener('keydown', closePopup);
 
 // Reset progress
 document.getElementById('challenges-reset-progress').addEventListener('click', () => {
-    game.resetProgress();
+    localStorage.clear();
     location.reload();
 });
