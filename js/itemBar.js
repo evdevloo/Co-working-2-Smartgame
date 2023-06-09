@@ -109,7 +109,9 @@ function deleteDuplicates() {
 
     copies.forEach(piece => {
         let id = piece.firstChild.alt.slice(-1);
-        document.getElementById(id).remove();
+        const piece = document.getElementById(id)
+        
+        if (piece) piece.remove();
     })
 }
 
